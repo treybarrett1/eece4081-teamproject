@@ -22,8 +22,6 @@ Names and project topic are confirmed by the repository owner. Roles and meeting
 - [AI-use log](AI_LOG.md).
 - [Rubric and submission checklist](docs/SUBMISSION_CHECKLIST.md).
 
-The screenshots give a due date of September 9, 2026, at 11:59 p.m. for both assignments. Check the course portal for any subsequent changes. EP 0.1 requires the playbook to be committed to the team repository and one submission per team.
-
 ## Current state
 
 This is the initial documentation package. Application implementation and test execution are future work. No team adoption, passing project tests, or course-portal submission is claimed.
