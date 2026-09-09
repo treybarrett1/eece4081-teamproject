@@ -41,8 +41,6 @@ Requesters can access only their own tickets and public comments. Support agents
 - Production availability guarantees, contractual service-level enforcement, automatic escalation, on-call paging, or 24-hour support.
 - Automatic diagnosis, AI-generated resolutions, autonomous remediation, and remote control of employee devices.
 - Full asset inventory, configuration management, procurement, change approval, and knowledge-base management.
-- File uploads and attachments; users describe the issue and reproduction steps as text in this version.
-- A general workflow designer or arbitrary custom fields; the prototype uses the defined roles, fields, and states.
 - Migration of real enterprise data, handling of actual confidential tickets, or claims of production security certification.
 
 ### Scope-change control
