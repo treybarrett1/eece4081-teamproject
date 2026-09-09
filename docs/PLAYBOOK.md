@@ -36,15 +36,15 @@ A work item is done only when every applicable check below is satisfied and its 
 
 ## 3. Sprint length and ceremonies
 
-Use one-week sprints, Monday through Sunday, in America/Chicago time. The times below are proposed until members confirm availability. The first partial week covers setup; the first full sprint begins Monday, September 14, 2026.
+Use one-week sprints, Monday through Sunday, in America/Chicago time. The first partial week covers setup; the first full sprint begins Monday, September 14, 2026.
 
 | Activity | Cadence | Required repository record |
 | --- | --- | --- |
-| Planning | Monday, 6:00-6:30 p.m. | Sprint goal, ordered issues, one owner and reviewer per issue, acceptance criteria, and each member's available hours |
+| Planning | Monday, 4:45-5:15 p.m. | Sprint goal, ordered issues, one owner and reviewer per issue, acceptance criteria, and each member's available hours |
 | Asynchronous stand-up | Monday-Friday by 8:00 p.m. | Each member posts completed work, next work, and blockers in the sprint tracking issue |
-| Midweek check | Wednesday, 6:00-6:15 p.m. | Blockers, overdue reviews, and revised assignments |
-| Review/demo | Sunday, 6:00-6:20 p.m. | Demonstrated completed items, acceptance evidence, and unfinished items returned to the backlog |
-| Retrospective | Sunday, 6:20-6:35 p.m. | One improvement action with an owner and a deadline in the next sprint |
+| Midweek check | Wednesday, 5:00-5:15 p.m. | Blockers, overdue reviews, and revised assignments |
+| Review/demo | Sunday, 4:55-5:15 p.m. | Demonstrated completed items, acceptance evidence, and unfinished items returned to the backlog |
+| Retrospective | Sunday, 5:00-5:15 p.m. | One improvement action with an owner and a deadline in the next sprint |
 
 Charles Barrett is the sprint facilitator; Doc Aberle is the backup, with Austin Gross as second backup. The facilitator posts notes in `docs/meetings/YYYY-MM-DD.md` within 24 hours, including attendance, decisions, and actions with owners and dates. For a moved meeting, the facilitator records the replacement time at least 24 hours ahead unless an emergency prevents notice. Asynchronous participation must still produce the required record.
 
