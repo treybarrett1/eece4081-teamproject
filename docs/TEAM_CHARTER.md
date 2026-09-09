@@ -83,7 +83,7 @@ Every member implements assigned work, reviews another member's work, records pr
 
 ### Meetings and availability
 
-Use the one-week sprint and proposed ceremony schedule in [Playbook v0.1](PLAYBOOK.md): Monday planning at 6:00 p.m., Wednesday check-in at 6:00 p.m., and Sunday review and retrospective at 6:00 p.m., America/Chicago time. Weekday asynchronous updates are due by 8:00 p.m.
+Use the one-week sprint and proposed ceremony schedule in [Playbook v0.1](PLAYBOOK.md)
 
 The proposed baseline is four hours per member per week, including ceremonies, with work scheduled around each person's classes and other obligations. Each person confirms or revises this baseline and the meeting times before adoption; the document does not claim personal availability has been verified. At each planning meeting, members report that week's exceptions and accept only work that fits their stated capacity. Planned absences require advance notice and an asynchronous update. Weekday work requests receive an acknowledgement within 24 hours.
 
