@@ -7,7 +7,7 @@
 
 ## 1. Branching strategy
 
-Use short-lived feature branches from `main`. Name branches `feat/<issue-number>-<description>`, `fix/<issue-number>-<description>`, or `docs/<issue-number>-<description>`. Each branch addresses one issue with written acceptance criteria.
+Use short-lived feature branches from `main`. This is a feature-branch workflow. Branches are created per issue rather than committing directly to main, but are kept intentionally short-lived to minimize divergence. Name branches `feat/<issue-number>-<description>`, `fix/<issue-number>-<description>`, or `docs/<issue-number>-<description>`. Each branch addresses one issue with written acceptance criteria.
 
 Open a draft pull request within 24 hours of the first branch commit. Merge or close the branch within three calendar days of that commit. If the work cannot fit, split the issue into smaller, independently reviewable changes. Before the three-day limit, the author must record any extension, its reason, and a new deadline in the PR; the assigned reviewer must approve it. Only one extension of up to two calendar days is permitted.
 
