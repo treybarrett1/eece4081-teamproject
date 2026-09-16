@@ -62,3 +62,15 @@ Human verification is pending. Austin Gross is the primary reviewer and Doc Aber
 - Checks performed and observed results:
 - Remaining issues:
 - Approval/adoption decision:
+
+## September 16 amendment — team tool preference
+
+Subsequent user prompts, in order:
+
+> im confused on what the assignment is asking us to do
+
+> i guess it will be claude code for coding and chatgpt for brainstorming for majority of the members.
+
+The assistant explained the three required policy decisions, then revised section 5 to name Anthropic Claude Code as the primary coding tool and OpenAI ChatGPT as the primary brainstorming tool. GitHub Copilot was removed from the proposed list. OpenAI Codex remains permitted only for course-document assistance and remains disclosed as the tool actually used here. The initial output description above is retained as history, not the current tool list.
+
+Disposition: the user's clarification supersedes the assistant's original suggested primary tools. It expresses expected majority usage, not unanimous adoption. Prompt logging and the proposed human-approval requirement remain unchanged. Assistant checks for this amendment compare the updated remote text with the prepared changes; no human audit or application test run is claimed.
