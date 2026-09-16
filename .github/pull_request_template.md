@@ -10,7 +10,7 @@ Closes #
 - Primary reviewer:
 - Backup reviewer:
 
-Use the named rotation in [Playbook v0.1](../docs/PLAYBOOK.md); explain any reassignment.
+Use the named rotation in [Playbook v0.2](https://github.com/treybarrett1/eece4081-teamproject/blob/main/docs/PLAYBOOK.md); explain any reassignment.
 
 ## Validation
 
@@ -20,13 +20,24 @@ Use the named rotation in [Playbook v0.1](../docs/PLAYBOOK.md); explain any reas
 - Not-applicable checks and reasons:
 - Known limitations:
 
+## AI assistance
+
+- Tools used, or none:
+- Prompt-log links:
+- AI-reviewed commit, or AI review not used:
+- Findings and dispositions:
+- Human-reviewed commit and independent checks:
+
+AI review supplies zero required approvals; a non-author teammate must approve.
+
 ## Before merge
 
 - [ ] Linked issue and measurable acceptance criteria.
 - [ ] Appropriate tests or document checks completed; evidence above.
 - [ ] Applicable build, test, lint, and configured CI checks pass on the latest commit.
 - [ ] Documentation updated and sensitive/unrelated content excluded.
-- [ ] AI assistance logged in AI_LOG.md, or none used.
+- [ ] AI session entries in docs/ai-logs/ are linked from AI_LOG.md, or the author explicitly states none used.
+- [ ] AI-review findings have dispositions and evidence, or AI review was not used.
 - [ ] Non-author approval covers the latest substantive changes.
 - [ ] All blocking review comments resolved.
 

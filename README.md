@@ -18,7 +18,9 @@ Names and project topic are confirmed by the repository owner. Roles and meeting
 ## Assignment documents
 
 - [T1 — Team Charter and Executive Summary](docs/TEAM_CHARTER.md): executive summary, scope inclusions and exclusions, stakeholders and interests, named responsibilities, conflict procedures, measurable success criteria, and AI disclosure.
-- [EP 0.1 — Engineering Playbook v0.1](docs/PLAYBOOK.md): branching strategy, definition of done, sprint cadence, and named PR review rules.
+- [Engineering Playbook v0.2 — AI Tooling Guidelines](docs/PLAYBOOK.md): retains the v0.1 workflow and adds approved AI tools, prompt logging, and advisory-only AI review.
+- [v0.2 human-audit checklist](docs/PLAYBOOK_V0.2_AUDIT.md).
+- [v0.2 prompt record](docs/ai-logs/2026-09-16-charles-playbook-v0.2.md).
 - [AI-use log](AI_LOG.md).
 - [Rubric and submission checklist](docs/SUBMISSION_CHECKLIST.md).
 

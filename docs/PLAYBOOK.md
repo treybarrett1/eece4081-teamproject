@@ -1,7 +1,9 @@
-# Engineering Playbook v0.1
+# Engineering Playbook v0.2 — AI Tooling Guidelines
 
 **Course:** EECE 4081-002 Software Engineering, Fall 2026  
 **Prepared:** September 8, 2026  
+**Updated:** September 16, 2026 — v0.2
+
 **Team:** Charles Barrett, Austin Gross, Caleb Turris, and Doc Aberle  
 **Status:** Complete working-agreement proposal for team review. Member agreement and meeting availability are not yet confirmed.
 
@@ -26,7 +28,7 @@ A work item is done only when every applicable check below is satisfied and its 
 - [ ] Relevant user-facing behavior has been manually exercised, with steps and observed results recorded. UI changes include screenshots when helpful.
 - [ ] Setup instructions, user documentation, and design notes reflect changed behavior where applicable.
 - [ ] The diff contains no credentials, private user data, unexplained generated files, or unrelated changes.
-- [ ] Any AI assistance is recorded in `AI_LOG.md`, including affected files and human verification completed or still required. If none was used, the PR says so.
+- [ ] Any AI assistance has a session entry in `docs/ai-logs/` linked from `AI_LOG.md`, with prompts, output disposition, and actual validation evidence. AI review findings are resolved or explained. If none was used, the PR says so.
 - [ ] A named teammate other than the author has approved the latest substantive changes, and blocking review comments are resolved.
 
 ### After merge
@@ -83,6 +85,73 @@ For two reasonable approaches in dispute, participants record the options and tr
 
 The author may merge when all before-merge checks pass, then completes the after-merge checks. Scope changes follow the charter's scope-change procedure.
 
+## 5. Approved AI tools and permitted uses — v0.2
+
+This is the proposed approval list for team adoption, not evidence that every tool is installed or used. OpenAI Codex was used for this assignment; the other listed tools are optional. An unlisted AI tool requires a policy-change PR and the adoption procedure below before team-project use.
+
+| Tool | Permitted uses | Limits |
+| --- | --- | --- |
+| OpenAI Codex | Draft or revise code, tests, documentation, and acceptance scenarios; explain repository code; suggest fixes; perform advisory review | Work on a task branch; record prompts and affected files; a human checks the diff and validation evidence. No self-approval, policy adoption, or autonomous merge into main. |
+| OpenAI ChatGPT | Brainstorm requirements, explain concepts, compare designs, draft documentation, and critique sanitized examples | Treat requirements and citations as suggestions until checked. Do not invent interviews, approvals, sources, test results, or user needs. It cannot approve a PR. |
+| GitHub Copilot | Suggest editor completions, tests, refactorings, and explanations; provide advisory chat or review findings | The accepting developer owns every accepted line and logs material assistance. Completions and automated review never count as the required teammate approval. |
+
+Approval is for these purposes only. No listed tool may decide grades, impersonate teammates, fabricate evidence, or send messages or take operational actions for real IT users. Generated code has the same acceptance criteria and review obligations as human-written code.
+
+Use repository code that is authorized for sharing and synthetic ticket/bug records. Never put credentials, tokens, personal information, real internal ticket contents, staff-only notes, or confidential enterprise code into an AI prompt. Public-repository logs must also exclude those data. Sanitize first; do not assume a tool's privacy settings make restricted input acceptable. If a secret is accidentally shared, stop using the session and privately notify Charles immediately so access can be revoked or rotated; record only a sanitized incident summary.
+
+Charles Barrett maintains the tool list. Caleb Turris evaluates proposed coding-tool changes and technical risks; Doc Aberle checks how their outputs can be tested. These responsibilities do not replace the team's policy-change vote. Reconsider the list at retrospectives when a tool, use case, or risk changes.
+
+## 6. Prompt-log policy — v0.2
+
+### What must be recorded
+
+Log every project-related AI session used to generate, edit, explain, evaluate, or review requirements, code, tests, designs, or assignment documents, including sessions whose substantive recommendations are rejected. Routine commands that do not invoke AI need no prompt entry.
+
+Each entry contains:
+
+1. A stable ID, date and time zone, responsible member, tool/product, and model/version if displayed. Write "not exposed" when it is unavailable; do not guess.
+2. The task, issue/PR link, base commit, and files or sanitized context supplied.
+3. The exact user-authored prompts and material follow-up prompts in order. Record attachment names and a sanitized transcript or description of the relevant input. Do not disclose hidden system instructions, private chain-of-thought, or credentials.
+4. The output used: a relevant excerpt or concise response summary plus the resulting diff/commit. Record material accepted, modified, and rejected suggestions and the reasons. Do not paste every generated file when the committed diff already preserves it.
+5. Actual verification: commands or review steps, observed results, limitations, and the verifying person's name. Label assistant checks separately from human checks. Planned checks remain pending.
+6. For AI-assisted review, the reviewed commit, every actionable finding, severity, disposition, and linked fix or reason for rejection.
+
+For inline completions without a typed prompt, write "inline completion; no typed prompt," describe the surrounding context, and group related completions by issue and working session. Identify affected files and accepted behavior. A broad "AI helped" statement is insufficient. Exploratory conversations that materially influence the design must be logged even when no generated text is copied.
+
+### Where and when
+
+Store entries in `docs/ai-logs/YYYY-MM-DD-member-topic.md`, using [the prompt-log template](ai-logs/TEMPLATE.md). Add a dated summary and link in root `AI_LOG.md`. Commit the entry with the assisted change, before marking its PR ready for human review. Update the record before re-review when further AI assistance changes the work. Rejected explorations with no implementation are still logged on the issue's documentation branch before the issue closes.
+
+Keep logs in Git history for the semester and retain them with the repository afterward. Correct mistakes with a dated amendment; do not erase earlier entries to hide assistance. If redaction is necessary, mark `[REDACTED: reason]` and retain the surrounding meaning without committing the sensitive original. Missing older transcripts must be labeled retrospective/incomplete; never reconstruct them as verbatim.
+
+### Who is responsible
+
+The member invoking the tool owns the entry and its accuracy, even if an AI drafts it. Charles Barrett maintains the index and checks log coverage at sprint review. Doc Aberle performs a weekly completeness check against AI-disclosed PRs and records gaps in the sprint issue. The assigned human PR reviewer checks the entry, output disposition, and verification evidence before approval. A missing required entry is a blocking review finding. If no AI was used, the author explicitly says so in the PR.
+
+For this assignment, Charles owns the AI-assisted submission; the assistant prepared [the actual session record](ai-logs/2026-09-16-charles-playbook-v0.2.md). Human verification remains for the team.
+
+## 7. AI-assisted code review — v0.2
+
+**Decision: AI review is advisory only. It does not count, even partially, toward the one non-author teammate approval required by section 4.** A bot approval, generated "LGTM," or the author's review of their own AI-generated work supplies zero required approvals. This applies to all PRs, including small fixes and documentation changes.
+
+**Why:** A tool can help identify suspicious code or missing cases, but its conclusions may be incorrect or miss project context. The team needs a named person accountable for checking acceptance criteria, access controls, and evidence. A human reviewer may use AI as an aid, but the human must independently inspect and validate the change and submit their own decision. Accountability cannot be delegated to a tool.
+
+Follow this procedure:
+
+1. The author completes the applicable checks and supplies the diff and acceptance criteria. If AI review is used, record the exact reviewed commit in the prompt log.
+2. The author triages each actionable AI finding. For a claimed defect, reproduce it or perform a relevant inspection/test. Record accepted findings and fixes, and rejected findings with a reason. A suspected unauthorized-access or data-loss defect remains blocking until a human resolves it.
+3. The assigned teammate from section 4 reads the actual diff and linked issue, checks the prompt log and finding dispositions, and runs relevant checks or explains why inspected evidence is sufficient. The reviewer does not merely copy the AI's verdict.
+4. For this ticketing system, changes to permissions or visibility require checks for cross-requester access, staff-only notes, and direct endpoint/ID access. Ticket/bug changes require appropriate lifecycle and persistence checks.
+5. Only the teammate's recorded approval satisfies section 4. Substantive changes after approval require re-review of the new commit. AI approval cannot override failing checks or an unresolved blocking finding.
+6. If review stalls, use section 4's primary/backup reviewer deadlines. Tool availability does not shorten or bypass those rules. Disagreements about AI findings use the existing evidence-based conflict procedure.
+
+Log "AI review not used" when it was not used; AI review is optional. Human review is mandatory. Record the reviewed commit and human reviewer identity in the PR. Do not mark an assignment audit complete based on the assistant's self-checks.
+
+## Version record
+
+- **v0.1:** Original working agreement, including later team edits preserved in sections 1–4.
+- **v0.2 — September 16, 2026:** Adds the named AI-tool list, prompt-log policy, and advisory-only AI-review rule. Extends the definition of done and PR template to capture prompt-log evidence. Prepared for human audit; adoption and course submission are not claimed.
+
 ## Adoption and revision
 
 Before adoption, Charles Barrett opens an adoption issue linking the charter and this playbook. All four members confirm their responsibilities, the review rotation, the proposed meeting schedule, and their weekly capacity in that issue. Each member records their own agreement; this proposal does not substitute for it.
@@ -94,3 +163,5 @@ These are written team rules; repository settings and automated enforcement have
 ## AI-use disclosure
 
 OpenAI Codex drafted this agreement from the assignment screenshots, user-confirmed project topic and roster, and the user's request on September 8, 2026. The process rules and meeting times are proposed recommendations. Member consent, availability, and actual compliance have not been verified. The team must review the text and record adoption. No meetings, approvals, or passing project tests are claimed. See [AI_LOG.md](../AI_LOG.md).
+
+**v0.2 disclosure:** OpenAI Codex prepared the September 16 additions using the supplied assignment screenshot and current repository files. Tool permissions are proposed policy, not a claim that all tools were used. The team will audit this work; no human approval, policy vote, or course submission is claimed. See the [session record](ai-logs/2026-09-16-charles-playbook-v0.2.md) and [audit checklist](PLAYBOOK_V0.2_AUDIT.md).
