@@ -25,3 +25,5 @@
 - [Work item #1](https://github.com/treybarrett1/eece4081-teamproject/issues/1).
 - Scope: AI tool policy, prompt-log rules, AI-review policy, and supporting documentation. Existing team workflow edits are preserved.
 - Assistant verification is document-only; human audit, acceptance, adoption, and course submission remain pending. See the PR for observed checks and publication evidence.
+
+- September 16 follow-up: Charles clarified that most members expect Claude Code for coding and ChatGPT for brainstorming. Section 5 was revised accordingly; Codex use for these documents remains disclosed. Exact follow-up prompts and dispositions are appended to the linked session record.
