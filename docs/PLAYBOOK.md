@@ -87,13 +87,13 @@ The author may merge when all before-merge checks pass, then completes the after
 
 ## 5. Approved AI tools and permitted uses — v0.2
 
-This is the proposed approval list for team adoption, not evidence that every tool is installed or used. OpenAI Codex was used for this assignment; the other listed tools are optional. An unlisted AI tool requires a policy-change PR and the adoption procedure below before team-project use.
+Charles reports that most members expect to use Claude Code for coding and ChatGPT for brainstorming. The proposed primary tools below reflect that preference; they do not require every member to use AI or claim unanimous team adoption. OpenAI Codex is additionally permitted for preparing and revising these course documents, as disclosed in the logs. An unlisted tool or additional use requires a policy-change PR and the adoption procedure below.
 
 | Tool | Permitted uses | Limits |
 | --- | --- | --- |
-| OpenAI Codex | Draft or revise code, tests, documentation, and acceptance scenarios; explain repository code; suggest fixes; perform advisory review | Work on a task branch; record prompts and affected files; a human checks the diff and validation evidence. No self-approval, policy adoption, or autonomous merge into main. |
-| OpenAI ChatGPT | Brainstorm requirements, explain concepts, compare designs, draft documentation, and critique sanitized examples | Treat requirements and citations as suggestions until checked. Do not invent interviews, approvals, sources, test results, or user needs. It cannot approve a PR. |
-| GitHub Copilot | Suggest editor completions, tests, refactorings, and explanations; provide advisory chat or review findings | The accepting developer owns every accepted line and logs material assistance. Completions and automated review never count as the required teammate approval. |
+| Anthropic Claude Code — primary coding tool | Draft and revise application code, tests, bug fixes, and refactorings; explain code and provide advisory code-review findings | Work on a task branch; log prompts and affected files; verify generated changes with appropriate tests and human review. No self-approval, policy adoption, or autonomous merge into main. |
+| OpenAI ChatGPT — primary brainstorming tool | Brainstorm requirements, user stories, acceptance criteria, design alternatives, and project plans; explain concepts and help organize ideas | Treat ideas as proposals until the team checks them. Brainstorming output is not an approved requirement or implementation. Coding and code-review uses are outside this approval. Do not invent interviews, approvals, sources, test results, or user needs. |
+| OpenAI Codex — course-document assistance | Prepare and revise the playbook, assignment documentation, and associated prompt records | Disclose actual use and retain human audit. This limited permission does not authorize project coding or replace the team's primary tools. No self-approval, policy adoption, or autonomous merge into main. |
 
 Approval is for these purposes only. No listed tool may decide grades, impersonate teammates, fabricate evidence, or send messages or take operational actions for real IT users. Generated code has the same acceptance criteria and review obligations as human-written code.
 
