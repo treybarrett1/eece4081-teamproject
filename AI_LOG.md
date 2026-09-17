@@ -17,3 +17,13 @@
 **Limits:** No stakeholder interviews, application implementation, test runs, meeting attendance, team votes, approvals, or signatures were fabricated. Success criteria are targets. No screenshots of private course information are included in the public-facing package.
 
 **Future entries:** For later AI-assisted changes, record the date, tool, task, files, accepted or rejected suggestions, and actual human verification. Do not mark planned checks complete.
+
+## September 16, 2026 — Playbook v0.2
+
+- Responsible member: Charles Barrett; tool: OpenAI Codex.
+- [Exact prompt, input summary, output disposition, and pending human audit](docs/ai-logs/2026-09-16-charles-playbook-v0.2.md).
+- [Work item #1](https://github.com/treybarrett1/eece4081-teamproject/issues/1).
+- Scope: AI tool policy, prompt-log rules, AI-review policy, and supporting documentation. Existing team workflow edits are preserved.
+- Assistant verification is document-only; human audit, acceptance, adoption, and course submission remain pending. See the PR for observed checks and publication evidence.
+
+- September 16 follow-up: Charles clarified that most members expect Claude Code for coding and ChatGPT for brainstorming. Section 5 was revised accordingly; Codex use for these documents remains disclosed. Exact follow-up prompts and dispositions are appended to the linked session record.
