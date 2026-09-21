@@ -1,0 +1,883 @@
+{
+  "version": "1.0",
+  "date": "2026-09-21",
+  "baselineCommit": "5c8b49e2f55925c87e8ec18645b5986370e9bd4a",
+  "status": "AI-assisted draft; human audit pending",
+  "sources": [
+    {
+      "id": "C00",
+      "locator": "§1 — Executive summary",
+      "commitment": "Single-organization prototype; requester-to-support-to-developer workflow using synthetic records.",
+      "type": "product"
+    },
+    {
+      "id": "C01",
+      "locator": "§2 / Accounts and access",
+      "commitment": "Four demonstration roles and application-enforced authorization.",
+      "type": "product"
+    },
+    {
+      "id": "C02",
+      "locator": "§2 / Ticket intake",
+      "commitment": "Unique ID, title, description, category, impact, creation time, and own-ticket viewing.",
+      "type": "product"
+    },
+    {
+      "id": "C03",
+      "locator": "§2 / Triage and ownership",
+      "commitment": "Four priorities, one current owner, and staff status updates.",
+      "type": "product"
+    },
+    {
+      "id": "C04",
+      "locator": "§2 / Ticket lifecycle",
+      "commitment": "Defined ticket transitions, direct triaged resolution, and requester reopening with reason.",
+      "type": "product"
+    },
+    {
+      "id": "C05",
+      "locator": "§2 / Bug records",
+      "commitment": "Reproduction details, expected/actual behavior, severity, owner, and many-to-many ticket links.",
+      "type": "product"
+    },
+    {
+      "id": "C06",
+      "locator": "§2 / Bug lifecycle",
+      "commitment": "Open, In Progress, Fixed, Verified, Closed; failed verification returns to In Progress.",
+      "type": "product"
+    },
+    {
+      "id": "C07",
+      "locator": "§2 / Communication and history",
+      "commitment": "Public comments, private staff notes, and actor/time history of material changes.",
+      "type": "product"
+    },
+    {
+      "id": "C08",
+      "locator": "§2 / Search and filtering",
+      "commitment": "Authorized ID/title searches with status, priority/severity, and owner filters.",
+      "type": "product"
+    },
+    {
+      "id": "C09",
+      "locator": "§2 / Dashboard",
+      "commitment": "Open counts, unassigned tickets, and age from creation time.",
+      "type": "product"
+    },
+    {
+      "id": "C10",
+      "locator": "§2 / Persistence and delivery",
+      "commitment": "Restart persistence, documented setup, synthetic seed data, tests, and repeatable demo.",
+      "type": "product"
+    },
+    {
+      "id": "G01",
+      "locator": "§5 / Complete support workflow",
+      "commitment": "End-to-end ticket/linked-bug resolution, closure, and reopening.",
+      "type": "outcome"
+    },
+    {
+      "id": "G02",
+      "locator": "§5 / Reliable bug workflow",
+      "commitment": "Valid fields, one bug linked to two tickets, failed verification, and independent ticket closure.",
+      "type": "outcome"
+    },
+    {
+      "id": "G03",
+      "locator": "§5 / Correct access boundaries",
+      "commitment": "Own-ticket isolation, staff-note isolation, and role checks on screens and endpoints.",
+      "type": "outcome"
+    },
+    {
+      "id": "G04",
+      "locator": "§5 / Consistent data and lifecycle",
+      "commitment": "Reject invalid transitions, record actor/time, and preserve data after restart.",
+      "type": "outcome"
+    },
+    {
+      "id": "G05",
+      "locator": "§5 / Accurate queue visibility",
+      "commitment": "At least 100 tickets and 20 bugs; filters/counts equal independent expectations.",
+      "type": "outcome"
+    },
+    {
+      "id": "G06",
+      "locator": "§5 / Usable requester experience",
+      "commitment": "At least four of five evaluators submit and find status within five minutes without coaching.",
+      "type": "outcome"
+    },
+    {
+      "id": "G07",
+      "locator": "§5 / Repeatable delivery",
+      "commitment": "A teammate other than the setup author initializes a fresh checkout and runs the demo.",
+      "type": "outcome"
+    },
+    {
+      "id": "G08",
+      "locator": "§5 / Delivery quality",
+      "commitment": "Acceptance criteria pass; zero open access, data-loss, or core-workflow-blocking defects.",
+      "type": "outcome"
+    },
+    {
+      "id": "G09",
+      "locator": "§5 / Team accountability",
+      "commitment": "Post-adoption PR issue/review/evidence records and sprint review/retro notes.",
+      "type": "process"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "FR01",
+      "title": "Demonstration sign-in",
+      "shall": "The system shall authenticate an active seeded or administrator-created demonstration account, establish its current role, reject invalid/disabled credentials without revealing which field failed, and invalidate the session on sign-out.",
+      "origins": [
+        "C01",
+        "G03"
+      ],
+      "stories": [
+        "US01"
+      ],
+      "verification": "Credential and sign-out scenarios in US01.",
+      "priority": "Must"
+    },
+    {
+      "id": "FR02",
+      "title": "Manage demonstration accounts",
+      "shall": "An administrator shall create a local demonstration account, assign exactly one of Requester, Support, Developer, or Administrator, and enable/disable accounts. Duplicate usernames and unknown roles shall be rejected. A role or active-status change shall affect the next authorized request; it shall not delete historical attribution.",
+      "origins": [
+        "C01",
+        "G03"
+      ],
+      "stories": [
+        "US02"
+      ],
+      "verification": "US02 account/role cases, including an already signed-in disabled user.",
+      "priority": "Must"
+    },
+    {
+      "id": "FR03",
+      "title": "Enforce the role matrix",
+      "shall": "The system shall enforce the matrix in section 2 on every read and write, including detail IDs, searches, counts, and direct endpoint requests. Unauthorized access shall disclose neither protected fields nor the existence/count of another requester's tickets.",
+      "origins": [
+        "C01",
+        "G03"
+      ],
+      "stories": [
+        "US03"
+      ],
+      "verification": "Positive and negative matrix cases; cross-requester and direct-ID probes.",
+      "priority": "Must"
+    },
+    {
+      "id": "FR04",
+      "title": "Create a support ticket",
+      "shall": "A requester shall create a ticket with title, description, category, and reported impact. On success the system shall generate a unique immutable ticket ID, set the requester to the authenticated account, stamp UTC creation time, and set status New with no assignee or priority until triage.",
+      "origins": [
+        "C02",
+        "C03"
+      ],
+      "stories": [
+        "US04"
+      ],
+      "verification": "US04 valid creation, duplicate-title distinction, forged-requester rejection.",
+      "priority": "Must"
+    },
+    {
+      "id": "FR05",
+      "title": "View own ticket progress",
+      "shall": "A requester shall list and read their own tickets, showing ID, title, category, reported impact, status, assigned support display name or Unassigned, priority or Not triaged, creation time, public comments, and any resolution note. Staff notes and bug details shall be excluded.",
+      "origins": [
+        "C02",
+        "C07",
+        "G01",
+        "G03"
+      ],
+      "stories": [
+        "US05"
+      ],
+      "verification": "US05 visibility and status after resolution/reopening.",
+      "priority": "Must"
+    },
+    {
+      "id": "FR06",
+      "title": "Triage and prioritize",
+      "shall": "Support shall review a New ticket, confirm/correct its category while retaining reported impact, and assign exactly one priority: Low, Medium, High, or Critical. Moving to Triaged requires a selected priority. Later priority changes shall be permitted to Support and recorded in history.",
+      "origins": [
+        "C03",
+        "C04"
+      ],
+      "stories": [
+        "US06"
+      ],
+      "verification": "US06 four priorities, invalid value, missing priority, history.",
+      "priority": "Must"
+    },
+    {
+      "id": "FR07",
+      "title": "Assign one current ticket owner",
+      "shall": "Support shall assign or reassign a ticket to one active Support account. Reassignment shall replace the current owner and preserve prior assignment history. New and Triaged tickets may be unassigned; entering or remaining In Progress requires an active owner. Disabling an owner or removing their Support role shall be rejected until their In Progress tickets are reassigned.",
+      "origins": [
+        "C03",
+        "G04"
+      ],
+      "stories": [
+        "US07"
+      ],
+      "verification": "US07 reassign, wrong-role assignee, and disable-owner guard.",
+      "priority": "Must"
+    },
+    {
+      "id": "FR08",
+      "title": "Enforce ticket lifecycle",
+      "shall": "The system shall allow only the ticket transitions and actor/guard combinations in section 2. Support may begin work only from Triaged, and no role may skip directly from New to Closed or set an arbitrary status. Rejected transitions shall leave data and history unchanged.",
+      "origins": [
+        "C04",
+        "G01",
+        "G04"
+      ],
+      "stories": [
+        "US08"
+      ],
+      "verification": "Every allowed edge and a rejected edge for each state in US08.",
+      "priority": "Must"
+    },
+    {
+      "id": "FR09",
+      "title": "Resolve, close, and reopen",
+      "shall": "Support shall supply a nonblank public resolution note for Triaged or In Progress → Resolved. The owning requester may confirm Resolved → Closed. The owning requester may reopen Resolved or Closed → Triaged with a nonblank reason; retain priority/owner and all earlier history. Reopening by a different requester shall fail.",
+      "origins": [
+        "C04",
+        "G01"
+      ],
+      "stories": [
+        "US09"
+      ],
+      "verification": "US09 note/reason validation, direct resolution, closure, two reopening routes.",
+      "priority": "Must"
+    },
+    {
+      "id": "FR10",
+      "title": "Public ticket conversation",
+      "shall": "The owning requester and Support shall append nonblank public comments to a ticket in New, Triaged, In Progress, or Resolved. Comments shall record author/time and become visible to that requester and Support. Closed tickets require reopening before further comments. Existing comments cannot be edited or deleted in this baseline.",
+      "origins": [
+        "C07",
+        "G01"
+      ],
+      "stories": [
+        "US10"
+      ],
+      "verification": "Public comment round-trip, invalid text, closed-ticket rejection.",
+      "priority": "Must"
+    },
+    {
+      "id": "FR11",
+      "title": "Staff-only technical notes",
+      "shall": "Support shall append staff-only notes; Developers may append notes only to tickets linked to a bug they own. Support can read all staff notes; a Developer can read notes only on tickets linked to a bug they own. Requester views, endpoint responses, and search results shall never expose them.",
+      "origins": [
+        "C07",
+        "C01",
+        "G03"
+      ],
+      "stories": [
+        "US10",
+        "US03"
+      ],
+      "verification": "Public/private paired records and unlinked-developer access checks.",
+      "priority": "Must"
+    },
+    {
+      "id": "FR12",
+      "title": "Change history",
+      "shall": "The system shall append an immutable actor/time event with old and new values for ticket owner, priority, category, status, bug owner/status/severity, and ticket–bug link additions/removals. Account changes shall record actor/time and changed role/active status, never credentials. Requesters see only public ticket status/priority/owner history; technical events follow the role matrix.",
+      "origins": [
+        "C07",
+        "G04",
+        "G03"
+      ],
+      "stories": [
+        "US07",
+        "US09",
+        "US13",
+        "US17"
+      ],
+      "verification": "History content/order/access checks, including failed writes leaving no event.",
+      "priority": "Must"
+    },
+    {
+      "id": "FR13",
+      "title": "Record reproducible bugs",
+      "shall": "Support or Developer shall create a bug with immutable unique ID, title, description, reproduction steps, expected result, actual result, and severity Low/Medium/High/Critical. New bugs start Open; required missing fields or unknown severity shall be rejected.",
+      "origins": [
+        "C05",
+        "G02"
+      ],
+      "stories": [
+        "US11"
+      ],
+      "verification": "US11 required-field matrix and unique ID.",
+      "priority": "Must"
+    },
+    {
+      "id": "FR14",
+      "title": "Bug ownership and technical updates",
+      "shall": "Support may assign/reassign any non-Closed bug to one active Developer without changing its state. A Developer may claim an unassigned Open bug, then edit its technical fields while Open or In Progress. A different Developer cannot edit it. In Progress requires an active owner; disabling that owner or removing their Developer role requires reassignment first.",
+      "origins": [
+        "C05",
+        "G02"
+      ],
+      "stories": [
+        "US12"
+      ],
+      "verification": "Claim, reassign, unauthorized edit, and disable-owner checks.",
+      "priority": "Must"
+    },
+    {
+      "id": "FR15",
+      "title": "Link tickets and bugs without coupling closure",
+      "shall": "Support shall add/remove many-to-many links between existing tickets and bugs, reject duplicate/nonexistent links, and record link history. A single bug may have two tickets and one ticket two bugs. Closing a bug shall never change a linked ticket's status; Support must resolve each ticket separately.",
+      "origins": [
+        "C05",
+        "G02",
+        "G01"
+      ],
+      "stories": [
+        "US13"
+      ],
+      "verification": "Two-by-two link fixture, removal, duplicates, and independent closure.",
+      "priority": "Must"
+    },
+    {
+      "id": "FR16",
+      "title": "Fix and verify bugs",
+      "shall": "The assigned Developer shall move Open → In Progress and In Progress → Fixed with a nonblank fix note. Support shall move Fixed → Verified with verification evidence, or Fixed → In Progress with a failed-verification explanation. Support shall close Verified bugs or return Verified → In Progress with a failed-verification explanation. Every transition into In Progress requires an active Developer owner; Support must reassign an inactive owner before recording failed verification. Other transitions are rejected.",
+      "origins": [
+        "C06",
+        "G02",
+        "G04"
+      ],
+      "stories": [
+        "US14"
+      ],
+      "verification": "All allowed edges, rejected Open → Closed, and failed verification.",
+      "priority": "Must"
+    },
+    {
+      "id": "FR17",
+      "title": "Search and filter tickets",
+      "shall": "Authorized users shall search ticket ID exactly or title by case-insensitive substring and combine applicable status, priority, and owner filters with AND. Requesters are constrained to their own tickets; Developers to the technical projection of tickets linked to their owned bugs. Unassigned and Not triaged are explicit filter values; results are ordered by creation time descending, then ID.",
+      "origins": [
+        "C08",
+        "G05",
+        "G03"
+      ],
+      "stories": [
+        "US15"
+      ],
+      "verification": "US15 independent fixture queries and cross-user leak tests.",
+      "priority": "Must"
+    },
+    {
+      "id": "FR18",
+      "title": "Search and filter bugs",
+      "shall": "Support and Developer shall search bug ID exactly or title by case-insensitive substring, AND-filter by status, severity, and Developer owner including Unassigned, and receive deterministic creation-time/ID ordering. Requesters and accounts with only Administrator role cannot access bug searches.",
+      "origins": [
+        "C08",
+        "G05",
+        "G03"
+      ],
+      "stories": [
+        "US15"
+      ],
+      "verification": "US15 bug queries, no-results case, and forbidden roles.",
+      "priority": "Must"
+    },
+    {
+      "id": "FR19",
+      "title": "Queue dashboard",
+      "shall": "Support shall see counts of open tickets by status and priority, a total open count, an unassigned-open count, and age per open ticket. Open means New, Triaged, or In Progress; Resolved/Closed are excluded. Untriaged New tickets are counted under Not triaged. Age is floor((current UTC time − creation UTC time)/86400) nonnegative whole days.",
+      "origins": [
+        "C09",
+        "G05"
+      ],
+      "stories": [
+        "US16"
+      ],
+      "verification": "US16 independent counts and frozen-clock age boundaries.",
+      "priority": "Must"
+    },
+    {
+      "id": "FR20",
+      "title": "Synthetic seed dataset",
+      "shall": "The delivery shall provide a repeatable seed procedure with at least 100 synthetic tickets, 20 bugs, two Requesters, two Support users, two Developers, and one Administrator. Include every lifecycle state, priorities/severities, unassigned cases, public/private comments, and many-to-many links. Loading a fresh dataset shall produce documented expected dashboard counts.",
+      "origins": [
+        "C10",
+        "G05",
+        "G07"
+      ],
+      "stories": [
+        "US18"
+      ],
+      "verification": "Fresh database seed twice with the same seed; compare expected IDs/counts.",
+      "priority": "Must"
+    },
+    {
+      "id": "FR21",
+      "title": "Validate input without partial changes",
+      "shall": "All create/update endpoints shall enforce the field rules in section 2 regardless of UI validation. Missing/invalid inputs shall return a field-specific error and perform no partial record, link, or history update. User-authored ticket, comment, note, and bug text shall render as text rather than executable markup.",
+      "origins": [
+        "C02",
+        "C05",
+        "G02",
+        "G04",
+        "G08"
+      ],
+      "stories": [
+        "US04",
+        "US11",
+        "US17"
+      ],
+      "verification": "Boundary values, malformed status/IDs, script-like text, and atomic-write failure cases.",
+      "priority": "Must"
+    },
+    {
+      "id": "FR22",
+      "title": "Repeatable demonstration package",
+      "shall": "The repository shall provide setup instructions, prerequisites, seed command, test command(s), and an end-to-end script covering report → triage → assignment → linked bug → fix/verification → individual ticket resolution → requester closure/reopening. The script shall identify accounts, expected states, and evidence to capture.",
+      "origins": [
+        "C00",
+        "C10",
+        "G01",
+        "G07"
+      ],
+      "stories": [
+        "US18",
+        "US19"
+      ],
+      "verification": "A non-author follows the committed instructions on a fresh checkout.",
+      "priority": "Must"
+    },
+    {
+      "id": "NFR01",
+      "title": "Authorization completeness",
+      "shall": "For each permitted and denied role/action pair in section 2, the acceptance suite shall include at least one success or rejection test as appropriate. All cases must pass; two requesters must be used for ownership tests. A disabled account or revoked role must lose access on its next request.",
+      "origins": [
+        "C01",
+        "G03",
+        "G08"
+      ],
+      "stories": [
+        "US03"
+      ],
+      "verification": "Run the complete matrix suite; one unauthorized disclosure or mutation fails the requirement.",
+      "priority": "Must"
+    },
+    {
+      "id": "NFR02",
+      "title": "Persistence and atomicity",
+      "shall": "After ten scripted workflows and a normal application/database restart without reseeding, all acknowledged tickets, bugs, comments, links, and history shall match the pre-restart snapshot. Inject a failure between data and history writes in one test: either both persist or neither persists. No partial result is permitted.",
+      "origins": [
+        "C10",
+        "G04"
+      ],
+      "stories": [
+        "US17"
+      ],
+      "verification": "Compare complete snapshots before/after restart and forced write failure; zero mismatches.",
+      "priority": "Must"
+    },
+    {
+      "id": "NFR03",
+      "title": "Requester usability",
+      "shall": "At least four of five volunteer evaluators unfamiliar with the implementation shall submit a valid ticket and find its status within five minutes total using only the provided instructions and no live coaching. Each successful result must refer to the evaluator's newly created ticket.",
+      "origins": [
+        "G06",
+        "C02"
+      ],
+      "stories": [
+        "US05"
+      ],
+      "verification": "Record anonymous task results and elapsed times from first instruction to correct status.",
+      "priority": "Must"
+    },
+    {
+      "id": "NFR04",
+      "title": "Queue accuracy",
+      "shall": "On the FR20 dataset, every dashboard count and the result set of the US15 filter queries shall equal independently calculated expected values. At frozen ages 0, 23h59m, 24h, and 48h, display 0, 0, 1, and 2 days respectively. Required mismatch count is zero.",
+      "origins": [
+        "G05",
+        "C08",
+        "C09"
+      ],
+      "stories": [
+        "US15",
+        "US16"
+      ],
+      "verification": "Expected results computed directly from seed records, not copied from UI output.",
+      "priority": "Must"
+    },
+    {
+      "id": "NFR05",
+      "title": "Interactive response time",
+      "shall": "On the documented reference environment (4 logical CPU cores, 8 GB RAM, local app/database), with the FR20 dataset and five simultaneous authenticated sessions, at least 95 of 100 measured requests for each of ticket list, ticket detail, and dashboard shall finish within 2 seconds, measured at the client after five warm-up requests per operation; no HTTP 5xx is permitted.",
+      "origins": [
+        "G06",
+        "C09"
+      ],
+      "stories": [
+        "US16"
+      ],
+      "verification": "Record environment, dataset, concurrency, raw durations, and failure count; proposed measurable usability refinement, not an achieved benchmark.",
+      "priority": "Must"
+    },
+    {
+      "id": "NFR06",
+      "title": "Fresh-checkout reproducibility",
+      "shall": "One teammate other than the setup-guide author shall install, seed, and execute the demonstration from a fresh checkout using only documented prerequisites and steps, with no undocumented correction or live coaching. Record the tested commit and environment. Any missing step that blocks completion fails.",
+      "origins": [
+        "C10",
+        "G07"
+      ],
+      "stories": [
+        "US18"
+      ],
+      "verification": "Observed independent setup run; no installation-time promise is invented.",
+      "priority": "Must"
+    },
+    {
+      "id": "NFR07",
+      "title": "Release acceptance",
+      "shall": "Before the final demonstration, 100% of the committed story acceptance criteria shall pass and zero open defects may allow unauthorized access, lose acknowledged records, or block the FR22 core workflow. Other known defects shall list impact and workaround.",
+      "origins": [
+        "G08",
+        "C10"
+      ],
+      "stories": [
+        "US19"
+      ],
+      "verification": "Commit-specific acceptance report and open-defect review; unmet criteria cannot be marked done.",
+      "priority": "Must"
+    },
+    {
+      "id": "NFR08",
+      "title": "Auditable change records",
+      "shall": "Every successful mutation covered by FR12 shall produce exactly one attributable event per changed field/link, with an ISO 8601 UTC timestamp, actor ID, record ID, and applicable old/new values; order ties by event ID. History-edit/delete attempts through the application shall fail. Audit payloads must contain zero passwords, tokens, or session identifiers.",
+      "origins": [
+        "C07",
+        "G04",
+        "G03"
+      ],
+      "stories": [
+        "US17"
+      ],
+      "verification": "Enumerate expected events for scripted changes, test immutability, and inspect payloads.",
+      "priority": "Must"
+    },
+    {
+      "id": "NFR09",
+      "title": "Team delivery evidence",
+      "shall": "Every post-adoption merged PR shall link an issue, identify a non-author human approval covering the final substantive revision, and record validation; each completed sprint shall have review and retrospective notes. AI-assisted work shall link its prompt record under the adopted playbook. The final evidence audit shall find zero missing records.",
+      "origins": [
+        "G09"
+      ],
+      "stories": [
+        "US20"
+      ],
+      "verification": "Process requirement, not application behavior: audit PR history and sprint notes; do not invent adoption dates or retrospective evidence.",
+      "priority": "Must"
+    },
+    {
+      "id": "NFR10",
+      "title": "Prototype data boundary",
+      "shall": "The committed seed/demo assets and acceptance evidence shall contain zero real employee ticket records, live credentials, or confidential organization data. Use synthetic display names and clearly labeled demonstration accounts; prompt and audit logs must also respect this boundary.",
+      "origins": [
+        "C00",
+        "C10",
+        "G08"
+      ],
+      "stories": [
+        "US18",
+        "US20"
+      ],
+      "verification": "Inspect seeded records and release evidence against the synthetic-data rule; a real private record fails.",
+      "priority": "Must"
+    }
+  ],
+  "epics": [
+    {
+      "id": "E01",
+      "title": "Establish accountable access",
+      "outcome": "Only authorized people can access the records needed for their job.",
+      "stories": [
+        "US01",
+        "US02",
+        "US03"
+      ]
+    },
+    {
+      "id": "E02",
+      "title": "Report and understand the problem",
+      "outcome": "Employees submit actionable reports and understand their progress.",
+      "stories": [
+        "US04",
+        "US05",
+        "US06"
+      ]
+    },
+    {
+      "id": "E03",
+      "title": "Own and resolve the support request",
+      "outcome": "Support has accountable ownership, conversation, and explicit completion.",
+      "stories": [
+        "US07",
+        "US08",
+        "US09",
+        "US10"
+      ]
+    },
+    {
+      "id": "E04",
+      "title": "Investigate linked software defects",
+      "outcome": "Developers reproduce defects; support verifies fixes for affected tickets.",
+      "stories": [
+        "US11",
+        "US12",
+        "US13",
+        "US14"
+      ]
+    },
+    {
+      "id": "E05",
+      "title": "Inspect the queue and evidence",
+      "outcome": "Staff find work and trust the dashboard and history.",
+      "stories": [
+        "US15",
+        "US16",
+        "US17"
+      ]
+    },
+    {
+      "id": "E06",
+      "title": "Demonstrate and govern the prototype",
+      "outcome": "A teammate can reproduce delivery and the team can show acceptance evidence.",
+      "stories": [
+        "US18",
+        "US19",
+        "US20"
+      ]
+    }
+  ],
+  "stories": [
+    {
+      "id": "US01",
+      "title": "Sign in and end a session",
+      "story": "As a demonstration user, I want to sign in and out so that access is tied to my identity.",
+      "criteria": [
+        "Given an active account and correct credentials, signing in shows that account's permitted workspace; an incorrect password and a disabled account both fail with the same non-specific sign-in error.",
+        "Given a signed-in user, after sign-out the old session cannot read ticket data; the next protected request is rejected.",
+        "Given a role change or disable action during a session, the next request uses the new permissions or rejects the disabled account."
+      ]
+    },
+    {
+      "id": "US02",
+      "title": "Manage accounts",
+      "story": "As an administrator, I want to manage demonstration accounts so that only assigned participants can act in each role.",
+      "criteria": [
+        "Given an unused valid username and valid credentials/role, creating the account succeeds; duplicate username and an unknown role fail without creating a partial account.",
+        "Given an existing account, changing its role or enabled state affects its next protected request and creates an attributable account-change event without credentials.",
+        "Given a Support or Developer who owns In Progress work, disabling or changing them out of that role is blocked until the affected work is reassigned; historical actor IDs remain resolvable."
+      ]
+    },
+    {
+      "id": "US03",
+      "title": "Protect records across roles",
+      "story": "As a requester, I want my requests and staff's private work separated so that other users cannot inspect my problem history.",
+      "criteria": [
+        "Given Requesters A and B, A cannot read or mutate B's ticket through URL guessing, a forged requester ID, direct endpoints, search, or counts; the response contains no protected record data.",
+        "Given public and staff-only text on A's ticket, A receives public text only. Developers see technical projection/notes only for tickets linked to bugs they own.",
+        "Given each role/action pair in the role matrix, allowed and denied requests match that matrix; the stored credential and session secret never appear in application response payloads.",
+        "Given every NFR01 matrix case, all pass before access-boundary acceptance is recorded."
+      ]
+    },
+    {
+      "id": "US04",
+      "title": "Submit a ticket",
+      "story": "As an employee requester, I want to describe a problem once so that support receives an actionable request.",
+      "criteria": [
+        "Given valid title, description, category, and impact, submission returns one immutable ID, UTC creation time, status New, requester identity from the session, and Unassigned/Not triaged values.",
+        "Given two valid submissions with the same title, each has a different ID; a submitted requester identity different from the session is rejected.",
+        "Given a missing required field, an over-limit title, or an unknown category, a field-specific error appears and no ticket/history fragment is persisted.",
+        "Given markup-like description text, it is displayed as text and does not execute."
+      ]
+    },
+    {
+      "id": "US05",
+      "title": "Find my status",
+      "story": "As a requester, I want to see my ticket's owner and progress so that I know what happens next.",
+      "criteria": [
+        "Given a newly created ticket, its requester can find it in their list and read every public field required by FR05, including explicit Unassigned and Not triaged values.",
+        "Given a support status change or resolution note, reloading the ticket shows the new public state and note without exposing internal notes or bug details.",
+        "Given five unfamiliar volunteer evaluators and the provided instructions, at least four create a valid ticket and locate that ticket's status within five minutes without live coaching; capture anonymous timing/results."
+      ]
+    },
+    {
+      "id": "US06",
+      "title": "Triage by impact",
+      "story": "As a support agent, I want to classify and prioritize new tickets so that important work is visible.",
+      "criteria": [
+        "Given a New ticket, Support can confirm/correct category and set each supported priority value; reported impact remains intact.",
+        "Given no selected priority, New → Triaged is rejected; selecting a valid priority permits it.",
+        "Given a later priority/category change, the old/new values, actor, and timestamp appear in the authorized history; Requesters cannot perform the update."
+      ]
+    },
+    {
+      "id": "US07",
+      "title": "Assign accountable ownership",
+      "story": "As a support agent, I want one current ticket owner so that the next action has a responsible person.",
+      "criteria": [
+        "Given a New or Triaged ticket, Support assigns active Support A, then reassigns to Support B; only B is current and both changes remain in history.",
+        "Given an inactive or non-Support target, assignment fails; Triaged → In Progress fails until an active Support owner is selected.",
+        "Given an In Progress ticket, clearing its owner or disabling/removing that owner's Support role is rejected until the ticket is reassigned."
+      ]
+    },
+    {
+      "id": "US08",
+      "title": "Move work through valid states",
+      "story": "As a support agent, I want predictable ticket states so that progress cannot skip required work.",
+      "criteria": [
+        "Given valid priority and an active owner, New → Triaged → In Progress succeeds with authorized events.",
+        "Given each allowed ticket transition in section 2, the specified actor and guard succeed; test at least one disallowed target from every state.",
+        "Given New → Closed or an arbitrary state string, the update fails and both ticket state and change-history count remain unchanged."
+      ]
+    },
+    {
+      "id": "US09",
+      "title": "Resolve, confirm, and reopen",
+      "story": "As a requester, I want to confirm a solution or reopen my ticket so that closure reflects whether my problem was addressed.",
+      "criteria": [
+        "Given a Triaged or In Progress ticket, Support can resolve it only with a nonblank public resolution note; both routes are tested.",
+        "Given my Resolved ticket, I can confirm Closed; another requester and a Developer cannot close it.",
+        "Given my Resolved or Closed ticket, a nonblank reopening reason returns it to Triaged while retaining priority/owner and previous resolution/history; a blank reason fails.",
+        "Given a linked bug closes, my ticket's state does not change until Support performs its own resolution action."
+      ]
+    },
+    {
+      "id": "US10",
+      "title": "Separate public conversation from internal notes",
+      "story": "As a support agent, I want public replies and staff-only notes so that useful internal investigation does not leak to requesters.",
+      "criteria": [
+        "Given a non-Closed ticket, Support and the owning requester append public comments with author/time; whitespace-only and over-limit text fail.",
+        "Given a staff-only note, Support and the owner of a linked bug can read it, while the requester and an unlinked Developer cannot; only Support and the owning linked Developer may add staff notes.",
+        "Given a Closed ticket, new public comments are rejected until reopening. Staff notes may still record technical follow-up without changing ticket status.",
+        "Given existing public comments or notes, edit/delete attempts are rejected in this baseline."
+      ]
+    },
+    {
+      "id": "US11",
+      "title": "Describe a reproducible defect",
+      "story": "As a developer, I want reproduction steps and expected versus actual results so that I can investigate a software problem.",
+      "criteria": [
+        "Given all required bug fields and a valid severity, Support or Developer creates an Open bug with unique immutable ID and UTC time.",
+        "Given each missing required field, an unknown severity, or over-limit field, creation fails with a specific error and no partial bug.",
+        "Given two bugs with the same title, IDs differ; markup-like field content displays inertly."
+      ]
+    },
+    {
+      "id": "US12",
+      "title": "Own a bug investigation",
+      "story": "As a developer, I want to claim or receive a bug so that investigation has one accountable owner.",
+      "criteria": [
+        "Given an unassigned Open bug, a Developer can claim it; claiming a bug already owned by another Developer fails.",
+        "Given an Open, In Progress, Fixed, or Verified bug, Support can reassign it to an active Developer without changing status, and the prior assignment remains in history.",
+        "Given the current owner, technical edits are allowed only in Open/In Progress; another Developer, an inactive user, or a requester is denied.",
+        "Given an In Progress bug, its owner cannot be disabled or lose the Developer role until reassignment; it cannot be left ownerless."
+      ]
+    },
+    {
+      "id": "US13",
+      "title": "Connect related work",
+      "story": "As a support agent, I want ticket–bug links so that one investigation can serve multiple reported problems.",
+      "criteria": [
+        "Given tickets T1 and T2 and bugs B1 and B2, create links T1–B1, T2–B1, and T1–B2; authorized views expose the same relationships in either direction.",
+        "Given an existing link, a duplicate attempt fails without a duplicate row; a nonexistent record ID fails; removing a link leaves both original records intact and records the removal.",
+        "Given B1 closes, T1 and T2 retain their previous statuses and Support resolves each separately after checking its public resolution.",
+        "Given T1's requester, bug IDs/details and link history are not exposed through requester responses."
+      ]
+    },
+    {
+      "id": "US14",
+      "title": "Verify a fix",
+      "story": "As a support agent, I want to verify a developer's fix so that a bug is not closed merely because code changed.",
+      "criteria": [
+        "Given the assigned active Developer, Open → In Progress succeeds and In Progress → Fixed requires a nonblank fix note.",
+        "Given a Fixed bug, Support can record successful verification evidence and move it to Verified, then Closed.",
+        "Given failed verification of a Fixed or Verified bug, Support records a nonblank explanation and returns it to In Progress; retain an active owner, or require reassignment first if the owner is inactive or no longer a Developer.",
+        "Given Open → Closed, an unassigned start, a missing note, or a Developer attempting the Support verification action, the request fails without a state/history change."
+      ]
+    },
+    {
+      "id": "US15",
+      "title": "Find authorized work",
+      "story": "As a support agent or developer, I want precise filters so that I can locate relevant work without scanning every record.",
+      "criteria": [
+        "Given the documented seed, compare independently expected sets for exact-ID search, mixed-case title substring, each status, each priority/severity, and each owner including Unassigned.",
+        "Given combined status plus priority/severity plus owner filters, the result is their intersection in creation-time-descending/ID order; a query with no matches returns an empty list.",
+        "Given a requester, ticket results contain only their own records and bug search is denied; a Developer's ticket searches return only the technical projection for tickets linked to their own bugs; an Administrator-only account cannot search operational records.",
+        "Given NFR04's expected query results, every actual result set equals the independently calculated set."
+      ]
+    },
+    {
+      "id": "US16",
+      "title": "Inspect queue size and age",
+      "story": "As a support manager using a Support account, I want accurate queue counts and age so that I can identify neglected work.",
+      "criteria": [
+        "Given the seed dataset, open counts include only New/Triaged/In Progress; counts grouped by status/priority sum to the total, and Not triaged remains visible for untriaged tickets.",
+        "Given both assigned and unassigned open/closed records, unassigned-open count excludes Resolved and Closed records.",
+        "Given a frozen clock, ticket ages at 0, 23h59m, 24h, and 48h are 0, 0, 1, and 2 whole days; do not use last-update time.",
+        "Given the NFR05 workload/environment, each measured operation meets its 95-of-100 response threshold and zero-server-error condition; retain raw measurements."
+      ]
+    },
+    {
+      "id": "US17",
+      "title": "Trust persisted records and history",
+      "story": "As a maintainer, I want durable, attributable changes so that progress can be reconstructed after a restart.",
+      "criteria": [
+        "Given ten completed scripted workflows, snapshot tickets, bugs, comments, links, and history, restart without reseeding, and compare: zero acknowledged records or values are missing or changed.",
+        "Given a forced failure between a record mutation and its event write, either both persist or neither persists; no partial update is allowed.",
+        "Given every FR12 mutation, NFR08's actor/time/old-new fields and event count are correct and no credential/session secret appears.",
+        "Given attempted history editing/deletion or an invalid transition, the history remains unchanged."
+      ]
+    },
+    {
+      "id": "US18",
+      "title": "Reproduce the prototype",
+      "story": "As a teammate who did not write the setup guide, I want a fresh-checkout path and synthetic dataset so that I can independently run the demonstration.",
+      "criteria": [
+        "Given only documented prerequisites and instructions, the teammate installs, seeds, and runs the demo without undocumented correction or live coaching, recording commit/environment.",
+        "Given a fresh database, the seed creates at least 100 tickets, 20 bugs, all four roles and required edge cases; repeat on another fresh database with the same seed and compare expected values.",
+        "Given the demo assets and acceptance evidence, inspection finds no actual employee ticket content, live credentials, or confidential organization data.",
+        "Given the repository, the setup, seed/test commands, demo accounts, and expected steps are all documented; missing instructions fail acceptance."
+      ]
+    },
+    {
+      "id": "US19",
+      "title": "Prove the core workflow",
+      "story": "As the course evaluator, I want reproducible acceptance evidence so that the delivered behavior can be checked against the specification.",
+      "criteria": [
+        "Given the FR22 script, demonstrate ticket reporting through a linked bug fix, verification, independent ticket resolution, requester closure, and reopening; record actual outcomes at a named commit.",
+        "Given the final story checklist, every committed criterion has a pass result; any failure keeps delivery acceptance open.",
+        "Given the defect list, no unresolved unauthorized-access, acknowledged-data-loss, or core-workflow-blocking issue remains; other issues state impact/workaround."
+      ]
+    },
+    {
+      "id": "US20",
+      "title": "Audit team evidence",
+      "story": "As a team member, I want traceable reviews and AI disclosures so that contribution and acceptance claims can be verified.",
+      "criteria": [
+        "Given the actual adoption record, inspect every later merged PR: each links an issue, has a non-author human approval covering its final substantive revision, and records validation.",
+        "Given each completed sprint, review and retrospective notes exist; AI-assisted PRs link prompt records under the adopted playbook.",
+        "Given no recorded adoption or no human authorship evidence, mark those facts unverified rather than inventing dates, approvals, or contribution claims.",
+        "Given the release evidence and logs, synthetic-data/privacy inspection finds no prohibited real records or live credentials."
+      ]
+    }
+  ]
+}

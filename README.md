@@ -17,6 +17,9 @@ Names and project topic are confirmed by the repository owner. Roles and meeting
 
 ## Assignment documents
 
+- [T2 — Requirements and Stakeholder Specification](docs/T2_REQUIREMENTS.md): 32 requirements, six epics, 20 stories, bidirectional traceability, and transparent authorship.
+- [T2 audit checklist](docs/t2/AUDIT.md), [traceability CSV](docs/t2/traceability.csv), and [validation evidence](docs/t2/VALIDATION.md).
+
 - [T1 — Team Charter and Executive Summary](docs/TEAM_CHARTER.md): executive summary, scope inclusions and exclusions, stakeholders and interests, named responsibilities, conflict procedures, measurable success criteria, and AI disclosure.
 - [Engineering Playbook v0.2 — AI Tooling Guidelines](docs/PLAYBOOK.md): retains the v0.1 workflow and adds approved AI tools, prompt logging, and advisory-only AI review.
 - [v0.2 human-audit checklist](docs/PLAYBOOK_V0.2_AUDIT.md).

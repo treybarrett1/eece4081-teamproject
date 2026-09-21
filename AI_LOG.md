@@ -27,3 +27,10 @@
 - Assistant verification is document-only; human audit, acceptance, adoption, and course submission remain pending. See the PR for observed checks and publication evidence.
 
 - September 16 follow-up: Charles clarified that most members expect Claude Code for coding and ChatGPT for brainstorming. Section 5 was revised accordingly; Codex use for these documents remains disclosed. Exact follow-up prompts and dispositions are appended to the linked session record.
+
+## September 21, 2026 — T2 requirements specification
+
+- Responsible member: Charles Barrett; drafting tool: OpenAI Codex (course-document assistance).
+- [Prompt/input record, repository evidence, and dispositions](docs/ai-logs/2026-09-21-charles-t2-requirements.md).
+- [Specification and authorship map](docs/T2_REQUIREMENTS.md); [human audit](docs/t2/AUDIT.md).
+- Scope: charter-derived requirements, stories, measurable quality targets, traceability and conflict analysis. Human authorship, interviews, implementation tests, approval, and submission are not fabricated.
