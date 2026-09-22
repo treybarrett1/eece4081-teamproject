@@ -2,7 +2,7 @@
 
 **Issue:** [#5](https://github.com/treybarrett1/eece4081-teamproject/issues/5)
 
-**Status:** Human audit pending; assistant checks are not teammate approval.
+**Status:** Scoped Caleb Turris review recorded; final overall human approval remains pending. AI-assisted findings have specification dispositions, not executed test results.
 
 ## Rubric coverage
 
@@ -23,12 +23,12 @@
 
 - [ ] Charles: confirm all positive charter capabilities and nine success criteria are accounted for.
 - [ ] Austin: compare story-map photo and PR #4 transcription to section 8; accept or change the dispositions.
-- [ ] Caleb: check role permissions, technical projection, ownership guards, and both lifecycle tables.
+- [x] Caleb: scoped review of permissions, technical projection, and ownership guards recorded on the original reviewed commit; overall final-revision approval still required.
 - [ ] Doc: verify every quality requirement has an observable failure condition and acceptance method.
 - [ ] Team: accept or revise the proposed field limits, role refinements, and response-time target.
 - [ ] Team: inspect semantic justification of traceability links; automatic coverage does not prove meaning.
 - [ ] Team: identify who actually wrote/revised each section and link edit evidence. Review responsibilities alone do not establish authorship.
-- [ ] Team: confirm any mapping of WoodlandMoss to a member before attributing workshop artifacts to that person.
+- [x] WoodlandMoss identified as Caleb Turris by the signed PR #6 review.
 - [ ] Reviewer: record the actual reviewed commit, findings, and independent approval in the PR.
 - [ ] Charles: merge only after the existing approval requirements are met.
 - [ ] Charles: submit one T2 team deliverable through the course portal and check the receipt.
@@ -43,3 +43,7 @@
 - Submission receipt:
 
 No interview, product test, team approval, or course submission is claimed by this checklist.
+
+## Review dispositions
+
+See [Review resolutions and verification procedures](REVIEW_RESOLUTIONS.md) for the four NFR clarifications and exact review links. The review submitted through docasbarton-gif explicitly denies human approval and does not satisfy the playbook's approval requirement.

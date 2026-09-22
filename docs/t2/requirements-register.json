@@ -482,7 +482,7 @@
       "stories": [
         "US17"
       ],
-      "verification": "Compare complete snapshots before/after restart and forced write failure; zero mismatches.",
+      "verification": "Execute W01–W10 and the separate atomicity-injection case in the review-resolution procedures; compare canonical pre/post-restart snapshots with zero mismatches.",
       "priority": "Must"
     },
     {
@@ -526,7 +526,7 @@
       "stories": [
         "US16"
       ],
-      "verification": "Record environment, dataset, concurrency, raw durations, and failure count; proposed measurable usability refinement, not an achieved benchmark.",
+      "verification": "Execute the review-resolution protocol: five independent Support sessions, three operation phases, five warm-ups per phase, then 20 synchronized rounds of five requests. Retain raw measurements; this is a proposed target, not an achieved benchmark.",
       "priority": "Must"
     },
     {
@@ -582,7 +582,7 @@
       "stories": [
         "US20"
       ],
-      "verification": "Process requirement, not application behavior: audit PR history and sprint notes; do not invent adoption dates or retrospective evidence.",
+      "verification": "Use an actual dated team-adoption record to set the post-adoption audit interval; inspect PRs and sprint notes. PR #2's merge proves publication only. Adoption is currently unverified and this process requirement is not assessed/passed.",
       "priority": "Must"
     },
     {
@@ -598,7 +598,7 @@
         "US18",
         "US20"
       ],
-      "verification": "Inspect seeded records and release evidence against the synthetic-data rule; a real private record fails.",
+      "verification": "Create the complete artifact manifest and content-inspection record defined in the review-resolution procedures; every delivered seed/demo/evidence artifact must be accounted for and show zero real private records or live credentials.",
       "priority": "Must"
     }
   ],

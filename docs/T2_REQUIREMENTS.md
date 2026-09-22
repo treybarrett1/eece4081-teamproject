@@ -8,7 +8,7 @@ Charles Barrett · Austin Gross · Caleb Turris · Doc Aberle
 
 Version 1.0 · September 21, 2026 · Prepared for team audit
 
-**Status:** Complete AI-assisted specification draft; team acceptance, actual human section authorship, stakeholder interviews, implementation, and product test results are not asserted. The authorship map in section 9 states what is known. This document is the T2 deliverable; its supporting files make the traceability and audit reproducible.
+**Status:** AI-assisted specification with review clarifications incorporated. Caleb Turris completed a scoped permissions/ownership review; overall final-revision approval, individual human section writing, stakeholder interviews, implementation, and product test results are not asserted. The authorship map in section 9 states what is known. This document is the T2 deliverable; its supporting files make the traceability and audit reproducible.
 
 ## Navigation
 
@@ -354,6 +354,8 @@ The repository shall provide setup instructions, prerequisites, seed command, te
 <a id="quality"></a>
 ## 5. Non-functional and process requirements
 
+Detailed procedures for NFR02, NFR05, NFR09, and NFR10 are part of this specification in [Review resolutions and verification procedures](t2/REVIEW_RESOLUTIONS.md).
+
 Each statement identifies a threshold or a named failure condition. These are acceptance targets. No measurements or successful tests are claimed. NFR09 is explicitly a team-process requirement so the charter's accountability promise is not omitted.
 
 <a id="nfr01"></a>
@@ -372,7 +374,7 @@ After ten scripted workflows and a normal application/database restart without r
 
 **Priority:** Must. **Charter:** [C10](#c10), [G04](#g04). **Stories:** [US17](#us17).
 
-**Pass/fail method:** Compare complete snapshots before/after restart and forced write failure; zero mismatches.
+**Pass/fail method:** Execute W01–W10 and the separate atomicity-injection case in the review-resolution procedures; compare canonical pre/post-restart snapshots with zero mismatches.
 
 <a id="nfr03"></a>
 ### NFR03 — Requester usability
@@ -399,7 +401,7 @@ On the documented reference environment (4 logical CPU cores, 8 GB RAM, local ap
 
 **Priority:** Must. **Charter:** [G06](#g06), [C09](#c09). **Stories:** [US16](#us16).
 
-**Pass/fail method:** Record environment, dataset, concurrency, raw durations, and failure count; proposed measurable usability refinement, not an achieved benchmark.
+**Pass/fail method:** Execute the review-resolution protocol: five independent Support sessions, three operation phases, five warm-ups per phase, then 20 synchronized rounds of five requests. Retain raw measurements; this is a proposed target, not an achieved benchmark.
 
 <a id="nfr06"></a>
 ### NFR06 — Fresh-checkout reproducibility
@@ -435,7 +437,7 @@ Every post-adoption merged PR shall link an issue, identify a non-author human a
 
 **Priority:** Must. **Charter:** [G09](#g09). **Stories:** [US20](#us20).
 
-**Pass/fail method:** Process requirement, not application behavior: audit PR history and sprint notes; do not invent adoption dates or retrospective evidence.
+**Pass/fail method:** Use an actual dated team-adoption record to set the post-adoption audit interval; inspect PRs and sprint notes. PR #2's merge proves publication only. Adoption is currently unverified and this process requirement is not assessed/passed.
 
 <a id="nfr10"></a>
 ### NFR10 — Prototype data boundary
@@ -444,7 +446,7 @@ The committed seed/demo assets and acceptance evidence shall contain zero real e
 
 **Priority:** Must. **Charter:** [C00](#c00), [C10](#c10), [G08](#g08). **Stories:** [US18](#us18), [US20](#us20).
 
-**Pass/fail method:** Inspect seeded records and release evidence against the synthetic-data rule; a real private record fails.
+**Pass/fail method:** Create the complete artifact manifest and content-inspection record defined in the review-resolution procedures; every delivered seed/demo/evidence artifact must be accounted for and show zero real private records or live credentials.
 
 <a id="epics"></a>
 ## 6. Epics and user stories
@@ -766,15 +768,15 @@ The following tables are generated from the same [machine-readable register](t2/
 | [FR21](#fr21) | [C02](#c02), [C05](#c05), [G02](#g02), [G04](#g04), [G08](#g08) | [US04](#us04) / E02, [US11](#us11) / E04, [US17](#us17) / E05 | Boundary values, malformed status/IDs, script-like text, and atomic-write failure cases. |
 | [FR22](#fr22) | [C00](#c00), [C10](#c10), [G01](#g01), [G07](#g07) | [US18](#us18) / E06, [US19](#us19) / E06 | A non-author follows the committed instructions on a fresh checkout. |
 | [NFR01](#nfr01) | [C01](#c01), [G03](#g03), [G08](#g08) | [US03](#us03) / E01 | Run the complete matrix suite; one unauthorized disclosure or mutation fails the requirement. |
-| [NFR02](#nfr02) | [C10](#c10), [G04](#g04) | [US17](#us17) / E05 | Compare complete snapshots before/after restart and forced write failure; zero mismatches. |
+| [NFR02](#nfr02) | [C10](#c10), [G04](#g04) | [US17](#us17) / E05 | Execute W01–W10 and the separate atomicity-injection case in the review-resolution procedures; compare canonical pre/post-restart snapshots with zero mismatches. |
 | [NFR03](#nfr03) | [G06](#g06), [C02](#c02) | [US05](#us05) / E02 | Record anonymous task results and elapsed times from first instruction to correct status. |
 | [NFR04](#nfr04) | [G05](#g05), [C08](#c08), [C09](#c09) | [US15](#us15) / E05, [US16](#us16) / E05 | Expected results computed directly from seed records, not copied from UI output. |
-| [NFR05](#nfr05) | [G06](#g06), [C09](#c09) | [US16](#us16) / E05 | Record environment, dataset, concurrency, raw durations, and failure count; proposed measurable usability refinement, not an achieved benchmark. |
+| [NFR05](#nfr05) | [G06](#g06), [C09](#c09) | [US16](#us16) / E05 | Execute the review-resolution protocol: five independent Support sessions, three operation phases, five warm-ups per phase, then 20 synchronized rounds of five requests. Retain raw measurements; this is a proposed target, not an achieved benchmark. |
 | [NFR06](#nfr06) | [C10](#c10), [G07](#g07) | [US18](#us18) / E06 | Observed independent setup run; no installation-time promise is invented. |
 | [NFR07](#nfr07) | [G08](#g08), [C10](#c10) | [US19](#us19) / E06 | Commit-specific acceptance report and open-defect review; unmet criteria cannot be marked done. |
 | [NFR08](#nfr08) | [C07](#c07), [G04](#g04), [G03](#g03) | [US17](#us17) / E05 | Enumerate expected events for scripted changes, test immutability, and inspect payloads. |
-| [NFR09](#nfr09) | [G09](#g09) | [US20](#us20) / E06 | Process requirement, not application behavior: audit PR history and sprint notes; do not invent adoption dates or retrospective evidence. |
-| [NFR10](#nfr10) | [C00](#c00), [C10](#c10), [G08](#g08) | [US18](#us18) / E06, [US20](#us20) / E06 | Inspect seeded records and release evidence against the synthetic-data rule; a real private record fails. |
+| [NFR09](#nfr09) | [G09](#g09) | [US20](#us20) / E06 | Use an actual dated team-adoption record to set the post-adoption audit interval; inspect PRs and sprint notes. PR #2's merge proves publication only. Adoption is currently unverified and this process requirement is not assessed/passed. |
+| [NFR10](#nfr10) | [C00](#c00), [C10](#c10), [G08](#g08) | [US18](#us18) / E06, [US20](#us20) / E06 | Create the complete artifact manifest and content-inspection record defined in the review-resolution procedures; every delivered seed/demo/evidence artifact must be accounted for and show zero real private records or live credentials. |
 
 ### 7.2 Every charter commitment → requirements → stories
 
@@ -857,14 +859,16 @@ This is a factual contribution map, not a division of credit based on role title
 | --- | --- | --- | --- |
 | Charles Barrett | Supplied the assignment screenshots, project topic and roster in the conversation, and clarified the AI-tool preference | Source/context contribution; no claim of personally writing the generated T2 prose | Confirm scope, decisions, authorship, and final submission |
 | Austin Gross | No individual T2 writing contribution supplied or verified | None claimed | Stakeholder analysis; epics/stories; non-author review |
-| Caleb Turris | No individual T2 writing contribution supplied or verified | None claimed | Functional requirements, permissions, and lifecycle guards |
+| Caleb Turris (`WoodlandMoss`) | Submitted the story-map artifact/transcription in PR #4; signed a scoped review of permissions, technical projection, and ownership guards on September 21 at commit d780614e8617a1f782f6da34c4334689c2990ae4 | No T2 section-writing claimed; reviewer explicitly states review only | Overall approval was deferred to the primary reviewer |
 | Doc Aberle | No individual T2 writing contribution supplied or verified | None claimed | Non-functional thresholds, acceptance methods, traceability checks |
 | OpenAI Codex | Generated this draft from the supplied screenshots and current repository artifacts | Sections 1–10, register, CSV, verification tooling, and audit materials | Cannot perform or certify the team's human audit |
 
-The repository story-map photo and transcription were contributed through merged [PR #4](https://github.com/treybarrett1/eece4081-teamproject/pull/4) by GitHub account `WoodlandMoss` (commit `b80c81caae26565bae59b4e3b107275055280c66`). That verifies an artifact contribution; the mapping of that account to a person's name and authorship of individual workshop notes remain unverified. The playbook supplies review responsibilities, not a T2 section-authorship record. Charles explicitly confirmed that no authorship map exists yet. To finalize the graded human-authorship map, each person must identify actual sections they wrote or substantively revised and link the corresponding edit/PR evidence. Review-only contributions should be labeled review, not writing. Until that evidence is added, this remains an honest AI-assisted draft rather than a claim of four-person authorship.
+The repository story-map photo and transcription were contributed through merged [PR #4](https://github.com/treybarrett1/eece4081-teamproject/pull/4) by GitHub account `WoodlandMoss` (commit `b80c81caae26565bae59b4e3b107275055280c66`). The signed [Caleb Turris review](https://github.com/treybarrett1/eece4081-teamproject/pull/6#pullrequestreview-5273284958) identifies that account as Caleb. Individual workshop-note authorship remains unverified. The playbook supplies review responsibilities, not a T2 section-authorship record. Charles explicitly confirmed that no authorship map exists yet. To finalize the graded human-authorship map, each person must identify actual sections they wrote or substantively revised and link the corresponding edit/PR evidence. Review-only contributions should be labeled review, not writing. Until that evidence is added, this remains an honest AI-assisted draft rather than a claim of four-person authorship.
 
 <a id="disclosure"></a>
 ## 10. AI-use disclosure appendix
+
+**Review follow-through:** The [review-resolution record](t2/REVIEW_RESOLUTIONS.md) records Caleb's scoped human review and the separate explicitly AI-assisted review submitted through `docasbarton-gif`. Its four requests for more concrete verification procedures are addressed as specification clarifications. No overall human approval or executed product tests are implied.
 
 **Tool:** OpenAI Codex, used for course-document assistance under the repository's v0.2 tool policy. No Claude Code or ChatGPT drafting is claimed for this artifact merely because those are the team's preferred tools for other work.
 
