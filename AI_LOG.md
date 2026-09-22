@@ -34,3 +34,10 @@
 - [Prompt/input record, repository evidence, and dispositions](docs/ai-logs/2026-09-21-charles-t2-requirements.md).
 - [Specification and authorship map](docs/T2_REQUIREMENTS.md); [human audit](docs/t2/AUDIT.md).
 - Scope: charter-derived requirements, stories, measurable quality targets, traceability and conflict analysis. Human authorship, interviews, implementation tests, approval, and submission are not fabricated.
+
+## September 22, 2026 — T4 scope proposal and submission handoff
+
+- Responsible member: Charles Barrett; drafting tool: OpenAI Codex.
+- [Prompts, context, proposals, and review status](docs/ai-logs/2026-09-22-charles-t4-scope.md).
+- [T4 proposal](docs/T4_SCOPE_AGREEMENT.md) and [Doc's pending T3/T4 handoff](docs/T3_T4_SUBMISSION_HANDOFF.md).
+- Scope/capacity are proposed; Doc's selection is user-directed, but his acknowledgement, team approvals, implementation results, and course submissions are not claimed.
