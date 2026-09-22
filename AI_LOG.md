@@ -1,5 +1,12 @@
 # AI-use log
 
+## September 22, 2026 — T3 ADR-001 proposal
+
+- Responsible member: Charles Barrett; drafting tool: OpenAI Codex (course-document assistance).
+- [Prompt/input record and proposed design rationale](docs/ai-logs/2026-09-22-charles-t3-adr-001.md).
+- [ADR-001](docs/adr/ADR-001.md), [work item #7](https://github.com/treybarrett1/eece4081-teamproject/issues/7).
+- Proposed shared workflow services and two genuine alternatives grounded in T2. Actual member positions, agreement, human review, implementation, and course submission remain pending.
+
 ## September 8, 2026 — Initial T1 and EP 0.1 package
 
 **Tool:** OpenAI Codex.
