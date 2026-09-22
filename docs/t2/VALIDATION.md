@@ -1,6 +1,6 @@
 # T2 documentation validation
 
-Date: September 21, 2026. Performed by OpenAI Codex. Human audit and application testing remain pending.
+Date: September 21, 2026. Performed by OpenAI Codex. Human approval statements and their scopes are recorded in REVIEW_RESOLUTIONS.md; application testing remains future work.
 
 ## Scope
 
@@ -30,3 +30,7 @@ The consistency pass also addresses Developer ticket-search boundaries, owner ro
 ## Limits
 
 This is structural documentation validation. It does not establish the correctness of every semantic trace link, stakeholder acceptance, measured performance, software behavior, human writing credit, team approval, or course submission.
+
+## Final review-record update
+
+Doc Aberle's edited review now states human approval after reviewing AI suggestions. The final workload uses five warm-ups per session per operation (25 total warm-ups per operation) and retains 100 measured requests per operation. Caleb's scoped approval and Charles's correction approval are recorded with their original commit references. The structural validator and whitespace checks are rerun after these edits; no product benchmark is claimed.

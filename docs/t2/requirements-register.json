@@ -1,8 +1,8 @@
 {
-  "version": "1.0",
+  "version": "1.1",
   "date": "2026-09-21",
   "baselineCommit": "5c8b49e2f55925c87e8ec18645b5986370e9bd4a",
-  "status": "AI-assisted draft; human audit pending",
+  "status": "Reviewed requirements specification; product acceptance and course submission are separate.",
   "sources": [
     {
       "id": "C00",
@@ -518,7 +518,7 @@
     {
       "id": "NFR05",
       "title": "Interactive response time",
-      "shall": "On the documented reference environment (4 logical CPU cores, 8 GB RAM, local app/database), with the FR20 dataset and five simultaneous authenticated sessions, at least 95 of 100 measured requests for each of ticket list, ticket detail, and dashboard shall finish within 2 seconds, measured at the client after five warm-up requests per operation; no HTTP 5xx is permitted.",
+      "shall": "On the documented reference environment (4 logical CPU cores, 8 GB RAM, local app/database), with the FR20 dataset and five simultaneous authenticated sessions, at least 95 of 100 measured requests for each of ticket list, ticket detail, and dashboard shall finish within 2 seconds, measured at the client after five warm-up requests per session per operation; no HTTP 5xx is permitted.",
       "origins": [
         "G06",
         "C09"
@@ -526,7 +526,7 @@
       "stories": [
         "US16"
       ],
-      "verification": "Execute the review-resolution protocol: five independent Support sessions, three operation phases, five warm-ups per phase, then 20 synchronized rounds of five requests. Retain raw measurements; this is a proposed target, not an achieved benchmark.",
+      "verification": "Execute the review-resolution protocol: five independent Support sessions, three operation phases, five warm-ups per session per phase (25 total per phase), then 20 synchronized rounds of five requests. Retain raw measurements; this is a proposed target, not an achieved benchmark.",
       "priority": "Must"
     },
     {

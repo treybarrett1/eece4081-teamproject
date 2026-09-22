@@ -6,9 +6,9 @@ EECE 4081-002 Software Engineering, Fall 2026
 
 Charles Barrett · Austin Gross · Caleb Turris · Doc Aberle
 
-Version 1.0 · September 21, 2026 · Prepared for team audit
+Version 1.1 · September 21, 2026 · Review corrections incorporated
 
-**Status:** AI-assisted specification with review clarifications incorporated. Caleb Turris completed a scoped permissions/ownership review; overall final-revision approval, individual human section writing, stakeholder interviews, implementation, and product test results are not asserted. The authorship map in section 9 states what is known. This document is the T2 deliverable; its supporting files make the traceability and audit reproducible.
+**Status:** Completed T2 specification with review corrections incorporated. Caleb Turris recorded scoped approval of permissions and ownership; Doc Aberle recorded human approval after reviewing AI suggestions; Charles Barrett approved the corrections as submission owner. Their exact review scope and reviewed commits are recorded in the review-resolution appendix. Approval of this document does not claim completed interviews, implemented software, passing product tests, or course submission. The authorship map in section 9 states what is known. This document is the T2 deliverable; its supporting files make the traceability and audit reproducible.
 
 ## Navigation
 
@@ -397,11 +397,11 @@ On the FR20 dataset, every dashboard count and the result set of the US15 filter
 <a id="nfr05"></a>
 ### NFR05 — Interactive response time
 
-On the documented reference environment (4 logical CPU cores, 8 GB RAM, local app/database), with the FR20 dataset and five simultaneous authenticated sessions, at least 95 of 100 measured requests for each of ticket list, ticket detail, and dashboard shall finish within 2 seconds, measured at the client after five warm-up requests per operation; no HTTP 5xx is permitted.
+On the documented reference environment (4 logical CPU cores, 8 GB RAM, local app/database), with the FR20 dataset and five simultaneous authenticated sessions, at least 95 of 100 measured requests for each of ticket list, ticket detail, and dashboard shall finish within 2 seconds, measured at the client after five warm-up requests per session per operation; no HTTP 5xx is permitted.
 
 **Priority:** Must. **Charter:** [G06](#g06), [C09](#c09). **Stories:** [US16](#us16).
 
-**Pass/fail method:** Execute the review-resolution protocol: five independent Support sessions, three operation phases, five warm-ups per phase, then 20 synchronized rounds of five requests. Retain raw measurements; this is a proposed target, not an achieved benchmark.
+**Pass/fail method:** Execute the review-resolution protocol: five independent Support sessions, three operation phases, five warm-ups per session per phase (25 total per phase), then 20 synchronized rounds of five requests. Retain raw measurements; this is a proposed target, not an achieved benchmark.
 
 <a id="nfr06"></a>
 ### NFR06 — Fresh-checkout reproducibility
@@ -771,7 +771,7 @@ The following tables are generated from the same [machine-readable register](t2/
 | [NFR02](#nfr02) | [C10](#c10), [G04](#g04) | [US17](#us17) / E05 | Execute W01–W10 and the separate atomicity-injection case in the review-resolution procedures; compare canonical pre/post-restart snapshots with zero mismatches. |
 | [NFR03](#nfr03) | [G06](#g06), [C02](#c02) | [US05](#us05) / E02 | Record anonymous task results and elapsed times from first instruction to correct status. |
 | [NFR04](#nfr04) | [G05](#g05), [C08](#c08), [C09](#c09) | [US15](#us15) / E05, [US16](#us16) / E05 | Expected results computed directly from seed records, not copied from UI output. |
-| [NFR05](#nfr05) | [G06](#g06), [C09](#c09) | [US16](#us16) / E05 | Execute the review-resolution protocol: five independent Support sessions, three operation phases, five warm-ups per phase, then 20 synchronized rounds of five requests. Retain raw measurements; this is a proposed target, not an achieved benchmark. |
+| [NFR05](#nfr05) | [G06](#g06), [C09](#c09) | [US16](#us16) / E05 | Execute the review-resolution protocol: five independent Support sessions, three operation phases, five warm-ups per session per phase (25 total per phase), then 20 synchronized rounds of five requests. Retain raw measurements; this is a proposed target, not an achieved benchmark. |
 | [NFR06](#nfr06) | [C10](#c10), [G07](#g07) | [US18](#us18) / E06 | Observed independent setup run; no installation-time promise is invented. |
 | [NFR07](#nfr07) | [G08](#g08), [C10](#c10) | [US19](#us19) / E06 | Commit-specific acceptance report and open-defect review; unmet criteria cannot be marked done. |
 | [NFR08](#nfr08) | [C07](#c07), [G04](#g04), [G03](#g03) | [US17](#us17) / E05 | Enumerate expected events for scripted changes, test immutability, and inspect payloads. |
@@ -853,22 +853,22 @@ These are explicit dispositions in this proposed specification. “Resolved in d
 <a id="authorship"></a>
 ## 9. Authorship map
 
-This is a factual contribution map, not a division of credit based on role titles. Git commit identity alone does not prove who wrote a section. No new human prose for T2 or completed interview transcript has been supplied in this conversation.
+This is a factual contribution map, not a division of credit based on role titles. Git commit identity alone does not prove who wrote a section. The initial T2 prose was AI-drafted. Subsequent human contributions include Caleb's scoped review, Doc's review and proposed NFR05 wording, and Charles's approval of the corrections. No completed interview transcript has been supplied.
 
 | Person/tool | Actual contribution verified for this draft | Sections authored in this draft | Proposed human review responsibility |
 | --- | --- | --- | --- |
-| Charles Barrett | Supplied the assignment screenshots, project topic and roster in the conversation, and clarified the AI-tool preference | Source/context contribution; no claim of personally writing the generated T2 prose | Confirm scope, decisions, authorship, and final submission |
+| Charles Barrett | Supplied assignment screenshots, project context and roster; clarified AI-tool preference; approved review corrections as submission owner | Source/context contribution and correction approval; no claim of personally writing generated prose | Submission owner |
 | Austin Gross | No individual T2 writing contribution supplied or verified | None claimed | Stakeholder analysis; epics/stories; non-author review |
 | Caleb Turris (`WoodlandMoss`) | Submitted the story-map artifact/transcription in PR #4; signed a scoped review of permissions, technical projection, and ownership guards on September 21 at commit d780614e8617a1f782f6da34c4334689c2990ae4 | No T2 section-writing claimed; reviewer explicitly states review only | Overall approval was deferred to the primary reviewer |
-| Doc Aberle | No individual T2 writing contribution supplied or verified | None claimed | Non-functional thresholds, acceptance methods, traceability checks |
+| Doc Aberle (`docasbarton-gif`) | Reviewed the quality/process requirements with AI assistance, supplied NFR05 wording specifying five warm-ups per session, and explicitly approved after adjusting suggestions to scope | Review and suggested NFR05 revision incorporated in section 5 and the verification appendix; no claim of independently writing the original section | Human review and approval recorded in PR #6 |
 | OpenAI Codex | Generated this draft from the supplied screenshots and current repository artifacts | Sections 1–10, register, CSV, verification tooling, and audit materials | Cannot perform or certify the team's human audit |
 
-The repository story-map photo and transcription were contributed through merged [PR #4](https://github.com/treybarrett1/eece4081-teamproject/pull/4) by GitHub account `WoodlandMoss` (commit `b80c81caae26565bae59b4e3b107275055280c66`). The signed [Caleb Turris review](https://github.com/treybarrett1/eece4081-teamproject/pull/6#pullrequestreview-5273284958) identifies that account as Caleb. Individual workshop-note authorship remains unverified. The playbook supplies review responsibilities, not a T2 section-authorship record. Charles explicitly confirmed that no authorship map exists yet. To finalize the graded human-authorship map, each person must identify actual sections they wrote or substantively revised and link the corresponding edit/PR evidence. Review-only contributions should be labeled review, not writing. Until that evidence is added, this remains an honest AI-assisted draft rather than a claim of four-person authorship.
+The repository story-map photo and transcription were contributed through merged [PR #4](https://github.com/treybarrett1/eece4081-teamproject/pull/4) by GitHub account `WoodlandMoss` (commit `b80c81caae26565bae59b4e3b107275055280c66`). The signed [Caleb Turris review](https://github.com/treybarrett1/eece4081-teamproject/pull/6#pullrequestreview-5273284958) identifies that account as Caleb. Individual workshop-note authorship remains unverified. The playbook supplies review responsibilities, not a T2 section-authorship record. Charles explicitly confirmed that no authorship map exists yet. This map records the verified contribution evidence available for submission. Caleb explicitly identifies his contribution as review only. Doc's suggested NFR05 revision is attributed to him; the underlying generated prose remains attributed to Codex. Austin has no verified individual contribution recorded for this artifact. Further contribution evidence should amend this map; no four-person writing claim is fabricated.
 
 <a id="disclosure"></a>
 ## 10. AI-use disclosure appendix
 
-**Review follow-through:** The [review-resolution record](t2/REVIEW_RESOLUTIONS.md) records Caleb's scoped human review and the separate explicitly AI-assisted review submitted through `docasbarton-gif`. Its four requests for more concrete verification procedures are addressed as specification clarifications. No overall human approval or executed product tests are implied.
+**Review follow-through:** The [review-resolution record](t2/REVIEW_RESOLUTIONS.md) records Caleb's scoped human approval, Doc Aberle's updated human approval after reviewing AI suggestions, and Charles's correction approval. All four procedure findings are addressed; NFR05 uses Doc's five-warm-ups-per-session wording. Review approval is not a claim that the product tests have been executed.
 
 **Tool:** OpenAI Codex, used for course-document assistance under the repository's v0.2 tool policy. No Claude Code or ChatGPT drafting is claimed for this artifact merely because those are the team's preferred tools for other work.
 
