@@ -73,6 +73,15 @@ All items are mandatory if this proposal is accepted. Each numbered criterion is
 5. Before demonstration, all retained criteria must pass and no open defect may expose unauthorized data, lose acknowledged records, or block the committed workflow. Record other defects and workarounds. Inventory the delivered seed/demo/evidence artifacts and verify zero real employee tickets, confidential records, or live credentials.
 6. Verify that governed Django Admin pages are read-only and that alternate write paths do not bypass the workflow services. Exercise the retained workflow's conditional-update concurrency guard so one conflicting transition succeeds and the other reports a conflict without an extra history event.
 
+### Evaluator acceptance and observable failure matrix
+
+| Item | Acceptance method | Observable failure condition |
+| --- | --- | --- |
+| S1 | Run the seeded authentication and complete role/action matrix through request-level tests and the scripted demo; inspect response status, visible fields, ticket/history pre/post state, and the next request after sign-out or disablement. | Any unauthorized ticket field is returned or mutated; a signed-out/disabled session remains usable; a submitted requester ID/role changes authorization; or the required seeded identities/roles are missing. |
+| S2 | Submit valid, boundary, malformed, forged-owner, duplicate-title, and markup-like inputs; compare the UI response and stored ticket rows, then open requester/support list and detail views and refresh after an authorized update. | Invalid input creates any row or partial data; ownership is taken from the client; duplicate titles share an ID; text executes as markup; another requester sees the ticket; or a required retained field/current value is absent. |
+| S3 | Execute every allowed transition plus at least one unlisted and wrong-actor transition from each state; query the ticket and ordered history after each attempt and try to alter a history event. | An invalid/wrong-actor transition succeeds; a rejected attempt changes ticket/history; a valid changed field lacks exactly one attributable event or creates duplicates; reopening loses retained data; history is mutable/misordered; or private content/credentials appear. |
+| S4 | Have a non-author perform a fresh checkout/setup/seed/demo on the recorded commit; compare canonical snapshots before/after restart; inject a history-write failure; test read-only Admin/alternate paths; launch two conflicting transitions; inspect the artifact manifest. | Any undocumented correction/live coaching is required; snapshot mismatches occur; data persists without required history; Admin/alternate paths bypass services; both conflicting transitions succeed or create extra history; a retained criterion lacks evidence; or delivered artifacts contain real confidential data/live credentials. |
+
 ## 3. Explicit deferrals and T2 disposition
 
 **Deferred** means outside the session-26 delivery commitment, not a hidden stretch promise. **Retained subset** names a deliberate reduction; it does not mark the original whole requirement satisfied. No deferred feature is added back merely because spare time appears: finish the committed slice first and use the scope-change procedure for additions.
@@ -131,7 +140,7 @@ Proposed distribution makes the individual capacity assumption visible:
 | Member | Item work allocation | Work | Coordination | Reserve | Total / confirmation |
 | --- | --- | --- | --- | --- | --- |
 | Charles Barrett | S2 assistance 1h; S3 workflow/history 3h; S4 instructions 2h | 6 | 1 | 1 | 8h / pending |
-| Austin Gross | S2 UI/validation 4h; S3 acceptance/review 2h | 6 | 1 | 1 | 8h / pending |
+| Austin Gross | S2 UI/validation 4h; S3 acceptance/review 2h | 6 | 1 | 1 | 8h / confirmed September 28 |
 | Caleb Turris | S1 access 4h; S3 lifecycle/integration 3h | 7 | 1 | 0 | 8h / pending |
 | Doc Aberle | S4 setup/verification/evidence 3h | 3 | 1 | 4 | 8h / confirmed September 28 |
 
@@ -164,7 +173,7 @@ Never cut authorization, server-side validation, retained-operation audit/atomic
 | Member | Scope vote and reasoning | Accepted assignment/hours | Evidence/date/commit |
 | --- | --- | --- | --- |
 | Charles Barrett | Pending | Pending | Pending |
-| Austin Gross | Pending | Pending | Pending |
+| Austin Gross | Accepts the ticket-only reduction and C1 → C2 → C3. Raised an evaluator-observability concern, addressed by the acceptance/failure matrix in section 2. | Confirms S2/S3 assignment and 8h: 6 work, 1 coordination, 1 reserve. Available for independent final review. | [PR scope vote](https://github.com/treybarrett1/eece4081-teamproject/pull/10#issuecomment-5883374611) and [completed checklist response](https://github.com/treybarrett1/eece4081-teamproject/issues/16#issuecomment-5883415613), September 28. |
 | Caleb Turris | Pending | Pending | Pending |
 | Doc Aberle | Accepts the ticket-only scope, named deferrals, and C1 → C2 → C3 cut order, contingent on reconciled estimates, member capacity, and final review. | Confirms S4 ownership and 8h: 3 work, 1 coordination, 4 reserve. | [Scope/capacity statement](https://github.com/treybarrett1/eece4081-teamproject/pull/10#issuecomment-5882911830), September 28, reviewed `af0498e`. |
 
