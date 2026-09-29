@@ -27,6 +27,9 @@ Names and project topic are confirmed by the repository owner. Roles and meeting
 - [AI-use log](AI_LOG.md).
 - [Rubric and submission checklist](docs/SUBMISSION_CHECKLIST.md).
 
+- [T4 — Scope Agreement](docs/T4_SCOPE_AGREEMENT.md): proposed two-sprint ticket workflow, T2 dispositions, capacity assumptions, and ordered cuts; team agreement pending.
+- [T3/T4 submission handoff](docs/T3_T4_SUBMISSION_HANDOFF.md): Doc Aberle is Charles's selected submitter; acknowledgement and completion pending.
+
 ## Current state
 
 This is the initial documentation package. Application implementation and test execution are future work. No team adoption, passing project tests, or course-portal submission is claimed.
