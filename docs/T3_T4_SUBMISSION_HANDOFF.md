@@ -2,7 +2,7 @@
 
 **Recorded:** September 22, 2026. **Due:** September 28, 2026 at 11:59 PM per the supplied course screenshots.
 
-Charles will be unavailable on the due date and has selected **Doc Aberle** to submit both assignments. This records Charles's direction; Doc's acknowledgement, course-portal access, and completion remain pending. **Austin Gross is the proposed backup**, following the charter's backup order, subject to his own agreement. Do not assume either person has accepted from this document alone.
+Charles will be unavailable on the due date and selected **Doc Aberle** to submit both assignments. Doc acknowledged responsibility and confirmed access to the separate T3 and T4 assignment pages on September 28; actual submissions and confirmations remain pending. **Austin Gross is the proposed backup**, following the charter's backup order, subject to his own agreement.
 
 | Assignment | Review location | Document after its PR merges | Readiness |
 | --- | --- | --- | --- |
@@ -13,7 +13,7 @@ The two submissions are separate. T3 approval does not approve T4's reduced scop
 
 ## Before the deadline
 
-- [ ] Doc posts his own acknowledgement in issue #9 that he will handle both submissions and verifies both assignment pages permit him to submit for the team. Confirm the portal's due time/time zone.
+- [x] Doc acknowledged responsibility in issues #11 and #14 and confirmed that both assignment pages permit him to submit for the team. The portal's due time/time zone still requires confirmation.
 - [ ] If Doc cannot take the handoff, record an acknowledged replacement. Austin is a proposal, not an automatic acceptance. Escalate unresolved access to the instructor before the deadline.
 - [ ] Collect Charles's T3 position and T4 scope/workload response before his absence. Collect the other members' actual reviews; do not reuse T2 approvals.
 - [ ] Finish T3's team decision evidence and T4's scope/capacity agreement. Retain non-author approval covering each final substantive revision. Submission responsibility does not authorize self-approval or bypass review.
@@ -28,7 +28,7 @@ Recommended internal target: confirm the handoff/access by September 24 and comp
 
 | Assignment | Submitter acknowledgement | Final commit/link | Submitted at/time zone | Portal confirmation | Result |
 | --- | --- | --- | --- | --- | --- |
-| T3 | Pending | Pending | Pending | Pending | Not submitted by this work |
-| T4 | Pending | Pending | Pending | Pending | Not submitted by this work |
+| T3 | Doc acknowledged September 28; T3 access confirmed | Pending | Pending | Pending | Not yet submitted |
+| T4 | Doc acknowledged September 28; T4 access confirmed | Pending | Pending | Pending | Not yet submitted |
 
 The team need not wait for Charles to return once the required agreements/reviews and actual submitter acknowledgement are recorded. This checklist does not claim those conditions are already met.
