@@ -2,7 +2,7 @@
 
 - **Project:** Enterprise IT Ticketing and Bug System
 - **Course:** EECE 4081-002 Software Engineering, Fall 2026
-- **Version/date:** 0.1 proposal / September 22, 2026
+- **Version/date:** 0.2 proposal / September 28, 2026
 - **Status:** Pending team scope approval, capacity confirmation, and review; not the accepted grading baseline yet.
 - **Work item:** [Issue #9](https://github.com/treybarrett1/eece4081-teamproject/issues/9)
 - **T2 baseline:** [Reviewed specification at bba8b22](https://github.com/treybarrett1/eece4081-teamproject/blob/bba8b22a8c976b54ba4e93f53a091cb3004bd26e/docs/T2_REQUIREMENTS.md)
@@ -12,7 +12,7 @@
 
 **Proposed commitment for session 26: a working support-ticket application in which a requester signs in, submits and follows their own ticket, and Support triages, assigns, and resolves it. The requester can close or reopen it. Required changes have persistent, attributable history.** The team will demonstrate the four items below from a fresh checkout using synthetic accounts and records.
 
-We deliberately defer software-bug management and reporting to make one complete support workflow the delivery target. This reduces the original product vision; it is not a claim that ticket-only delivery satisfies all of T2. Session 26 is the demonstration milestone given by the assignment. Its calendar date and the two course sprint dates must be copied from the course schedule before acceptance; this document does not invent them or assume the playbook's weekly cadence equals those course milestones.
+We deliberately defer software-bug management and reporting to make one complete support workflow the delivery target. This reduces the original product vision; it is not a claim that ticket-only delivery satisfies all of T2. Session 26 is the demonstration milestone given by the assignment. Doc proposed September 29–October 5 for Sprint 1 and October 6–12 for Sprint 2 as internal planning windows; these are not claimed as official course-schedule dates. The official session-26 calendar date remains TBD and must be updated when the course schedule confirms it.
 
 ### Reconciliation with T2 and the charter
 
@@ -66,11 +66,12 @@ All items are mandatory if this proposal is accepted. Each numbered criterion is
 
 **T2 trace:** retained delivery portions of [FR20](T2_REQUIREMENTS.md#fr20), [FR22](T2_REQUIREMENTS.md#fr22), [NFR02](T2_REQUIREMENTS.md#nfr02), [NFR06](T2_REQUIREMENTS.md#nfr06), [NFR07](T2_REQUIREMENTS.md#nfr07), [NFR10](T2_REQUIREMENTS.md#nfr10).
 
-1. Commit prerequisites, setup/seed/test commands, and a scripted demo using the S1 accounts and at least four synthetic tickets split between the two Requesters. Seed loading on a fresh database is repeatable; roles remain fixed for the ordinary demo.
+1. Budget and complete the Django project bootstrap, then commit prerequisites, setup/seed/test commands, and a scripted demo using the S1 accounts and at least four synthetic tickets split between the two Requesters. Seed loading on a fresh database is repeatable; roles remain fixed for the ordinary demo.
 2. A teammate other than the setup-guide author completes a fresh checkout, seed, and demo without undocumented corrections or live coaching. Record the tested commit, environment, person, and result.
 3. The script executes S1–S3, including direct resolution, the In Progress route, closure, both reopening routes, and unauthorized access rejection. Capture each criterion's pass/fail result. Rejected operations must leave history unchanged.
 4. Snapshot the tickets, required notes/reasons, owners, priorities, and history; restart the app/database without reseeding; compare with zero mismatches. Inject a failure between one ticket update and its history write: both persist or neither persists, with no partial result. This is the narrowed ticket-only protocol, not a claim to have run T2's ten workflows including bugs.
 5. Before demonstration, all retained criteria must pass and no open defect may expose unauthorized data, lose acknowledged records, or block the committed workflow. Record other defects and workarounds. Inventory the delivered seed/demo/evidence artifacts and verify zero real employee tickets, confidential records, or live credentials.
+6. Verify that governed Django Admin pages are read-only and that alternate write paths do not bypass the workflow services. Exercise the retained workflow's conditional-update concurrency guard so one conflicting transition succeeds and the other reports a conflict without an extra history event.
 
 ## 3. Explicit deferrals and T2 disposition
 
@@ -115,7 +116,7 @@ Original exclusions remain: corporate SSO/email/chat integrations, billing/multi
 
 ## 4. Two-sprint plan and capacity
 
-**Planning assumption, not confirmed availability:** four members × four hours/week × two one-week delivery sprints = 32 person-hours. This uses the charter's tentative baseline. Confirm the course sprint/session dates and each person's actual capacity before accepting it. Charles's absence on the assignment due date does not establish his availability for either implementation sprint; his hours below need separate confirmation.
+**Planning assumption, not confirmed team availability:** four members × four hours/week × two one-week delivery sprints = 32 person-hours. This uses the charter's tentative baseline. Doc proposed September 29–October 5 and October 6–12 as internal Sprint 1 and Sprint 2 windows; the official course sprint dates and session-26 date remain unverified. Each person's actual capacity must be confirmed before acceptance. Charles's absence on the assignment due date does not establish his availability for either implementation sprint; his hours below need separate confirmation.
 
 Budget **22 hours of item work including tests/review**, **4 hours of coordination**, and **6 hours of contingency**. This is a rough planning estimate, not measured velocity. Required ceremonies and asynchronous updates must fit the coordination allowance or the team must revise capacity/commitments before acceptance; the budget does not waive the playbook. Basic server-rendered forms/lists are assumed; custom visual polish is deferred.
 
@@ -132,11 +133,11 @@ Proposed distribution makes the individual capacity assumption visible:
 | Charles Barrett | S2 assistance 1h; S3 workflow/history 3h; S4 instructions 2h | 6 | 1 | 1 | 8h / pending |
 | Austin Gross | S2 UI/validation 4h; S3 acceptance/review 2h | 6 | 1 | 1 | 8h / pending |
 | Caleb Turris | S1 access 4h; S3 lifecycle/integration 3h | 7 | 1 | 0 | 8h / pending |
-| Doc Aberle | S4 setup/verification/evidence 3h | 3 | 1 | 4 | 8h / pending |
+| Doc Aberle | S4 setup/verification/evidence 3h | 3 | 1 | 4 | 8h / confirmed September 28 |
 
 Owner/reviewer participation must be included in these allocations; they are not extra unpaid capacity. Doc's reserve is shared integration/defect capacity, not four hours of additional committed features. If estimates or ceremony costs do not fit confirmed hours, reduce scope before accepting the baseline. A reviewer must challenge these estimates against the actual starting code and skills; the repository currently supplies documentation, not an implemented application.
 
-Dependencies: agree the minimal implementation approach; establish setup/seed/access before intake; land intake before lifecycle; add history with mutations, not at the last minute. Record actual course sprint dates, session-26 date, and the tested implementation baseline in the issue when confirmed.
+Dependencies: agree the minimal implementation approach; establish setup/seed/access before intake; land intake before lifecycle; add history with mutations, not at the last minute. Proposed internal planning windows are September 29–October 5 and October 6–12. Record the official course sprint dates, session-26 date, and tested implementation baseline in the issue when confirmed.
 
 ## 5. Delivery risks and stated cut order
 
@@ -165,7 +166,7 @@ Never cut authorization, server-side validation, retained-operation audit/atomic
 | Charles Barrett | Pending | Pending | Pending |
 | Austin Gross | Pending | Pending | Pending |
 | Caleb Turris | Pending | Pending | Pending |
-| Doc Aberle | Scope vote and implementation capacity pending | T3/T4 submission responsibility acknowledged; separate portal access confirmed | [Issue #14 acknowledgement](https://github.com/treybarrett1/eece4081-teamproject/issues/14#issuecomment-5882866767); scope/capacity response still required |
+| Doc Aberle | Accepts the ticket-only scope, named deferrals, and C1 → C2 → C3 cut order, contingent on reconciled estimates, member capacity, and final review. | Confirms S4 ownership and 8h: 3 work, 1 coordination, 4 reserve. | [Scope/capacity statement](https://github.com/treybarrett1/eece4081-teamproject/pull/10#issuecomment-5882911830), September 28, reviewed `af0498e`. |
 
 - [ ] At least three affirmative scope-change votes are linked, with all four members' own workload confirmations.
 - [ ] Course sprint dates and session-26 date are verified; estimates include actual required coordination and review.
@@ -174,7 +175,7 @@ Never cut authorization, server-side validation, retained-operation audit/atomic
 - [ ] Status updated to Accepted with real evidence/date; final PR merged and main-branch content verified.
 - [ ] Doc completes the separate T3 and T4 portal submissions and records confirmation under the [handoff checklist](T3_T4_SUBMISSION_HANDOFF.md).
 
-**Agreement date:** Pending. **Session 26 calendar date:** Pending course-schedule confirmation. **Implementation results:** Not yet demonstrated. **Course submission:** Pending.
+**Agreement date:** Pending additional member votes and resolved estimates. **Proposed internal Sprint 1:** September 29–October 5, 2026. **Proposed internal Sprint 2:** October 6–12, 2026. **Official session-26 calendar date:** TBD; update when the course schedule confirms it. **Implementation results:** Not yet demonstrated. **Course submission:** Pending.
 
 ## 7. AI-use disclosure
 
