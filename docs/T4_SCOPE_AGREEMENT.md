@@ -6,7 +6,7 @@
 - **Status:** Pending team scope approval, capacity confirmation, and review; not the accepted grading baseline yet.
 - **Work item:** [Issue #9](https://github.com/treybarrett1/eece4081-teamproject/issues/9)
 - **T2 baseline:** [Reviewed specification at bba8b22](https://github.com/treybarrett1/eece4081-teamproject/blob/bba8b22a8c976b54ba4e93f53a091cb3004bd26e/docs/T2_REQUIREMENTS.md)
-- **Submission lead:** Doc Aberle, selected by Charles; Doc's acknowledgement and portal access are pending. See the [T3/T4 handoff](T3_T4_SUBMISSION_HANDOFF.md).
+- **Submission lead:** Doc Aberle, selected by Charles; Doc acknowledged responsibility and confirmed access to the separate T4 portal page on September 28. See the [T3/T4 handoff](T3_T4_SUBMISSION_HANDOFF.md).
 
 ## 1. Delivery commitment and boundary
 
@@ -165,7 +165,7 @@ Never cut authorization, server-side validation, retained-operation audit/atomic
 | Charles Barrett | Pending | Pending | Pending |
 | Austin Gross | Pending | Pending | Pending |
 | Caleb Turris | Pending | Pending | Pending |
-| Doc Aberle | Pending | Pending; T3/T4 submission acknowledgement also needed | Pending |
+| Doc Aberle | Scope vote and implementation capacity pending | T3/T4 submission responsibility acknowledged; separate portal access confirmed | [Issue #14 acknowledgement](https://github.com/treybarrett1/eece4081-teamproject/issues/14#issuecomment-5882866767); scope/capacity response still required |
 
 - [ ] At least three affirmative scope-change votes are linked, with all four members' own workload confirmations.
 - [ ] Course sprint dates and session-26 date are verified; estimates include actual required coordination and review.
