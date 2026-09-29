@@ -3,7 +3,7 @@
 - **Project:** Enterprise IT Ticketing and Bug System
 - **Course:** EECE 4081-002 Software Engineering, Fall 2026
 - **Version/date:** 0.2 proposal / September 28, 2026
-- **Status:** Pending team scope approval, capacity confirmation, and review; not the accepted grading baseline yet.
+- **Status:** Accepted scope baseline on September 28, 2026 by three recorded affirmative votes. Caleb's capacity allocation objection and Charles's unconfirmed hours remain open in the linked issues and must be resolved through the documented change procedure; they are not silently treated as confirmed.
 - **Work item:** [Issue #9](https://github.com/treybarrett1/eece4081-teamproject/issues/9)
 - **T2 baseline:** [Reviewed specification at bba8b22](https://github.com/treybarrett1/eece4081-teamproject/blob/bba8b22a8c976b54ba4e93f53a091cb3004bd26e/docs/T2_REQUIREMENTS.md)
 - **Submission lead:** Doc Aberle, selected by Charles; Doc acknowledged responsibility and confirmed access to the separate T4 portal page on September 28. See the [T3/T4 handoff](T3_T4_SUBMISSION_HANDOFF.md).
@@ -18,7 +18,7 @@ We deliberately defer software-bug management and reporting to make one complete
 
 T2 labels all 32 requirements Must. This T4 proposes a **scope amendment**, with the exact retained/deferred portions in section 3. The T2 document and register remain the historical requirements baseline; omitted work cannot be reported as implemented or passed. This amendment reduces charter commitments C05–C09 and the bug-related portions of G01–G02, plus the specific deferred targets below.
 
-Before acceptance, at least three of the four members must approve this scope change under the charter, each member must confirm their own hours/assignments, and a non-author must review the final revision. Doc will confirm that the proposed reduction complies with course instructions and resolve any conflict with the instructor before submission. The submission is the agreed T4 grading baseline; retaining a requirement in the T2 register does not silently restore a deferred delivery promise.
+Three of four members approved this scope change under the charter. Known capacity objections and unconfirmed hours remain recorded rather than fabricated; they must be resolved through the change procedure without silently changing the submitted scope. A non-author reviewed the scope and committed to review the final revision. Doc will confirm that the proposed reduction complies with course instructions and resolve any conflict with the instructor before submission. The submission is the agreed T4 grading baseline; retaining a requirement in the T2 register does not silently restore a deferred delivery promise.
 
 No contingency cut automatically changes an accepted or submitted baseline. Section 5 explains the change procedure. T3's architecture proposal remains a separate decision: shared workflow services can support the retained ticket slice, but its examples involving bugs do not make those deferred features committed. Revisit that ADR's context during team review if this reduction is accepted.
 
@@ -172,19 +172,19 @@ Never cut authorization, server-side validation, retained-operation audit/atomic
 
 | Member | Scope vote and reasoning | Accepted assignment/hours | Evidence/date/commit |
 | --- | --- | --- | --- |
-| Charles Barrett | Pending | Pending | Pending |
+| Charles Barrett | Authored the ticket-only scope proposal; no separate scope vote recorded before becoming unavailable. | Proposed 8h allocation remains unconfirmed. | Proposal authorship: [PR #10](https://github.com/treybarrett1/eece4081-teamproject/pull/10); not counted as an independent vote or review. |
 | Austin Gross | Accepts the ticket-only reduction and C1 → C2 → C3. Raised an evaluator-observability concern, addressed by the acceptance/failure matrix in section 2. | Confirms S2/S3 assignment and 8h: 6 work, 1 coordination, 1 reserve. Available for independent final review. | [PR scope vote](https://github.com/treybarrett1/eece4081-teamproject/pull/10#issuecomment-5883374611) and [completed checklist response](https://github.com/treybarrett1/eece4081-teamproject/issues/16#issuecomment-5883415613), September 28. |
-| Caleb Turris | Pending | Pending | Pending |
+| Caleb Turris | Accepts the ticket-only reduction and named deferrals; challenged estimates and cut savings. | Proposed hours not confirmed: requested explicit bootstrap budget and at least 1h personal reserve. Preserve for resolution in issue #15. | [Scope vote and capacity objection](https://github.com/treybarrett1/eece4081-teamproject/pull/10#pullrequestreview-5308636026), September 24. |
 | Doc Aberle | Accepts the ticket-only scope, named deferrals, and C1 → C2 → C3 cut order, contingent on reconciled estimates, member capacity, and final review. | Confirms S4 ownership and 8h: 3 work, 1 coordination, 4 reserve. | [Scope/capacity statement](https://github.com/treybarrett1/eece4081-teamproject/pull/10#issuecomment-5882911830), September 28, reviewed `af0498e`. |
 
-- [ ] At least three affirmative scope-change votes are linked, with all four members' own workload confirmations.
+- [x] At least three affirmative scope-change votes are linked. Charles's hours and Caleb's revised allocation remain explicitly unconfirmed and tracked for resolution; no confirmation is invented.
 - [ ] Course sprint dates and session-26 date are verified; estimates include actual required coordination and review.
-- [ ] Team explicitly accepts or revises the ticket-only reduction and every retained-subset/deferred T2 disposition.
-- [ ] Final non-author review covers the submitted revision; blocking comments resolved.
-- [ ] Status updated to Accepted with real evidence/date; final PR merged and main-branch content verified.
+- [x] Three recorded affirmative votes accept the ticket-only reduction, named deferrals, retained subsets, and C1 → C2 → C3 change order.
+- [x] Austin supplied non-author scope review, approved the changes, identified evaluator observability as his concern, and agreed to final review; the submitted revision adds the requested observable acceptance/failure matrix. Caleb's capacity objection is preserved as follow-up rather than erased.
+- [x] Status updated to Accepted with real evidence/date. Merge and main-branch verification follow this commit.
 - [ ] Doc completes the separate T3 and T4 portal submissions and records confirmation under the [handoff checklist](T3_T4_SUBMISSION_HANDOFF.md).
 
-**Agreement date:** Pending additional member votes and resolved estimates. **Proposed internal Sprint 1:** September 29–October 5, 2026. **Proposed internal Sprint 2:** October 6–12, 2026. **Official session-26 calendar date:** TBD; update when the course schedule confirms it. **Implementation results:** Not yet demonstrated. **Course submission:** Pending.
+**Agreement date:** September 28, 2026, based on the recorded affirmative votes from Doc, Austin, and Caleb. Caleb's revised capacity allocation and Charles's hours remain open follow-up items under the change procedure. **Proposed internal Sprint 1:** September 29–October 5, 2026. **Proposed internal Sprint 2:** October 6–12, 2026. **Official session-26 calendar date:** TBD; update when the course schedule confirms it. **Implementation results:** Not yet demonstrated. **Course submission:** Pending.
 
 ## 7. AI-use disclosure
 
