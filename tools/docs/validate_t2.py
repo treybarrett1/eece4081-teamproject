@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Check T2 documentation structure; not an application or semantic acceptance test."""
 import csv
 import json
