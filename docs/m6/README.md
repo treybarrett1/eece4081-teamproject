@@ -1,44 +1,15 @@
-# M6 — thin-slice test plan and evidence
+# M6 — verified testing evidence
 
-The linked Team1 repository is not accessible to this GitHub connection.
-This proposed runnable ticket-intake starter is on a review branch of
-`treybarrett1/eece4081-teamproject`. It should not be presented as existing
-M5 code from Team1. Full S1–S4 ticket lifecycle remains unfinished.
+The [M6 submission index](SUBMISSION.md) maps every rubric item to committed
+source and real GitHub Actions evidence.
 
-## Actual acceptance boundary
+- **Green baseline:** [31 passing tests, 89% application-package coverage](https://github.com/treybarrett1/eece4081-teamproject/actions/runs/39691153398).
+- **Deliberate fault:** [2 failed, 29 passed](https://github.com/treybarrett1/eece4081-teamproject/actions/runs/39691243098).
+- **Fault removed:** [31 passing tests, all quality gates green](https://github.com/treybarrett1/eece4081-teamproject/actions/runs/39691411338).
+- **Evidence files:** [baseline, coverage, fault diff, failing output, fix diff, restored output](evidence/).
+- **Prompt and diff log:** [full disclosure](../ai-logs/2026-10-21-charles-m6-bug-injection.md).
 
-`tests/test_acceptance.py` uses Django's CSRF-enforcing HTTP client to
-establish a session, submit a ticket, read back a database-persisted ticket,
-prove another requester cannot see it, and verify Support can. It checks
-forged owner rejection, wrong-role denial, and logout.
-
-`tests/test_unit.py` validates observable behavior: 120/4,000 inclusive
-length limits, trimmed content, category/impact enumerations, duplicates,
-invalid-write nonpersistence, and role/disable enforcement.
-
-## Commands
-
-```bash
-python -m pip install -r requirements-quality.txt
-python -m pytest -q --cov=tickets --cov-report=term-missing --cov-report=xml:coverage.xml
-python manage.py check
-python manage.py makemigrations --check --dry-run
-```
-
-## Injected-fault recipe (do not invent the result)
-
-Change this single business-rule line in `tickets/services.py`:
-
-```diff
--        if not value or len(value) > limit:
-+        if not value or len(value) >= limit:
-```
-
-The changed boundary incorrectly rejects valid titles of exactly 120
-characters and descriptions of exactly 4,000 characters. The acceptance
-test and the unit test explicitly cover these lengths.
-
-Save (1) the fault commit/diff, (2) the observed failing test run, and
-(3) a restoring commit with observed green output. Include a real coverage
-report and a prompt-and-diff log. Never claim runtime results without CI
-or local execution records.
+This code is a *provisional Django ticket-intake walking skeleton* written in
+the accessible personal repository. It cannot be represented as a test of the
+inaccessible `eece-4081-fall-2026/Team1` M5 implementation. See the submission
+index for remaining review and transfer steps.
