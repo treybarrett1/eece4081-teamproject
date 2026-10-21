@@ -18,7 +18,7 @@ def parse_body(request):
     except (UnicodeDecodeError, json.JSONDecodeError):
         raise ValueError("Invalid JSON.") from None
     if not isinstance(value, dict):
-        raise ValueError("A JSON object is required.")
+        raise TypeError("A JSON object is required.")
     return value
 
 
@@ -46,7 +46,7 @@ def session(request):
     if request.method == "POST":
         try:
             credentials = parse_body(request)
-        except ValueError:
+        except (TypeError, ValueError):
             return JsonResponse({"error": "Invalid credentials."}, status=401)
         if set(credentials) != {"username", "password"}:
             return JsonResponse({"error": "Invalid credentials."}, status=401)
