@@ -41,3 +41,10 @@
 - [Prompts, context, proposals, and review status](docs/ai-logs/2026-09-22-charles-t4-scope.md).
 - [T4 proposal](docs/T4_SCOPE_AGREEMENT.md) and [Doc's pending T3/T4 handoff](docs/T3_T4_SUBMISSION_HANDOFF.md).
 - Scope/capacity are proposed; Doc's selection is user-directed, but his acknowledgement, team approvals, implementation results, and course submissions are not claimed.
+
+## October 21, 2026 — Engineering Playbook v0.3 quality gates
+
+- Responsible member: Charles Barrett; assistant: OpenAI ChatGPT (GPT-6).
+- [Task prompt, results, and pending team validation](docs/ai-logs/2026-10-21-charles-playbook-v0.3.md).
+- Scope: v0.3 quality-gate rules, runnable GitHub Actions CI config, Python quality requirements, README and PR evidence changes.
+- The organization Team1 repository could not be accessed by the linked GitHub App. Work is on a review branch of `treybarrett1/eece4081-teamproject` only; team adoption, successful CI, organization-repo transfer, and course submission are not claimed.
