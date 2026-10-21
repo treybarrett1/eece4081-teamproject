@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name="Ticket",
             fields=[
-                ("id", models.BigAutoField(primary_key=True, serialize=False)),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
                 ("title", models.CharField(max_length=120)),
                 ("description", models.TextField()),
                 (
@@ -34,9 +34,9 @@ class Migration(migrations.Migration):
                     models.CharField(
                         max_length=24,
                         choices=[
-                            ("One user", "One user"),
-                            ("Multiple users", "Multiple users"),
-                            ("Organization-wide", "Organization-wide"),
+                            ("One user", "One User"),
+                            ("Multiple users", "Multiple Users"),
+                            ("Organization-wide", "Organization Wide"),
                         ],
                     ),
                 ),
