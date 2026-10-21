@@ -1,8 +1,8 @@
-# Engineering Playbook v0.2 — AI Tooling Guidelines
+# Engineering Playbook v0.3 — Quality Gates
 
 **Course:** EECE 4081-002 Software Engineering, Fall 2026  
 **Prepared:** September 8, 2026  
-**Updated:** September 16, 2026 — v0.2
+**Updated:** October 21, 2026 — v0.3
 
 **Team:** Charles Barrett, Austin Gross, Caleb Turris, and Doc Aberle  
 **Status:** Complete working-agreement proposal for team review. Member agreement and meeting availability are not yet confirmed.
@@ -147,10 +147,49 @@ Follow this procedure:
 
 Log "AI review not used" when it was not used; AI review is optional. Human review is mandatory. Record the reviewed commit and human reviewer identity in the PR. Do not mark an assignment audit complete based on the assistant's self-checks.
 
+## 8. Code quality gates — v0.3
+
+**Stack and scope:** Python/Django for the enterprise IT ticketing and bug system. Every code-producing PR must satisfy the applicable checks below. Run the commands locally before requesting review; the GitHub Actions workflow `.github/workflows/quality-gates.yml` also runs on **every push and pull request**. The workflow contains a job named `quality-gates`. A nonzero exit code fails the job.
+
+| Quality gate (what it checks) | Concrete tool and command | Where it runs | What a failure blocks |
+| --- | --- | --- | --- |
+| Tests — unit and integration tests, including ticket transitions, permissions, and invalid-input paths | `pytest` and `pytest-django`: `python -m pytest -q --cov=. --cov-report=term-missing --cov-report=xml:coverage.xml` | Locally before PR review and in GitHub Actions on every push/PR once Python source exists | A failed test, test collection error, or absence of tests after source is added fails `quality-gates`; the PR must not be approved or merged |
+| Lint — unused imports, likely bugs, and rule violations | `Ruff`: `python -m ruff check .` | Locally and in GitHub Actions on every push/PR | Any Ruff error fails `quality-gates` and blocks PR approval/merge |
+| Formatting — a consistent Python code layout | `Ruff formatter`: `python -m ruff format --check .` | Locally and in GitHub Actions on every push/PR | An unformatted file fails `quality-gates` and blocks PR approval/merge; fix with `python -m ruff format .` |
+| Django system configuration — invalid model, URL, app, or settings checks | `Django manage.py`: `python manage.py check` | Locally and in GitHub Actions when `manage.py` exists | Django check errors fail `quality-gates`; PR approval/merge is blocked until fixed |
+| Migration drift — model changes without committed migrations | `Django manage.py`: `python manage.py makemigrations --check --dry-run` | Locally and in GitHub Actions when `manage.py` exists | If migrations are missing, `quality-gates` fails and PR approval/merge is blocked |
+| Coverage evidence — a real test-coverage report, without a minimum threshold yet | `pytest-cov` with `--cov=. --cov-report=term-missing --cov-report=xml:coverage.xml` | Locally and in GitHub Actions during the pytest step | Failure to run tests or produce coverage evidence fails the pytest/coverage step; no numeric percentage can fail the build in v0.3 |
+
+**Run locally (from the repository root):**
+
+```bash
+python -m pip install -r requirements-quality.txt
+# Also install the application's requirements.txt (or backend/requirements.txt) if present.
+python -m ruff check .
+python -m ruff format --check .
+python -m pytest -q --cov=. --cov-report=term-missing --cov-report=xml:coverage.xml
+# Once Django is added:
+python manage.py check
+python manage.py makemigrations --check --dry-run
+```
+
+If the Django project places `manage.py` in `backend/`, run its two Django commands from that directory. CI detects either root `manage.py` or `backend/manage.py`. The team must configure test settings, project dependencies, and any other application-specific setup as Django code is added; a failed installation or missing settings is not an acceptable reason to bypass a gate.
+
+### What is automated now versus later
+
+The committed workflow installs `pytest`, `pytest-django`, `pytest-cov`, and `ruff` from `requirements-quality.txt`, then runs Ruff lint and format checks, conditional pytest/coverage, and conditional Django checks. It publishes `coverage.xml` as a CI artifact when that file exists. **The repository is currently documentation-only, so CI explicitly skips pytest and Django commands until tracked Python files and a `manage.py` respectively exist.** When a Python source file is first committed, pytest runs and fails if no tests can be collected; it must not silently pass untested application code. Ruff runs even before application code exists.
+
+**Merge enforcement distinction:** Team policy blocks approval and merge whenever an applicable gate is red. To additionally make GitHub mechanically refuse such merges, a repository administrator must require the `quality-gates` status check in the `main` branch ruleset or branch-protection settings and prevent bypasses. **That GitHub-required-check setting has not been verified or claimed as active.** Until it is enabled, a failed run is a visible CI failure and a *process* blocker enforced by the non-author reviewer, not necessarily a GitHub UI merge prohibition. Never describe the workflow's existence alone as proof that branch protection is configured.
+
+### Coverage floor — deliberately deferred
+
+**v0.3 does not set a numeric coverage floor** and does not use `--cov-fail-under`. Before **Amendment 1 at Session 15**, the team will generate and inspect a real `pytest-cov` report from its own implemented code, identify untested behavior, and then choose and record a justified numerical minimum in **Amendment 1**. Until then, producing coverage evidence is required when tests run; meeting an invented percentage is not.
+
 ## Version record
 
 - **v0.1:** Original working agreement, including later team edits preserved in sections 1–4.
 - **v0.2 — September 16, 2026:** Adds the named AI-tool list, prompt-log policy, and advisory-only AI-review rule. Extends the definition of done and PR template to capture prompt-log evidence. Prepared for human audit; adoption and course submission are not claimed.
+- **v0.3 — October 21, 2026:** Names enforceable Python/Django quality tools and commands, local/CI execution, and merge-failure consequences. Adds the GitHub Actions workflow and explicitly defers a numeric coverage floor to Amendment 1 at Session 15. Team approval, branch protection, CI passage, and course submission are not claimed.
 
 ## Adoption and revision
 
@@ -158,10 +197,12 @@ Before adoption, Charles Barrett opens an adoption issue linking the charter and
 
 Policy changes use a PR identifying the old rule, replacement, and reason. Approval requires a strict majority of team members and at least one non-author review. Changing an individual's availability requires that person's explicit agreement. Preserve previous versions in Git history.
 
-These are written team rules; repository settings and automated enforcement have not been configured or verified.
+These are written team rules. The v0.3 GitHub Actions workflow implements executable checks in this repository, but the GitHub required-status-check setting and team adoption have not been verified. See section 8.
 
 ## AI-use disclosure
 
 OpenAI Codex drafted this agreement from the assignment screenshots, user-confirmed project topic and roster, and the user's request on September 8, 2026. The process rules and meeting times are proposed recommendations. Member consent, availability, and actual compliance have not been verified. The team must review the text and record adoption. No meetings, approvals, or passing project tests are claimed. See [AI_LOG.md](../AI_LOG.md).
 
 **v0.2 disclosure:** OpenAI Codex prepared the September 16 additions using the supplied assignment screenshot and current repository files. Tool permissions are proposed policy, not a claim that all tools were used. The team will audit this work; no human approval, policy vote, or course submission is claimed. See the [session record](ai-logs/2026-09-16-charles-playbook-v0.2.md) and [audit checklist](PLAYBOOK_V0.2_AUDIT.md).
+
+**v0.3 disclosure:** OpenAI ChatGPT (GPT-6) assisted with drafting the quality-gate policy and CI configuration on October 21, 2026. The source repository, not the separately referenced organization repository, was accessible to this GitHub connection. This change is proposed for human review and transfer/merge as appropriate; no CI success, team approval, or course submission is claimed. See the October 21 session log linked from [AI_LOG.md](../AI_LOG.md).
