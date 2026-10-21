@@ -22,6 +22,7 @@ Names and project topic are confirmed by the repository owner. Roles and meeting
 
 - [T1 — Team Charter and Executive Summary](docs/TEAM_CHARTER.md): executive summary, scope inclusions and exclusions, stakeholders and interests, named responsibilities, conflict procedures, measurable success criteria, and AI disclosure.
 - [Engineering Playbook v0.3 — Quality Gates](docs/PLAYBOOK.md): retains v0.1/v0.2 rules and adds concrete Python/Django quality gates, their local and GitHub Actions commands, failure consequences, and the Session 15 coverage-floor deferral.
+- [v0.3 rubric and CI audit](docs/PLAYBOOK_V0.3_AUDIT.md): exact rubric coverage, observed CI evidence, and outstanding human/submission steps.
 - [v0.2 human-audit checklist](docs/PLAYBOOK_V0.2_AUDIT.md).
 - [v0.2 prompt record](docs/ai-logs/2026-09-16-charles-playbook-v0.2.md).
 - [AI-use log](AI_LOG.md).
@@ -32,10 +33,10 @@ Names and project topic are confirmed by the repository owner. Roles and meeting
 
 ## Current state
 
-This repository is currently a documentation package. A Python/Django quality-check workflow is proposed; the application, actual test execution, and any required-status-check configuration are not yet verified. No team adoption, passing project tests, or course-portal submission is claimed.
+This repository is currently a documentation package. A Python/Django quality-check workflow is implemented on the v0.3 review branch, with successful lint, formatting, and documentation CI checks. No Django application, Django test run, numeric coverage floor, verified required-status-check configuration, team adoption, or course-portal submission is claimed.
 
 Before submission, each member reviews their responsibilities and availability, and Charles records adoption. Use the document links above or the course portal's permitted upload format.
 
 ## Proposed contribution workflow
 
-Work is tracked in issues and short-lived branches. After team adoption, changes require a PR with a non-author approval and validation evidence. See the playbook for the named review rotation, deadlines, and merge checklist. The PR template supports those rules; automated enforcement has not been configured.
+Work is tracked in issues and short-lived branches. After team adoption, changes require a PR with a non-author approval and validation evidence. See the playbook for the named review rotation, deadlines, and merge checklist. The PR template supports those rules; CI validation runs on pushes and pull requests, but required-status-check merge protection is not verified.

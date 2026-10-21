@@ -11,6 +11,10 @@ jobs:
   quality-gates:
     name: quality-gates
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        shell: bash
 
     steps:
       - name: Check out repository
@@ -32,51 +36,54 @@ jobs:
             python -m pip install -r backend/requirements.txt
           fi
 
-      - name: Ruff suggested diffs (diagnostic only)
+      - name: Record revision, environment, and tracked application scope
+        id: scope
         run: |
-          python -m ruff check --diff . || true
-          python -m ruff format --diff . || true
+          mkdir -p gate-evidence
+          git rev-parse HEAD | tee gate-evidence/revision.txt
+          python --version | tee gate-evidence/python.txt
+          python -m pip freeze > gate-evidence/environment.txt
+          python tools/docs/gate_scope.py | tee gate-evidence/scope.json
+          python tools/docs/gate_scope.py --github-output >> "$GITHUB_OUTPUT"
 
       - name: Ruff lint
-        run: python -m ruff check .
+        run: python -m ruff check . 2>&1 | tee gate-evidence/ruff-lint.txt
 
       - name: Ruff format check
         run: |
-          python -m ruff format --diff . || true
-          python -m ruff format --check .
+          python -m ruff format --diff . > gate-evidence/ruff-format.diff || true
+          python -m ruff format --check . 2>&1 | tee gate-evidence/ruff-format.txt
 
       - name: Validate requirement documentation links and traceability
-        run: python tools/docs/validate_t2.py
+        run: python tools/docs/validate_t2.py 2>&1 | tee gate-evidence/t2-validation.txt
+
+      - name: Verify quality gates with passing and failing disposable fixtures
+        run: python tools/docs/verify_quality_gates.py --output gate-evidence/fixtures.json 2>&1 | tee gate-evidence/fixtures.txt
 
       - name: Pytest and coverage
         shell: bash
         run: |
-          if [ -f manage.py ] || [ -f backend/manage.py ] || [ -d tests ] || [ -d backend/tests ]; then
-            python -m pytest -q --cov=tickets --cov-report=term-missing --cov-report=xml:coverage.xml
+          if [ "${{ steps.scope.outputs.application }}" = "true" ]; then
+            python -m pytest -q --cov=. --cov-report=term-missing --cov-report=xml:coverage.xml 2>&1 | tee gate-evidence/application-tests.txt
+            if [ ! -s coverage.xml ]; then
+              echo "Coverage XML report missing or empty; failing coverage-evidence gate."
+              exit 1
+            fi
           else
-            echo "No application/tests yet; pytest and coverage deferred until implementation."
+            echo "NOT APPLICABLE: no tracked application/test source outside tools/docs/. No product tests or product coverage passed." | tee gate-evidence/application-tests.txt
           fi
 
       - name: Django system and migration checks
         shell: bash
-        run: |
-          if [ -f manage.py ]; then
-            python manage.py check
-            python manage.py makemigrations --check --dry-run
-          elif [ -f backend/manage.py ]; then
-            (
-              cd backend
-              python manage.py check
-              python manage.py makemigrations --check --dry-run
-            )
-          else
-            echo "No Django manage.py yet; system and migration checks deferred until implementation."
-          fi
+        run: python tools/docs/gate_scope.py --django-checks 2>&1 | tee gate-evidence/django-checks.txt
 
-      - name: Upload coverage report
+      - name: Upload gate evidence and any product coverage report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: coverage-report
-          path: coverage.xml
+          name: quality-gate-evidence
+          path: |
+            gate-evidence/
+            coverage.xml
           if-no-files-found: ignore
+          retention-days: 90

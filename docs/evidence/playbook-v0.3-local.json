@@ -1,0 +1,326 @@
+{
+  "utc": "2026-10-21T23:08:27.809005+00:00",
+  "revision": "6404732ce6fd6e0e82a32dfa29d92165edf10e8b",
+  "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+  "working_tree_modified": true,
+  "verified_file_sha256": {
+    "tools/docs/gate_scope.py": "c0703e3a12c2d66665997b7ac6a866068f21e3bc2fab30cfa17c6713ce32db84",
+    "tools/docs/verify_quality_gates.py": "46c857eb195b3814a6ae63a255e394f6868a5c2ad412f67e041e9aa83349e672",
+    "tools/docs/validate_t2.py": "9f1aeb1236d25fd15e8475216812a5b6f0e714765cd4ed5e30fa21458e11bd40",
+    ".github/workflows/quality-gates.yml": "cfdf06e72cee00179527c94ef41ab8b2a705e65eb50294348fc4304afb45d8d7",
+    "ruff.toml": "0fc119d18ad8f5d649c7f08383c8b80c159296d96d56d48a0187953e439b69b5"
+  },
+  "tools": {
+    "ruff": "0.17.1",
+    "pytest": "9.1.1",
+    "pytest-django": "4.14.0",
+    "pytest-cov": "7.1.0",
+    "Django": "5.2.18"
+  },
+  "limitation": "Disposable fixtures verify gate behavior, not the unimplemented ticketing application.",
+  "checks": [
+    {
+      "check": "documentation helpers do not activate product pytest",
+      "passed": true
+    },
+    {
+      "check": "tracked source activates pytest: src/tickets/models.py",
+      "passed": true
+    },
+    {
+      "check": "tracked source activates pytest: services/api/handler.py",
+      "passed": true
+    },
+    {
+      "check": "tracked source activates pytest: tests/test_api.py",
+      "passed": true
+    },
+    {
+      "check": "nested Django projects are detected",
+      "passed": true
+    },
+    {
+      "check": "Git inventory failure cannot silently skip gates",
+      "command": [
+        "python",
+        "tools/docs/gate_scope.py"
+      ],
+      "expected_exit": 1,
+      "exit_code": 1,
+      "passed": true,
+      "stdout": "",
+      "stderr": "fatal: not a git repository (or any of the parent directories): .git\nTraceback (most recent call last):\n  File \"<fixture-root>\\inventory\\tools\\docs\\gate_scope.py\", line 57, in <module>\n    main()\n    ~~~~^^\n  File \"<fixture-root>\\inventory\\tools\\docs\\gate_scope.py\", line 32, in main\n    subprocess.check_output([\"git\", \"ls-files\", \"-z\", \"--\", \"*.py\"], cwd=root)\n    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Python314\\Lib\\subprocess.py\", line 473, in check_output\n    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,\n           ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n               **kwargs).stdout\n               ^^^^^^^^^\n  File \"C:\\Python314\\Lib\\subprocess.py\", line 578, in run\n    raise CalledProcessError(retcode, process.args,\n                             output=stdout, stderr=stderr)\nsubprocess.CalledProcessError: Command '['git', 'ls-files', '-z', '--', '*.py']' returned non-zero exit status 128.\n"
+    },
+    {
+      "check": "real tracked-file inventory succeeds",
+      "command": [
+        "python",
+        "tools/docs/gate_scope.py"
+      ],
+      "expected_exit": 0,
+      "exit_code": 0,
+      "passed": true,
+      "stdout": "{\n  \"application\": true,\n  \"sources\": [\n    \"services/api/handler.py\"\n  ],\n  \"manage\": []\n}\n",
+      "stderr": ""
+    },
+    {
+      "check": "real inventory activates arbitrary-layout source",
+      "passed": true
+    },
+    {
+      "check": "Ruff accepts clean source",
+      "command": [
+        "python",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "expected_exit": 0,
+      "exit_code": 0,
+      "passed": true,
+      "stdout": "All checks passed!\n",
+      "stderr": ""
+    },
+    {
+      "check": "Ruff accepts formatted source",
+      "command": [
+        "python",
+        "-m",
+        "ruff",
+        "format",
+        "--check",
+        "."
+      ],
+      "expected_exit": 0,
+      "exit_code": 0,
+      "passed": true,
+      "stdout": "1 file already formatted\n",
+      "stderr": ""
+    },
+    {
+      "check": "Ruff rejects unused import",
+      "command": [
+        "python",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "expected_exit": 1,
+      "exit_code": 1,
+      "passed": true,
+      "stdout": "F401 [*] `os` imported but unused\n --> sample.py:1:8\n  |\n1 | import os\n  |        ^^\nhelp: Remove unused import: `os`\n  |\n  - import os\n  |\n\nFound 1 error.\n[*] 1 fixable with `--fix`.\n",
+      "stderr": ""
+    },
+    {
+      "check": "Ruff rejects bad formatting",
+      "command": [
+        "python",
+        "-m",
+        "ruff",
+        "format",
+        "--check",
+        "."
+      ],
+      "expected_exit": 1,
+      "exit_code": 1,
+      "passed": true,
+      "stdout": "unformatted: File would be reformatted\n --> sample.py:1:6\n  |\n  - value=1\n1 + value = 1\n  |\n\n1 file would be reformatted\n",
+      "stderr": ""
+    },
+    {
+      "check": "T2 validator accepts valid documentation",
+      "command": [
+        "python",
+        "tools/docs/validate_t2.py"
+      ],
+      "expected_exit": 0,
+      "exit_code": 0,
+      "passed": true,
+      "stdout": "PASS: 20 charter sources; 32 requirements; 20 stories; 6 epics; 72 acceptance criteria; 114 CSV trace rows.\nPASS: no orphan sources, requirements, or stories; text/CSV links and local anchors agree.\nLIMIT: structural documentation validation only; human semantic audit and product testing remain pending.\n",
+      "stderr": ""
+    },
+    {
+      "check": "T2 validator rejects a broken link",
+      "command": [
+        "python",
+        "tools/docs/validate_t2.py"
+      ],
+      "expected_exit": 1,
+      "exit_code": 1,
+      "passed": true,
+      "stdout": "FAIL\nbroken.md: missing link missing-file.md\n",
+      "stderr": ""
+    },
+    {
+      "check": "T2 validator rejects traceability drift",
+      "command": [
+        "python",
+        "tools/docs/validate_t2.py"
+      ],
+      "expected_exit": 1,
+      "exit_code": 1,
+      "passed": true,
+      "stdout": "FAIL\nCSV trace relationships differ from register\n",
+      "stderr": ""
+    },
+    {
+      "check": "pytest rejects application without tests",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "--cov=sample",
+        "--cov-report=term-missing",
+        "--cov-report=xml:coverage.xml"
+      ],
+      "expected_exit": 5,
+      "exit_code": 5,
+      "passed": true,
+      "stdout": "\nWARNING: Failed to generate report: No data to report.\n\n\nno tests ran in 0.02s\n",
+      "stderr": "C:\\Users\\Docsb\\QuestBridge\\test-output\\teamproject-quality-venv\\Lib\\site-packages\\coverage\\inorout.py:558: CoverageWarning: Module sample was never imported. (module-not-imported); see https://coverage.readthedocs.io/en/7.16.2/messages.html#warning-module-not-imported\n  self.warn(f\"Module {pkg} was never imported.\", slug=\"module-not-imported\")\nC:\\Users\\Docsb\\QuestBridge\\test-output\\teamproject-quality-venv\\Lib\\site-packages\\coverage\\control.py:967: CoverageWarning: No data was collected. (no-data-collected); see https://coverage.readthedocs.io/en/7.16.2/messages.html#warning-no-data-collected\n  self._warn(\"No data was collected.\", slug=\"no-data-collected\")\nC:\\Users\\Docsb\\QuestBridge\\test-output\\teamproject-quality-venv\\Lib\\site-packages\\pytest_cov\\plugin.py:366: CovReportWarning: Failed to generate report: No data to report.\n\n  warnings.warn(CovReportWarning(message), stacklevel=1)\n"
+    },
+    {
+      "check": "pytest passes with coverage output",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "--cov=sample",
+        "--cov-report=term-missing",
+        "--cov-report=xml:coverage.xml"
+      ],
+      "expected_exit": 0,
+      "exit_code": 0,
+      "passed": true,
+      "stdout": ".                                                                        [100%]\n=============================== tests coverage ================================\n_______________ coverage: platform win32, python 3.14.6-final-0 _______________\n\nName        Stmts   Miss  Cover   Missing\n-----------------------------------------\nsample.py       2      0   100%\n-----------------------------------------\nTOTAL           2      0   100%\nCoverage XML written to file coverage.xml\n1 passed in 0.03s\n",
+      "stderr": ""
+    },
+    {
+      "check": "coverage XML exists and is parseable",
+      "passed": true
+    },
+    {
+      "check": "pytest rejects a failing test",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "--cov=sample",
+        "--cov-report=term-missing",
+        "--cov-report=xml:coverage.xml"
+      ],
+      "expected_exit": 1,
+      "exit_code": 1,
+      "passed": true,
+      "stdout": "F\nWARNING: Failed to generate report: No data to report.\n\n                                                                         [100%]\n================================== FAILURES ===================================\n________________________________ test_failure _________________________________\n\n    def test_failure():\n>       assert False\nE       assert False\n\ntest_sample.py:2: AssertionError\n=========================== short test summary info ===========================\nFAILED test_sample.py::test_failure - assert False\n1 failed in 0.03s\n",
+      "stderr": "C:\\Users\\Docsb\\QuestBridge\\test-output\\teamproject-quality-venv\\Lib\\site-packages\\coverage\\inorout.py:558: CoverageWarning: Module sample was never imported. (module-not-imported); see https://coverage.readthedocs.io/en/7.16.2/messages.html#warning-module-not-imported\n  self.warn(f\"Module {pkg} was never imported.\", slug=\"module-not-imported\")\nC:\\Users\\Docsb\\QuestBridge\\test-output\\teamproject-quality-venv\\Lib\\site-packages\\coverage\\control.py:967: CoverageWarning: No data was collected. (no-data-collected); see https://coverage.readthedocs.io/en/7.16.2/messages.html#warning-no-data-collected\n  self._warn(\"No data was collected.\", slug=\"no-data-collected\")\nC:\\Users\\Docsb\\QuestBridge\\test-output\\teamproject-quality-venv\\Lib\\site-packages\\pytest_cov\\plugin.py:366: CovReportWarning: Failed to generate report: No data to report.\n\n  warnings.warn(CovReportWarning(message), stacklevel=1)\n"
+    },
+    {
+      "check": "Django system check accepts valid model",
+      "command": [
+        "python",
+        "manage.py",
+        "check"
+      ],
+      "expected_exit": 0,
+      "exit_code": 0,
+      "passed": true,
+      "stdout": "System check identified no issues (0 silenced).\n",
+      "stderr": ""
+    },
+    {
+      "check": "Django detects missing initial migration",
+      "command": [
+        "python",
+        "manage.py",
+        "makemigrations",
+        "--check",
+        "--dry-run"
+      ],
+      "expected_exit": 1,
+      "exit_code": 1,
+      "passed": true,
+      "stdout": "Migrations for 'demoapp':\n  demoapp\\migrations\\0001_initial.py\n    + Create model Entry\n",
+      "stderr": ""
+    },
+    {
+      "check": "create fixture migration",
+      "command": [
+        "python",
+        "manage.py",
+        "makemigrations",
+        "demoapp"
+      ],
+      "expected_exit": 0,
+      "exit_code": 0,
+      "passed": true,
+      "stdout": "Migrations for 'demoapp':\n  demoapp\\migrations\\0001_initial.py\n    + Create model Entry\n",
+      "stderr": ""
+    },
+    {
+      "check": "Django accepts committed model/migration agreement",
+      "command": [
+        "python",
+        "manage.py",
+        "makemigrations",
+        "--check",
+        "--dry-run"
+      ],
+      "expected_exit": 0,
+      "exit_code": 0,
+      "passed": true,
+      "stdout": "No changes detected\n",
+      "stderr": ""
+    },
+    {
+      "check": "pytest-django initializes fixture with coverage",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "--cov=demoapp",
+        "--cov-report=xml:coverage.xml"
+      ],
+      "expected_exit": 0,
+      "exit_code": 0,
+      "passed": true,
+      "stdout": ".                                                                        [100%]\n=============================== tests coverage ================================\n_______________ coverage: platform win32, python 3.14.6-final-0 _______________\n\nCoverage XML written to file coverage.xml\n1 passed in 0.09s\n",
+      "stderr": ""
+    },
+    {
+      "check": "Django rejects migration drift",
+      "command": [
+        "python",
+        "manage.py",
+        "makemigrations",
+        "--check",
+        "--dry-run"
+      ],
+      "expected_exit": 1,
+      "exit_code": 1,
+      "passed": true,
+      "stdout": "Migrations for 'demoapp':\n  demoapp\\migrations\\0002_alter_entry_name.py\n    ~ Alter field name on entry\n",
+      "stderr": ""
+    },
+    {
+      "check": "Django rejects invalid model configuration",
+      "command": [
+        "python",
+        "manage.py",
+        "check"
+      ],
+      "expected_exit": 1,
+      "exit_code": 1,
+      "passed": true,
+      "stdout": "",
+      "stderr": "SystemCheckError: System check identified some issues:\n\nERRORS:\ndemoapp.Entry.name: (fields.E121) 'max_length' must be a positive integer.\n\nSystem check identified 1 issue (0 silenced).\n"
+    }
+  ],
+  "passed": true
+}
