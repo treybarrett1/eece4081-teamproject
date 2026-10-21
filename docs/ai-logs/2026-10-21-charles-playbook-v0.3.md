@@ -5,8 +5,8 @@
 - Responsible member: Charles Barrett
 - Tool/product: OpenAI ChatGPT
 - Model/version: GPT-6
-- Issue/PR: v0.3 playbook quality-gates proposal (link to the review PR after creation)
-- Base/reviewed commit: original repository default branch `main`; exact base SHA not recorded
+- Issue/PR: [v0.3 review PR #17](https://github.com/treybarrett1/eece4081-teamproject/pull/17)
+- Base commit: `9ac80e1194520bc7e57b8c9b64f0138a682fa0ed` (`main` at PR creation); final reviewed commit must be identified by the teammate at approval
 - Affected files: `docs/PLAYBOOK.md`, `.github/workflows/quality-gates.yml`, `requirements-quality.txt`, `README.md`, `.github/pull_request_template.md`, `AI_LOG.md`, `tools/docs/validate_t2.py`, and this record
 
 ## Inputs
@@ -77,7 +77,7 @@ Assistant-side checks:
 - Fetched existing playbook and project files from accessible `treybarrett1/eece4081-teamproject`; confirmed it is documentation-only and does not contain a GitHub Actions workflows directory before this update.
 - Created a new branch rather than merging directly into `main`, preserving the v0.2 non-author review policy.
 - Read the v0.2 policy and documented the missing branch-protection setting as a **pending configuration**, not an already-enforced prohibition.
-- Code/CI execution results: **not yet verified here**. No passing tests or successful workflow run claimed.
+- At initial drafting, CI had not yet been verified. The dated amendment below records the later passing document checks; no Django application tests have run.
 
 Human checks still pending:
 - Confirm these tool versions and commands are compatible with the codebase once a Django application is committed.
@@ -105,3 +105,7 @@ The first `quality-gates` CI runs failed because the existing (non-application) 
 
 This verifies that the workflow actually executes and passes Ruff lint, Ruff format, and the T2 documentation validator with the current **documentation-only** repository. It does **not** show Django tests, coverage report output, or Django checks passing: those are intentionally conditional and no application has been committed. Branch protection is not confirmed, and the organization Team1 repo remains inaccessible to this connection. Human review, team adoption, and course submission are still pending.
 
+
+### October 21, 2026 — Rubric and documentation review
+
+Prompt: "Double check docs work". The assistant compared the playbook and supporting records against the provided v0.3 rubric, the committed GitHub Actions workflow, and the latest available CI results. It corrected outdated CI-status descriptions and aligned the pytest activation documentation to the actual CI condition. A rubric checklist was added at [PLAYBOOK_V0.3_AUDIT.md](../PLAYBOOK_V0.3_AUDIT.md). The configured workflow is demonstrably running; mandatory merge blocking via branch protection remains unverified. Team1 publication, teammate review and course submission remain pending.
