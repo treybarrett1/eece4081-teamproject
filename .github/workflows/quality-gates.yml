@@ -36,15 +36,17 @@ jobs:
         run: python -m ruff check .
 
       - name: Ruff format check
-        run: python -m ruff format --check .
+        run: |
+          python -m ruff format --diff . || true
+          python -m ruff format --check .
 
       - name: Pytest and coverage
         shell: bash
         run: |
-          if git ls-files '*.py' | grep -q .; then
+          if [ -f manage.py ] || [ -f backend/manage.py ] || [ -d tests ] || [ -d backend/tests ]; then
             python -m pytest -q --cov=. --cov-report=term-missing --cov-report=xml:coverage.xml
           else
-            echo "No tracked Python files yet; pytest and coverage deferred until implementation."
+            echo "No application/tests yet; pytest and coverage deferred until implementation."
           fi
 
       - name: Django system and migration checks
