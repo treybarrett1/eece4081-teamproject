@@ -153,6 +153,7 @@ Log "AI review not used" when it was not used; AI review is optional. Human revi
 
 | Quality gate (what it checks) | Concrete tool and command | Where it runs | What a failure blocks |
 | --- | --- | --- | --- |
+| Requirements documentation — Markdown links, requirement/story IDs, and CSV traceability agree with the register | `python tools/docs/validate_t2.py` | Locally and in GitHub Actions on every push/PR | A broken link, ID, or traceability mismatch fails `quality-gates`; PR approval/merge is blocked |
 | Tests — unit and integration tests, including ticket transitions, permissions, and invalid-input paths | `pytest` and `pytest-django`: `python -m pytest -q --cov=. --cov-report=term-missing --cov-report=xml:coverage.xml` | Locally before PR review and in GitHub Actions on every push/PR once Python source exists | A failed test, test collection error, or absence of tests after source is added fails `quality-gates`; the PR must not be approved or merged |
 | Lint — unused imports, likely bugs, and rule violations | `Ruff`: `python -m ruff check .` | Locally and in GitHub Actions on every push/PR | Any Ruff error fails `quality-gates` and blocks PR approval/merge |
 | Formatting — a consistent Python code layout | `Ruff formatter`: `python -m ruff format --check .` | Locally and in GitHub Actions on every push/PR | An unformatted file fails `quality-gates` and blocks PR approval/merge; fix with `python -m ruff format .` |
@@ -167,6 +168,7 @@ python -m pip install -r requirements-quality.txt
 # Also install the application's requirements.txt (or backend/requirements.txt) if present.
 python -m ruff check .
 python -m ruff format --check .
+python tools/docs/validate_t2.py
 python -m pytest -q --cov=. --cov-report=term-missing --cov-report=xml:coverage.xml
 # Once Django is added:
 python manage.py check
@@ -177,7 +179,7 @@ If the Django project places `manage.py` in `backend/`, run its two Django comma
 
 ### What is automated now versus later
 
-The committed workflow installs `pytest`, `pytest-django`, `pytest-cov`, and `ruff` from `requirements-quality.txt`, then runs Ruff lint and format checks, conditional pytest/coverage, and conditional Django checks. It publishes `coverage.xml` as a CI artifact when that file exists. **The repository is currently documentation-only, so CI explicitly skips pytest and Django commands until application/test Python files and a `manage.py` respectively exist.** When an application entry point (`manage.py` or `backend/manage.py`) or a `tests/` directory is first committed, pytest runs and fails if no tests can be collected; it must not silently pass untested application code. The existing `tools/docs/validate_t2.py` documentation helper is not the Django application. Ruff runs even before application code exists.
+The committed workflow installs `pytest`, `pytest-django`, `pytest-cov`, and `ruff` from `requirements-quality.txt`, then runs Ruff lint and format checks, the existing T2 documentation validator, conditional pytest/coverage, and conditional Django checks. It publishes `coverage.xml` as a CI artifact when that file exists. **The repository is currently documentation-only, so CI explicitly skips pytest and Django commands until application/test Python files and a `manage.py` respectively exist.** When an application entry point (`manage.py` or `backend/manage.py`) or a `tests/` directory is first committed, pytest runs and fails if no tests can be collected; it must not silently pass untested application code. The existing `tools/docs/validate_t2.py` documentation helper is not the Django application. Ruff runs even before application code exists.
 
 **Merge enforcement distinction:** Team policy blocks approval and merge whenever an applicable gate is red. To additionally make GitHub mechanically refuse such merges, a repository administrator must require the `quality-gates` status check in the `main` branch ruleset or branch-protection settings and prevent bypasses. **That GitHub-required-check setting has not been verified or claimed as active.** Until it is enabled, a failed run is a visible CI failure and a *process* blocker enforced by the non-author reviewer, not necessarily a GitHub UI merge prohibition. Never describe the workflow's existence alone as proof that branch protection is configured.
 
