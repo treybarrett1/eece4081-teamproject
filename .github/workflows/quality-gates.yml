@@ -32,6 +32,11 @@ jobs:
             python -m pip install -r backend/requirements.txt
           fi
 
+      - name: Ruff suggested diffs (diagnostic only)
+        run: |
+          python -m ruff check --diff . || true
+          python -m ruff format --diff . || true
+
       - name: Ruff lint
         run: python -m ruff check .
 
