@@ -41,3 +41,17 @@
 - [Prompts, context, proposals, and review status](docs/ai-logs/2026-09-22-charles-t4-scope.md).
 - [T4 proposal](docs/T4_SCOPE_AGREEMENT.md) and [Doc's pending T3/T4 handoff](docs/T3_T4_SUBMISSION_HANDOFF.md).
 - Scope/capacity are proposed; Doc's selection is user-directed, but his acknowledgement, team approvals, implementation results, and course submissions are not claimed.
+
+## October 21, 2026 — Engineering Playbook v0.3 quality gates
+
+- Responsible member: Charles Barrett; assistant: OpenAI ChatGPT (GPT-6).
+- [Task prompt, results, and pending team validation](docs/ai-logs/2026-10-21-charles-playbook-v0.3.md).
+- Scope: v0.3 quality-gate rules, runnable GitHub Actions CI config, Python quality requirements, README and PR evidence changes.
+- The organization Team1 repository could not be accessed by the linked GitHub App. Work is on a review branch of `treybarrett1/eece4081-teamproject` only; the current documentation quality-gates CI has passed, but Django application tests have not run. Team adoption, organization-repo publication, enforced merge protection, and course submission are not claimed.
+
+## October 21, 2026 — Doc's PR #17 gate verification follow-up
+
+- Responsible member: Doc Aberle; OpenAI Codex assistance, model/version not exposed.
+- [Prompts and dispositions](docs/ai-logs/2026-10-21-doc-pr17-verification.md); [per-gate audit](docs/PLAYBOOK_V0.3_VERIFICATION.md).
+- Preserves Trey's follow-up commits, adds actual positive/negative gate fixtures and CI evidence artifacts, and adds a separate verification record alongside Trey's rubric audit.
+- Organization publication is left to Trey at Doc's direction. Branch protection requires administrator access; it is not enabled by this change. New substantive commits need renewed non-author review.

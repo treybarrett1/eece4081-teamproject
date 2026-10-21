@@ -1,0 +1,7 @@
+# Quality-gate dependencies for the EECE 4081 Python/Django application.
+# Install application requirements as well when present.
+Django>=5.2,<6.0
+pytest>=8.0,<10.0
+pytest-django>=4.8,<5.0
+pytest-cov>=6.0,<8.0
+ruff>=0.13,<1.0
