@@ -47,4 +47,4 @@
 - Responsible member: Charles Barrett; assistant: OpenAI ChatGPT (GPT-6).
 - [Task prompt, results, and pending team validation](docs/ai-logs/2026-10-21-charles-playbook-v0.3.md).
 - Scope: v0.3 quality-gate rules, runnable GitHub Actions CI config, Python quality requirements, README and PR evidence changes.
-- The organization Team1 repository could not be accessed by the linked GitHub App. Work is on a review branch of `treybarrett1/eece4081-teamproject` only; team adoption, successful CI, organization-repo transfer, and course submission are not claimed.
+- The organization Team1 repository could not be accessed by the linked GitHub App. Work is on a review branch of `treybarrett1/eece4081-teamproject` only; the current documentation quality-gates CI has passed, but Django application tests have not run. Team adoption, organization-repo publication, enforced merge protection, and course submission are not claimed.
