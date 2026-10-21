@@ -33,7 +33,7 @@ Names and project topic are confirmed by the repository owner. Roles and meeting
 
 ## Current state
 
-This repository is currently a documentation package. A Python/Django quality-check workflow is implemented on the v0.3 review branch, with successful lint, formatting, and documentation CI checks. No Django application, Django test run, numerical coverage floor, required-status-check configuration, or course submission is claimed. No team adoption, passing project tests, or course-portal submission is claimed.
+This repository is currently a documentation package. A Python/Django quality-check workflow is implemented on the v0.3 review branch, with successful lint, formatting, and documentation CI checks. No Django application, Django test run, numeric coverage floor, verified required-status-check configuration, team adoption, or course-portal submission is claimed.
 
 Before submission, each member reviews their responsibilities and availability, and Charles records adoption. Use the document links above or the course portal's permitted upload format.
 
