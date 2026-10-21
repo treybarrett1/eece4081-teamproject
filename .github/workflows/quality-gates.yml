@@ -46,7 +46,7 @@ jobs:
       - name: Pytest and coverage
         shell: bash
         run: |
-          if [ -f manage.py ] || [ -f backend/manage.py ] || [ -d tests ] || [ -d backend/tests ]; then
+          if git ls-files '*.py' | grep -vE '^tools/docs/' | grep -q .; then
             python -m pytest -q --cov=. --cov-report=term-missing --cov-report=xml:coverage.xml
           else
             echo "No application/tests yet; pytest and coverage deferred until implementation."
