@@ -1,14 +1,14 @@
 {
-  "utc": "2026-10-21T23:06:20.630175+00:00",
-  "revision": "f64cd8f1f7c8328d590d297d2b327cbd65e60f9a",
+  "utc": "2026-10-21T23:08:27.809005+00:00",
+  "revision": "6404732ce6fd6e0e82a32dfa29d92165edf10e8b",
   "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
   "working_tree_modified": true,
   "verified_file_sha256": {
-    "tools/docs/gate_scope.py": "ff850eaacda229cea30d66a2f4cdfed0d4ef8817e76cf54f3fc49b0a5350fd51",
-    "tools/docs/verify_quality_gates.py": "086430858ceac7f357d9c2f2d744cc851cd4eb01d3030d24d4a6a748a6861762",
+    "tools/docs/gate_scope.py": "c0703e3a12c2d66665997b7ac6a866068f21e3bc2fab30cfa17c6713ce32db84",
+    "tools/docs/verify_quality_gates.py": "46c857eb195b3814a6ae63a255e394f6868a5c2ad412f67e041e9aa83349e672",
     "tools/docs/validate_t2.py": "9f1aeb1236d25fd15e8475216812a5b6f0e714765cd4ed5e30fa21458e11bd40",
-    ".github/workflows/quality-gates.yml": "92a5aa654b2d9b5c2267214d8ce0358eae904ec4ee26ef40d5a2e509fd7fffdb",
-    "ruff.toml": "6889583348e52f4604588902fbd6a4bac6004348c5b1ece802331438b0d3136b"
+    ".github/workflows/quality-gates.yml": "cfdf06e72cee00179527c94ef41ab8b2a705e65eb50294348fc4304afb45d8d7",
+    "ruff.toml": "0fc119d18ad8f5d649c7f08383c8b80c159296d96d56d48a0187953e439b69b5"
   },
   "tools": {
     "ruff": "0.17.1",
@@ -196,7 +196,7 @@
       "expected_exit": 0,
       "exit_code": 0,
       "passed": true,
-      "stdout": ".                                                                        [100%]\n=============================== tests coverage ================================\n_______________ coverage: platform win32, python 3.14.6-final-0 _______________\n\nName        Stmts   Miss  Cover   Missing\n-----------------------------------------\nsample.py       2      0   100%\n-----------------------------------------\nTOTAL           2      0   100%\nCoverage XML written to file coverage.xml\n1 passed in 0.04s\n",
+      "stdout": ".                                                                        [100%]\n=============================== tests coverage ================================\n_______________ coverage: platform win32, python 3.14.6-final-0 _______________\n\nName        Stmts   Miss  Cover   Missing\n-----------------------------------------\nsample.py       2      0   100%\n-----------------------------------------\nTOTAL           2      0   100%\nCoverage XML written to file coverage.xml\n1 passed in 0.03s\n",
       "stderr": ""
     },
     {
@@ -290,7 +290,7 @@
       "expected_exit": 0,
       "exit_code": 0,
       "passed": true,
-      "stdout": ".                                                                        [100%]\n=============================== tests coverage ================================\n_______________ coverage: platform win32, python 3.14.6-final-0 _______________\n\nCoverage XML written to file coverage.xml\n1 passed in 0.10s\n",
+      "stdout": ".                                                                        [100%]\n=============================== tests coverage ================================\n_______________ coverage: platform win32, python 3.14.6-final-0 _______________\n\nCoverage XML written to file coverage.xml\n1 passed in 0.09s\n",
       "stderr": ""
     },
     {

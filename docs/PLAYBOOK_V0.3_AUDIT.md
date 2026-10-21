@@ -54,3 +54,7 @@ Those GitHub Actions runs verified dependency installation, Ruff lint/format, an
 - Team adoption record: Pending
 - Team repo publication: Pending
 - Course submission receipt: Pending
+
+## Follow-up verification
+
+[Doc's executable verification record](PLAYBOOK_V0.3_VERIFICATION.md) preserves the rubric audit above while adding positive/negative gate checks, retained local evidence and per-run CI artifacts. It records that main is currently unprotected and requires administrator action. Organization publication remains Trey's responsibility at Doc's direction.

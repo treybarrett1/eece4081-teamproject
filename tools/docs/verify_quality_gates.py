@@ -29,6 +29,7 @@ def verify():
             capture_output=True,
             timeout=90,
             check=False,
+            env={**os.environ, "PYTHONDONTWRITEBYTECODE": "1"},
         )
         records.append(
             {

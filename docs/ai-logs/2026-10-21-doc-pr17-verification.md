@@ -67,3 +67,7 @@ results are recorded after pushing; no passing CI for an unpushed change is clai
 ## Concurrent author updates
 
 Preserved Trey's further commits through `ec69507`, including his new rubric audit, coverage-file requirement, README cleanup and historical-log amendment. The new fixture evidence lives in a separate verification document, rather than replacing his audit.
+
+## Fixture timing correction
+
+A repeat run reproduced stale Django model bytecode when same-length model edits occurred within one timestamp interval. Fixture subprocesses now disable bytecode writes; a subsequent complete 26-case run passed. This corrects the verification harness rather than claiming a product defect. Updated local JSON records the verified file hashes and modified-tree provenance.
