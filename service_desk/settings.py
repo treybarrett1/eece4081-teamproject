@@ -4,7 +4,9 @@ import os
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "local-demo-insecure-not-for-deployment")
+SECRET_KEY = os.environ.get(
+    "DJANGO_SECRET_KEY", "local-demo-insecure-not-for-deployment"
+)
 DEBUG = False
 ALLOWED_HOSTS = ["testserver", "localhost", "127.0.0.1"]
 INSTALLED_APPS = [

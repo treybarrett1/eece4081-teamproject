@@ -18,7 +18,9 @@ class Ticket(models.Model):
         ORGANIZATION_WIDE = "Organization-wide"
 
     requester = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.PROTECT, related_name="support_tickets"
+        settings.AUTH_USER_MODEL,
+        on_delete=models.PROTECT,
+        related_name="support_tickets",
     )
     title = models.CharField(max_length=120)
     description = models.TextField()

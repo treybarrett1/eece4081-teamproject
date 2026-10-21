@@ -41,7 +41,9 @@ def test_invalid_descriptions_are_rejected(payload, description):
         validate_ticket(payload)
 
 
-@pytest.mark.parametrize("category", ["Hardware", "Software", "Network", "Access", "Other"])
+@pytest.mark.parametrize(
+    "category", ["Hardware", "Software", "Network", "Access", "Other"]
+)
 def test_all_specified_categories_are_accepted(payload, category):
     payload["category"] = category
     assert validate_ticket(payload)["category"] == category
@@ -55,7 +57,12 @@ def test_all_specified_impacts_are_accepted(payload, impact):
 
 @pytest.mark.parametrize(
     ("field", "value"),
-    [("category", "Billing"), ("impact", "Worldwide"), ("category", []), ("impact", None)],
+    [
+        ("category", "Billing"),
+        ("impact", "Worldwide"),
+        ("category", []),
+        ("impact", None),
+    ],
 )
 def test_unknown_or_nontyped_choices_rejected(payload, field, value):
     payload[field] = value

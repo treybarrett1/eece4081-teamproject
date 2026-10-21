@@ -40,7 +40,10 @@ class Migration(migrations.Migration):
                         ],
                     ),
                 ),
-                ("state", models.CharField(max_length=20, default="New", editable=False)),
+                (
+                    "state",
+                    models.CharField(max_length=20, default="New", editable=False),
+                ),
                 ("created_at", models.DateTimeField(auto_now_add=True)),
                 (
                     "requester",
