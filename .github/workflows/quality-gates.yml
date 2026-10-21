@@ -52,7 +52,7 @@ jobs:
         shell: bash
         run: |
           if [ -f manage.py ] || [ -f backend/manage.py ] || [ -d tests ] || [ -d backend/tests ]; then
-            python -m pytest -q --cov=. --cov-report=term-missing --cov-report=xml:coverage.xml
+            python -m pytest -q --cov=tickets --cov-report=term-missing --cov-report=xml:coverage.xml
           else
             echo "No application/tests yet; pytest and coverage deferred until implementation."
           fi
