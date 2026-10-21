@@ -21,7 +21,7 @@ Names and project topic are confirmed by the repository owner. Roles and meeting
 - [T2 audit checklist](docs/t2/AUDIT.md), [traceability CSV](docs/t2/traceability.csv), and [validation evidence](docs/t2/VALIDATION.md).
 
 - [T1 — Team Charter and Executive Summary](docs/TEAM_CHARTER.md): executive summary, scope inclusions and exclusions, stakeholders and interests, named responsibilities, conflict procedures, measurable success criteria, and AI disclosure.
-- [Engineering Playbook v0.2 — AI Tooling Guidelines](docs/PLAYBOOK.md): retains the v0.1 workflow and adds approved AI tools, prompt logging, and advisory-only AI review.
+- [Engineering Playbook v0.3 — Quality Gates](docs/PLAYBOOK.md): retains v0.1/v0.2 rules and adds concrete Python/Django quality gates, their local and GitHub Actions commands, failure consequences, and the Session 15 coverage-floor deferral.
 - [v0.2 human-audit checklist](docs/PLAYBOOK_V0.2_AUDIT.md).
 - [v0.2 prompt record](docs/ai-logs/2026-09-16-charles-playbook-v0.2.md).
 - [AI-use log](AI_LOG.md).
@@ -32,7 +32,7 @@ Names and project topic are confirmed by the repository owner. Roles and meeting
 
 ## Current state
 
-This is the initial documentation package. Application implementation and test execution are future work. No team adoption, passing project tests, or course-portal submission is claimed.
+This repository is currently a documentation package. A Python/Django quality-check workflow is proposed; the application, actual test execution, and any required-status-check configuration are not yet verified. No team adoption, passing project tests, or course-portal submission is claimed.
 
 Before submission, each member reviews their responsibilities and availability, and Charles records adoption. Use the document links above or the course portal's permitted upload format.
 
