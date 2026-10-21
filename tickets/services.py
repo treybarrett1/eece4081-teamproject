@@ -25,7 +25,7 @@ def validate_ticket(payload):
         if not isinstance(value, str):
             raise ValidationError({field: "Must be text."})
         value = value.strip()
-        if not value or len(value) > limit:
+        if not value or len(value) >= limit:
             raise ValidationError({field: "Blank or longer than allowed."})
         result[field] = value
     for field, allowed in (
