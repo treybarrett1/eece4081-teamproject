@@ -48,3 +48,15 @@
 - [Task prompt, results, and pending team validation](docs/ai-logs/2026-10-21-charles-playbook-v0.3.md).
 - Scope: v0.3 quality-gate rules, runnable GitHub Actions CI config, Python quality requirements, README and PR evidence changes.
 - The organization Team1 repository could not be accessed by the linked GitHub App. Work is on a review branch of `treybarrett1/eece4081-teamproject` only; team adoption, successful CI, organization-repo transfer, and course submission are not claimed.
+
+## October 21, 2026 — M6 test-suite and injected-fault proof
+
+- Responsible member: Charles Barrett; assistant: OpenAI ChatGPT (GPT-6).
+- [Exact prompt-and-diff log](docs/ai-logs/2026-10-21-charles-m6-bug-injection.md) and [evidence submission index](docs/m6/SUBMISSION.md).
+- Scope: provisional Django ticket-intake implementation, real HTTP acceptance test,
+  behavioral unit tests, coverage reporting, one-line boundary fault and restoration.
+- **Observed:** 31 green -> 2 failed / 29 passed on deliberate fault -> 31 green,
+  with real GitHub Actions logs and baseline app-package coverage of 89%.
+- Important limits: the actual Team1 repository and M5 implementation could not be
+  accessed; code is on a personal repository review branch, not submitted to
+  the team. Human approval of AI coding use and course submission remain pending.
