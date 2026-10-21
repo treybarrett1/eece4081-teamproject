@@ -1,0 +1,72 @@
+name: Quality Gates
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  quality-gates:
+    name: quality-gates
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install quality-gate dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements-quality.txt
+          if [ -f requirements.txt ]; then
+            python -m pip install -r requirements.txt
+          fi
+          if [ -f backend/requirements.txt ]; then
+            python -m pip install -r backend/requirements.txt
+          fi
+
+      - name: Ruff lint
+        run: python -m ruff check .
+
+      - name: Ruff format check
+        run: python -m ruff format --check .
+
+      - name: Pytest and coverage
+        shell: bash
+        run: |
+          if git ls-files '*.py' | grep -q .; then
+            python -m pytest -q --cov=. --cov-report=term-missing --cov-report=xml:coverage.xml
+          else
+            echo "No tracked Python files yet; pytest and coverage deferred until implementation."
+          fi
+
+      - name: Django system and migration checks
+        shell: bash
+        run: |
+          if [ -f manage.py ]; then
+            python manage.py check
+            python manage.py makemigrations --check --dry-run
+          elif [ -f backend/manage.py ]; then
+            (
+              cd backend
+              python manage.py check
+              python manage.py makemigrations --check --dry-run
+            )
+          else
+            echo "No Django manage.py yet; system and migration checks deferred until implementation."
+          fi
+
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage.xml
+          if-no-files-found: ignore
