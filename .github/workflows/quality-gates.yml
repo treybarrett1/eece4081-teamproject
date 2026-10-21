@@ -46,8 +46,12 @@ jobs:
       - name: Pytest and coverage
         shell: bash
         run: |
-          if git ls-files '*.py' | grep -vE '^tools/docs/' | grep -q .; then
+          if [ -n "$(git ls-files '*.py' | grep -vE '^tools/docs/')" ]; then
             python -m pytest -q --cov=. --cov-report=term-missing --cov-report=xml:coverage.xml
+            if [ ! -s coverage.xml ]; then
+              echo "Coverage XML report missing or empty; failing coverage-evidence gate."
+              exit 1
+            fi
           else
             echo "No application/tests yet; pytest and coverage deferred until implementation."
           fi
