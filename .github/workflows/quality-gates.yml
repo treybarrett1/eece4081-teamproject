@@ -40,6 +40,9 @@ jobs:
           python -m ruff format --diff . || true
           python -m ruff format --check .
 
+      - name: Validate requirement documentation links and traceability
+        run: python tools/docs/validate_t2.py
+
       - name: Pytest and coverage
         shell: bash
         run: |
