@@ -1,0 +1,31 @@
+M6 INJECTED FAULT — ACTUAL FAILING GITHUB ACTIONS OUTPUT
+
+Fault commit: c67c39d5f7b6f8422a5b4277776ac38e8b462f99
+Run: https://github.com/treybarrett1/eece4081-teamproject/actions/runs/39691243098
+Command:
+python -m pytest -q --cov=tickets --cov-report=term-missing --cov-report=xml:coverage.xml
+
+Observed test progress:
+F........F.....................                                          [100%]
+
+FAILED tests/test_acceptance.py::test_session_to_creation_to_visible_own_ticket_with_isolation
+tests/test_acceptance.py:65: AssertionError
+> assert created.status_code == 201
+E assert 400 == 201
+E + where 400 = <JsonResponse status_code=400, "application/json">.status_code
+
+FAILED tests/test_unit.py::test_inclusive_text_bounds_and_whitespace
+tests/test_unit.py:25:
+> result = validate_ticket(payload)
+tickets/services.py:29: ValidationError
+E django.core.exceptions.ValidationError:
+  {'title': ['Blank or longer than allowed.']}
+
+Summary read from the actual job log:
+2 failed, 29 passed in 3.79s
+GitHub Actions pytest step: FAILURE (exit code 1).
+
+Explanation: the off-by-one change rejects an exactly 120-character title,
+which the specification expressly permits. One failing test exercises the
+real CSRF/session/HTTP/database boundary; the other exercises the validator.
+Neither test was added after seeing the fault.

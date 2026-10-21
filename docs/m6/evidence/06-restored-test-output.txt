@@ -1,0 +1,31 @@
+M6 RESTORED GREEN — ACTUAL GITHUB ACTIONS OUTPUT
+
+Restoration commit: d18875ac91b3c40897b7c7c834863bb094d2ee89
+Run: https://github.com/treybarrett1/eece4081-teamproject/actions/runs/39691411338
+XML coverage artifact: https://github.com/treybarrett1/eece4081-teamproject/actions/runs/39691411338/artifacts/12388891301
+
+Command:
+python -m pytest -q --cov=tickets --cov-report=term-missing --cov-report=xml:coverage.xml
+
+Observed:
+...............................                                          [100%]
+
+Name                                 Stmts   Miss  Cover   Missing
+------------------------------------------------------------------
+tickets/__init__.py                      0      0   100%
+tickets/migrations/0001_initial.py       7      0   100%
+tickets/migrations/__init__.py           0      0   100%
+tickets/models.py                       20      0   100%
+tickets/services.py                     27      0   100%
+tickets/views.py                        78     15    81%   18-19, 21, 49-50, 52, 64, 70, 82, 86, 89-90, 97, 103, 105
+------------------------------------------------------------------
+TOTAL                                  132     15    89%
+Coverage XML written to file coverage.xml
+31 passed in 5.59s
+
+Other gates: Ruff lint PASSED; Ruff format PASSED;
+T2 validator PASSED; Django system check PASSED;
+Django migration check 'No changes detected' PASSED;
+coverage artifact upload PASSED.
+
+Restoration returned the suite to green without editing a test.

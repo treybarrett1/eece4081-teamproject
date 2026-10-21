@@ -1,0 +1,11 @@
+# Deliberate fault commit c67c39d5f7b6f8422a5b4277776ac38e8b462f99
+# Parent clean baseline: 7274b202e097c7fda51dd296647200a220359a13
+# Commit: https://github.com/treybarrett1/eece4081-teamproject/commit/c67c39d5f7b6f8422a5b4277776ac38e8b462f99
+# User consequence: a valid 120-character ticket title is rejected with HTTP 400.
+diff --git a/tickets/services.py b/tickets/services.py
+--- a/tickets/services.py
++++ b/tickets/services.py
+@@
+-        if not value or len(value) > limit:
++        if not value or len(value) >= limit:
+             raise ValidationError({field: "Blank or longer than allowed."})

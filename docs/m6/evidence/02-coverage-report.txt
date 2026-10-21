@@ -1,0 +1,31 @@
+M6 APPLICATION COVERAGE — ACTUAL GITHUB ACTIONS OUTPUT
+
+Baseline commit: 7274b202e097c7fda51dd296647200a220359a13
+Baseline run: https://github.com/treybarrett1/eece4081-teamproject/actions/runs/39691153398
+Baseline XML artifact: https://github.com/treybarrett1/eece4081-teamproject/actions/runs/39691153398/artifacts/12388298593
+
+Command:
+python -m pytest -q --cov=tickets --cov-report=term-missing --cov-report=xml:coverage.xml
+
+Name                                 Stmts   Miss  Cover   Missing
+------------------------------------------------------------------
+tickets/__init__.py                      0      0   100%
+tickets/migrations/0001_initial.py       7      0   100%
+tickets/migrations/__init__.py           0      0   100%
+tickets/models.py                       20      0   100%
+tickets/services.py                     27      0   100%
+tickets/views.py                        78     15    81%   18-19, 21, 49-50, 52, 64, 70, 82, 86, 89-90, 97, 103, 105
+------------------------------------------------------------------
+TOTAL                                  132     15    89%
+Coverage XML written to file coverage.xml
+31 passed in 5.71s
+
+INTERPRETATION:
+- 89% statement coverage applies to the tickets package, not the whole
+  repository and not the full planned S1–S4 feature scope.
+- The tests fully exercise the existing service statements; most unexecuted
+  statements occur in HTTP error paths in tickets/views.py.
+- This is coverage measurement, not proof alone that the suite is effective.
+  The separate injected fault changed one line and was caught by two
+  pre-existing tests.
+- No numeric enforcement threshold was imposed by this milestone.

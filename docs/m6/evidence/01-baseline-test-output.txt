@@ -1,0 +1,25 @@
+M6 INITIAL CLEAN BASELINE — ACTUAL GITHUB ACTIONS OUTPUT
+Repository: treybarrett1/eece4081-teamproject
+Branch: test/m6-thin-slice-bug-injection
+Commit: 7274b202e097c7fda51dd296647200a220359a13
+Run: https://github.com/treybarrett1/eece4081-teamproject/actions/runs/39691153398
+Python: 3.12.15
+
+Command:
+python -m pytest -q --cov=tickets --cov-report=term-missing --cov-report=xml:coverage.xml
+
+Observed:
+...............................                                          [100%]
+31 passed in 5.71s
+
+Quality gate steps also passed:
+- Ruff lint
+- Ruff format check
+- T2 traceability validator
+- Django system check: System check identified no issues (0 silenced).
+- Django migration check: No changes detected
+- Coverage report artifact uploaded
+
+These results were read from the actual GitHub Actions job logs. A previous
+iteration had a failing Django migration check; the migration was corrected
+before this successful baseline.

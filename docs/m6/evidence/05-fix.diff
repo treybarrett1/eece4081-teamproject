@@ -1,0 +1,9 @@
+# Restoration commit d18875ac91b3c40897b7c7c834863bb094d2ee89
+# Commit: https://github.com/treybarrett1/eece4081-teamproject/commit/d18875ac91b3c40897b7c7c834863bb094d2ee89
+diff --git a/tickets/services.py b/tickets/services.py
+--- a/tickets/services.py
++++ b/tickets/services.py
+@@
+-        if not value or len(value) >= limit:
++        if not value or len(value) > limit:
+             raise ValidationError({field: "Blank or longer than allowed."})
