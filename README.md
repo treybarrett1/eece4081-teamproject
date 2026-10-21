@@ -17,6 +17,7 @@ Names and project topic are confirmed by the repository owner. Roles and meeting
 
 ## Assignment documents
 
+- [T3 — ADR-001: workflow business logic](docs/adr/ADR-001.md): proposal comparing shared services, views/forms, and model methods; team discussion and acceptance pending.
 - [T2 — Requirements and Stakeholder Specification](docs/T2_REQUIREMENTS.md): 32 requirements, six epics, 20 stories, bidirectional traceability, and transparent authorship.
 - [T2 audit checklist](docs/t2/AUDIT.md), [traceability CSV](docs/t2/traceability.csv), and [validation evidence](docs/t2/VALIDATION.md).
 
