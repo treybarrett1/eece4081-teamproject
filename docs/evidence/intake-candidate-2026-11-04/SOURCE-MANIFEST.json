@@ -1,0 +1,39 @@
+{
+  "label": "New unadopted implementation candidate; created 2026-11-04",
+  "team1_document_baseline": "ba34d08711ff64aa4cfe484a16013ed2d6971bb4",
+  "source_sha256": {
+    ".coveragerc": "95bd2e9bfc8ee911eb6e6a25ceb42b7d1a433f95589b1a3696db6fb4c353db78",
+    ".gitignore": "06d727419d39091917f8e83fee1c7fd0984353a895aec32116dfeb9cb87376ea",
+    "manage.py": "2d744ef9562f47cb65ebcbf9298a2fc7ba593f42126afbba07920b0d5fed87ec",
+    "MESSAGE-TO-AUSTIN.txt": "c5d4cc24fefb26732c4673b91af8b03302ad3a49ac072c734855c078ca702dbc",
+    "pytest.ini": "1fdaa26ba4f9c4128084d350eab9bed222c37bcaca24620a7533be7867b724ef",
+    "README.md": "9e78a0e8455fe2c11cdb449e502e0f10d2948619b34c4b4d37f3aca88b8acebd",
+    "requirements-test.txt": "cef362ce40042d034156e9ff64a722f470f7c39caded08aeb06b4ef64aad55c1",
+    "requirements.txt": "39c61094212daae8b52fc8b622afcf06cb51d790375033619ef40137247a72de",
+    "ruff.toml": "3579d79d8c12209d3b1b462a8b97b43e13b79972f5a1800b53c00ca44b727963",
+    "team1_site/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "team1_site/settings.py": "0701b834f404cb49997706f7612f0ec985731732b1bfb2e78a4a0c52aea3dea8",
+    "team1_site/urls.py": "12e734e2f479e7d0b433c903d672a16b696de0a14a8f0b397de10b12cde0e67f",
+    "tests/conftest.py": "4cc65e114fa403ca2ff90c32552493da35b46da7fd32e255d25171f0ea05b4a1",
+    "tests/test_http.py": "6d9d7e193f6f958692de19570f9721cb4150e0898402b6d514b6be5ed87462ba",
+    "tests/test_services.py": "b6700651b8032550ad4a6804c19feeaffedd90fc49295df4f15e15c47597faf8",
+    "tickets/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tickets/migrations/0001_initial.py": "3bf6f2774a95b722ef08a401c0c0a4f7b5214e412f68646451b7241000805fe0",
+    "tickets/migrations/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tickets/models.py": "5697d541ad55e50032e9a9c67ead9c91e9d470b181dafde5bc381920cab5fcf7",
+    "tickets/services.py": "e8b91415460d8c84e04432f664cf2d47bafabfb05a600f15fc5bbe902481a236",
+    "tickets/urls.py": "1e0fd312d88163771b369af42a9b8339a70f9726b6a15e15ea2a054b3a48fbc3",
+    "tickets/views.py": "3e81db439cf21e3d30497306abbe6113f4dac3cd6aa8937f9004ac3cae474c99"
+  },
+  "tested_scope": {
+    "package": "tickets",
+    "metric": "aggregate statement coverage",
+    "omit": [
+      "tickets/migrations/*"
+    ],
+    "statements": 127,
+    "missed": 0,
+    "rate": 1.0,
+    "tests_passed": 40
+  }
+}

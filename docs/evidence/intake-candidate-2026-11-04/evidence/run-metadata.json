@@ -1,0 +1,29 @@
+{
+  "created_utc": "2026-11-05T05:18:24.926584+00:00",
+  "label": "NEW proposed Team1 intake implementation, not adopted Team1 code or historical Sprint 1 evidence",
+  "team1_document_baseline": "ba34d08711ff64aa4cfe484a16013ed2d6971bb4",
+  "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+  "tools": {
+    "Django": "5.2.18",
+    "pytest": "9.1.1",
+    "pytest-django": "4.14.0",
+    "pytest-cov": "7.1.0",
+    "coverage": "7.16.2",
+    "ruff": "0.17.1"
+  },
+  "command": [
+    "python",
+    "-m",
+    "pytest",
+    "-q",
+    "--cov=tickets",
+    "--cov-report=term-missing",
+    "--cov-report=xml:evidence/coverage.xml",
+    "--junitxml=evidence/pytest.xml"
+  ],
+  "exit_code": 0,
+  "scope": "Aggregate statement coverage of tickets package; migrations omitted; excludes team1_site settings/urls, manage.py, tests, dependencies",
+  "source_manifest_sha256": "4e5931e999a176d5c454827ec837e171d356342021dfa94483ced6a9e85c39d3",
+  "final_enforcement_run": "evidence/coverage-floor-90.txt",
+  "all_final_checks_exit_zero": true
+}

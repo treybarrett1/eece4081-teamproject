@@ -1,0 +1,128 @@
+--- a/docs/PLAYBOOK.md
++++ b/docs/PLAYBOOK.md
+@@ -36,6 +36,27 @@
+ - [ ] The PR has merged into `main`, and the source branch has been deleted.
+ - [ ] The author verifies the merged result with the applicable smoke check, records the outcome, and links the merged PR in the issue before closing it. A failing check triggers a fix or revert and keeps the issue open.
+ 
++
++### Course-submission handoff — Amendment 1 proposal
++
++Name one acknowledged submitter for each assignment. Keep its submission-handoff
++issue open until it records the exact submitted commit and artifact identity,
++confirmation timestamp with time zone, and a receipt reference that an authorized
++teammate can verify. Keep personal portal details private and publish only a
++sanitized reference. If confirmation is unavailable, record the blocker, owner,
++and next action; do not claim confirmed submission or close the handoff.
++
++Rationale A1: In the T4 submission-confirmation gap (personal-repository issue
++#14), Doc's final update linked merged scope commit 9ac80e1 but said portal
++confirmation was pending; the issue subsequently closed. Section 2's smoke-check
++and merged-PR rule demonstrated technical readiness but did not require delivery
++evidence. The separate handoff already required confirmation, so this is also a
++failure to enforce an existing checklist, not a claim that no such rule existed.
++This amendment makes that requirement explicit in the playbook's closure gate.
++The record does not establish that T4 was never submitted. The team must confirm
++that this incident falls within its course-defined Sprint 1 before submission.
++Evidence: https://github.com/treybarrett1/eece4081-teamproject/issues/14#issuecomment-5883457926
++
+ ## 3. Sprint length and ceremonies
+ 
+ Use one-week sprints, Monday through Sunday, in America/Chicago time. The first partial week covers setup; the first full sprint begins Monday, September 14, 2026.
+@@ -159,7 +180,7 @@
+ | Formatting — a consistent Python code layout | `Ruff formatter`: `python -m ruff format --check .` | Locally and in GitHub Actions on every push/PR | An unformatted file fails `quality-gates` and blocks PR approval/merge; fix with `python -m ruff format .` |
+ | Django system configuration — invalid model, URL, app, or settings checks | `Django manage.py`: `python manage.py check` | Locally and in GitHub Actions when `manage.py` exists | Django check errors fail `quality-gates`; PR approval/merge is blocked until fixed |
+ | Migration drift — model changes without committed migrations | `Django manage.py`: `python manage.py makemigrations --check --dry-run` | Locally and in GitHub Actions when `manage.py` exists | If migrations are missing, `quality-gates` fails and PR approval/merge is blocked |
+-| Coverage evidence — a real test-coverage report, without a minimum threshold yet | `pytest-cov` with `--cov=. --cov-report=term-missing --cov-report=xml:coverage.xml` | Locally and in GitHub Actions during the pytest step | Failure to run tests or produce coverage evidence fails the pytest/coverage step; no numeric percentage can fail the build in v0.3 |
++| Coverage evidence and proposed 60% floor — see Amendment 1 below | `pytest-cov` with `--cov=. --cov-report=term-missing --cov-report=xml:coverage.xml` | Locally and in GitHub Actions during the pytest step | Failure to run tests or produce coverage evidence fails the pytest/coverage step; Amendment 1 requires the scoped 60% check below once product source exists (configuration pending) |
+ 
+ **Run locally (from the repository root):**
+ 
+@@ -185,9 +206,76 @@
+ 
+ **Merge enforcement distinction:** Team policy blocks approval and merge whenever an applicable gate is red. To additionally make GitHub mechanically refuse such merges, a repository administrator must require the `quality-gates` status check in the `main` branch ruleset or branch-protection settings and prevent bypasses. **The October 21 follow-up API check found main unprotected; the current account has push access but no administration permission. Required-check protection is not enabled or claimed active.** Until it is enabled, a failed run is a visible CI failure and a *process* blocker enforced by the non-author reviewer, not necessarily a GitHub UI merge prohibition. Never describe the workflow's existence alone as proof that branch protection is configured.
+ 
+-### Coverage floor — deliberately deferred
+-
+-**v0.3 does not set a numeric coverage floor** and does not use `--cov-fail-under`. Before **Amendment 1 at Session 15**, the team will generate and inspect a real `pytest-cov` report from its own implemented code, identify untested behavior, and then choose and record a justified numerical minimum in **Amendment 1**. Until then, producing coverage evidence is required when tests run; meeting an invented percentage is not.
++### Coverage floor — Amendment 1 proposal: 60% statement coverage
++
++**Commitment proposed for the rest of the semester:** at least **60.00% aggregate
++statement (line) coverage** of the **Team1 first-party Python/Django application
++runtime**, including ticket models, views/endpoints, forms/serializers, services,
++permission and validation logic, URLs, project configuration and entry points.
++This is an application-wide floor, not a whole-repository or domain-only floor,
++and not a per-file minimum. Branch coverage has no numeric commitment here.
++
++Exclude tests, documentation helpers under tools/docs/, disposable gate fixtures,
++third-party/virtual-environment code, generated migration files and non-Python
++assets. Include manually written migration logic. Never omit difficult application
++files to make the percentage pass. Before measurement, record the actual package
++paths and full included-file inventory in docs/COVERAGE_SCOPE.md; no product paths
++are invented by this proposal. Review every scope/configuration change in a PR.
++
++Measure 100 × covered executable statements / total executable statements across
++that scope, weighted by statement count rather than averaging file percentages.
++Configure coverage to include all in-scope modules, including unimported modules,
++and disable branch measurement for this metric. Use precision=2. Missing reports,
++an empty application denominator, failed tests, or zero collected product tests
++do not count as meeting the floor. Documentation-only CI must label product
++coverage NOT APPLICABLE; it must not report a fabricated 0%, 60%, or 100% result.
++
++Once the actual source and reviewed coverage configuration exist, add
++--cov-config=.coveragerc --cov-fail-under=60 to the section 8 pytest command in
++both local instructions and CI. Configure .coveragerc source entries with the
++actual runtime packages and all in-scope root entry points; use the same reviewed
++omissions locally and in CI. Verify that every in-scope source file appears in
++the report, including never-imported files. The existing --cov=. command alone
++does not establish the intended scope. Do not claim this documentation patch
++implements or verifies the CI threshold. Implementation remains a blocking
++follow-up before claiming product coverage compliance.
++
++Retain the commit, exact command, environment, test pass/fail/skip counts, complete
++per-file terminal table and TOTAL, coverage.xml, scope inventory and CI run link.
++Reviewer checks both the percentage and uncovered behavior. Before approving a
++product PR, all applicable tests must pass and this scoped floor must be met.
++Ticket access/visibility, lifecycle transitions, invalid input and persistence
++still require behavior checks under sections 2 and 7; aggregate coverage cannot
++substitute for them. Review skips so critical acceptance checks are not skipped.
++
++At each sprint review, check coverage and omissions. Schedule test work early
++and reduce feature scope when absences or deadlines threaten compliance. Do not
++silently waive or lower the floor to clear a failing PR. Policy revisions require
++the existing adoption procedure and a recorded rationale and course compliance.
++
++Rationale A2 (numeric choice and scope): 60% is a deliberately modest planning
++judgment under the user's stated lack of application/test access. It limits the
++aggregate uncovered allowance to roughly 40% while leaving room for integration
++work and uneven student availability. It is not an industry requirement, proof
++of adequate quality, or a guarantee that the unknown baseline already meets it.
++Application-wide scope captures integration code that a narrow domain-only floor
++could omit; excluding tests/helpers prevents those from inflating product results.
++Critical behavior checks mitigate, but do not eliminate, the limits of a modest
++aggregate line metric. The team must validate feasibility against its real report.
++
++Rationale A3 (evidence and enforcement): At saved Team1 commit
++ba34d08711ff64aa4cfe484a16013ed2d6971bb4, the CI artifact's scope.json says
++application=false with empty sources/manage lists, and application-tests.txt says
++no product tests or product coverage passed. Therefore the available baseline is
++unavailable, not zero. Personal-repository PR #18 explicitly identifies its 89%
++as separate prototype coverage and cannot justify this floor. Scope inventory,
++matching local/CI configuration, missing-report failures and retained evidence
++make the proposed number auditable without claiming measurements that do not exist.
++
++**Assignment limitation:** This proposal replaces v0.3's deferral with a numeric
++policy recommendation, but cannot satisfy the rubric's actual-team-coverage-report
++justification until that report is obtained. Do not present 60% as empirically
++derived or claim adoption, enforcement, passing application tests, or submission.
+ 
+ ## Version record
+ 
+@@ -195,6 +283,8 @@
+ - **v0.2 — September 16, 2026:** Adds the named AI-tool list, prompt-log policy, and advisory-only AI-review rule. Extends the definition of done and PR template to capture prompt-log evidence. Prepared for human audit; adoption and course submission are not claimed.
+ - **v0.3 — October 21, 2026:** Names enforceable Python/Django quality tools and commands, local/CI execution, and merge-failure consequences. Adds the GitHub Actions workflow and explicitly defers a numeric coverage floor to Amendment 1 at Session 15. Team approval, required branch protection, Django-test execution, and course submission are not claimed; existing documentation CI checks have passed on the v0.3 review branch.
+ 
++- **Amendment 1 proposal — November 4, 2026:** Adds submission-receipt closure evidence and a proposed scoped 60% statement-coverage floor. Rationales A1–A3 accompany the changes. Actual product coverage, Sprint 1 incident classification, team adoption and CI enforcement remain unverified. Rationale A4: preserve an explicit revision trail without mislabeling the historical v0.3 evidence.
++
+ ## Adoption and revision
+ 
+ Before adoption, Charles Barrett opens an adoption issue linking the charter and this playbook. All four members confirm their responsibilities, the review rotation, the proposed meeting schedule, and their weekly capacity in that issue. Each member records their own agreement; this proposal does not substitute for it.

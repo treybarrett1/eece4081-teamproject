@@ -32,6 +32,11 @@ Names and project topic are confirmed by the repository owner. Roles and meeting
 - [T4 — Scope Agreement](docs/T4_SCOPE_AGREEMENT.md): proposed two-sprint ticket workflow, T2 dispositions, capacity assumptions, and ordered cuts; team agreement pending.
 - [T3/T4 submission handoff](docs/T3_T4_SUBMISSION_HANDOFF.md): Doc Aberle is Charles's selected submitter; acknowledgement and completion pending.
 
+## Amendment 1 review and new intake evidence
+
+- [Amendment 1 review index](docs/amendment1/README.md): proposed diff, readable playbook, original review packet and outstanding decisions.
+- [New ticket-intake candidate](docs/evidence/intake-candidate-2026-11-04/README.md): source/tests archive and supplied coverage evidence; not adopted runtime code or historical Sprint 1 evidence. Its proposed package-only floor differs from the amendment's broader proposal.
+
 ## Current state
 
 This repository is currently a documentation package. A Python/Django quality-check workflow is implemented on the v0.3 review branch, with successful lint, formatting, and documentation CI checks. No Django application, Django test run, numeric coverage floor, verified required-status-check configuration, team adoption, or course-portal submission is claimed.

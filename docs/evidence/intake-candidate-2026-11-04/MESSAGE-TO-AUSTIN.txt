@@ -1,0 +1,9 @@
+Austin, we could not locate an existing Team1 app or coverage report, so this is NEW proposed implementation work, not a recovered Sprint 1 report.
+
+The attached ZIP has a small Django ticket-intake/read API, actual source and tests, coverage.xml and the complete coverage table. The run passed 40 tests with 100% aggregate statement coverage over 127 statements in the tickets package, excluding migrations. Lint, formatting, Django system checks and migration-drift checks also passed.
+
+It tests sign-in/out, real CSRF/session/database requests, role restrictions, own-ticket isolation, validation boundaries and rollback after a failed write. The README lists what is missing: UI, lifecycle/history/concurrency and deployment work are not implemented.
+
+Please review/adopt the source before presenting it as Team1's baseline, then rerun it on the resulting Team1 commit. Do not describe this as Sprint 1 code or use it as proof that the old class repo already had coverage. The manifest identifies this exact source snapshot.
+
+A 90% floor is provided only as a proposal for this limited package, based on its measured 100% baseline. That is not a team vote, and the previous proposed 60% whole-runtime floor has a different scope. Sprint 1 incident classification and the submission receipt still need separate confirmation.
