@@ -1,0 +1,18 @@
+Command: python -m pytest -q --cov=tickets --cov-report=term-missing --cov-report=xml:evidence/coverage.xml --cov-fail-under=90 --junitxml=evidence/pytest.xml
+Exit code: 0
+........................................                                 [100%]
+=============================== tests coverage ================================
+_______________ coverage: platform win32, python 3.14.6-final-0 _______________
+
+Name                  Stmts   Miss  Cover   Missing
+---------------------------------------------------
+tickets\__init__.py       0      0   100%
+tickets\models.py        16      0   100%
+tickets\services.py      49      0   100%
+tickets\urls.py           3      0   100%
+tickets\views.py         59      0   100%
+---------------------------------------------------
+TOTAL                   127      0   100%
+Coverage XML written to file evidence/coverage.xml
+Required test coverage of 90% reached. Total coverage: 100.00%
+40 passed in 0.70s

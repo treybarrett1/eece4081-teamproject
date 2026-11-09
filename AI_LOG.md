@@ -62,3 +62,9 @@
 - [Prompts and dispositions](docs/ai-logs/2026-10-21-doc-pr17-verification.md); [per-gate audit](docs/PLAYBOOK_V0.3_VERIFICATION.md).
 - Preserves Trey's follow-up commits, adds actual positive/negative gate fixtures and CI evidence artifacts, and adds a separate verification record alongside Trey's rubric audit.
 - Organization publication is left to Trey at Doc's direction. Branch protection requires administrator access; it is not enabled by this change. New substantive commits need renewed non-author review.
+
+## November 4, 2026 — Austin's Amendment 1 and intake-evidence publication
+
+- Responsible member: Austin Gross; OpenAI Codex assistance, model/version not exposed.
+- [Prompt, provenance, checks and limitations](docs/ai-logs/2026-11-04-austin-amendment1-publication.md).
+- Organizes the prepared amendment under docs/amendment1 and the supplied new candidate/reports under docs/evidence. Source is archived for review; no runtime installation, policy adoption or course submission is claimed.

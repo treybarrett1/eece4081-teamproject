@@ -1,0 +1,14 @@
+Publication base: c0b8bb23adee93a7fe7fae0e598ae35a8d5e2e93
+Repository: treybarrett1/eece4081-teamproject
+Branch: docs/amendment1-intake-evidence
+Source manifest: all listed SHA256 values matched supplied source files.
+Manifest SHA256: matched supplied run-metadata.json.
+Source ZIP: all supplied files compared byte for byte with archive entries.
+python tools/docs/validate_t2.py: PASS (including relative Markdown links).
+git diff --check before staging: PASS for tracked navigation edits.
+Staged whitespace check: flags preserved unified-diff context markers, inherited
+Markdown hard line breaks, and the supplied coverage transcript's final blank line.
+These are retained to preserve document/report content; newly authored index and
+AI-log text pass a scoped staged whitespace check.
+Candidate application tests: not rerun; supplied reports preserved.
+Policy adoption, runtime integration, CI threshold and course submission: not claimed.
